@@ -1,0 +1,720 @@
+[
+  {
+    "id": 1,
+    "name": "Iya Owolabi",
+    "avatar": "https://xsgames.co/randomusers/assets/avatars/female/23.jpg",
+    "lastMessage": "Sounds good to me! I'll get it over to you...",
+    "timestamp": "2025-08-29T11:40:00-05:00",
+    "unreadCount": 2,
+    "isOnline": true,
+    "role": "Project Manager",
+    "email": "iya.owolabi@example.com",
+    "phone": "+1 (555) 123-4567",
+    "organization": "Spherule",
+    "timezone": "PST",
+    "location": "San Francisco, CA",
+    "sharedLinks": [
+      { "url": "https://www.projectmanager.com/guides/project-management", "timestamp": "2025-09-01T11:20:00-05:00" },
+      { "url": "https://www.atlassian.com/agile", "timestamp": "2025-08-28T15:05:00-05:00" },
+      { "url": "https://trello.com/inspiration", "timestamp": "2025-08-15T09:30:00-05:00" },
+      { "url": "https://asana.com/resources", "timestamp": "2025-07-22T14:10:00-05:00" },
+      { "url": "https://www.pmi.org/pmbok-guide-standards", "timestamp": "2025-07-11T10:00:00-05:00" }
+    ],
+    "media": [
+      {
+        "url": "https://picsum.photos/seed/iya1/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya1/150/150",
+        "type": "image",
+        "timestamp": "2025-08-28T10:15:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya2/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya2/150/150",
+        "type": "image",
+        "timestamp": "2025-08-28T09:30:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya3/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya3/150/150",
+        "type": "image",
+        "timestamp": "2025-08-27T16:45:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya4/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya4/150/150",
+        "type": "image",
+        "timestamp": "2025-08-27T11:20:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya5/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya5/150/150",
+        "type": "image",
+        "timestamp": "2025-08-26T14:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya6/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya6/150/150",
+        "type": "image",
+        "timestamp": "2025-08-26T10:10:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya7/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya7/150/150",
+        "type": "image",
+        "timestamp": "2025-08-25T17:55:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya8/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya8/150/150",
+        "type": "image",
+        "timestamp": "2025-08-25T12:30:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya9/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya9/150/150",
+        "type": "image",
+        "timestamp": "2025-08-24T15:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya10/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya10/150/150",
+        "type": "image",
+        "timestamp": "2025-07-28T11:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya11/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya11/150/150",
+        "type": "image",
+        "timestamp": "2025-07-27T14:30:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya12/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya12/150/150",
+        "type": "image",
+        "timestamp": "2025-07-26T09:45:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya13/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya13/150/150",
+        "type": "image",
+        "timestamp": "2025-07-25T16:20:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya14/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya14/150/150",
+        "type": "image",
+        "timestamp": "2025-07-24T13:10:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya15/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya15/150/150",
+        "type": "image",
+        "timestamp": "2025-07-23T10:05:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya16/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya16/150/150",
+        "type": "image",
+        "timestamp": "2025-07-22T17:40:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya17/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya17/150/150",
+        "type": "image",
+        "timestamp": "2025-07-21T12:50:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya18/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya18/150/150",
+        "type": "image",
+        "timestamp": "2025-07-20T14:15:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/iya19/800/600",
+        "thumbnail": "https://picsum.photos/seed/iya19/150/150",
+        "type": "image",
+        "timestamp": "2025-07-19T08:30:00-05:00"
+      }
+    ],
+    "sharedFiles": [
+        { "name": "Project_Charter_Final.docx", "size": "1.2 MB", "type": "doc", "timestamp": "2025-09-05T10:15:00-05:00" },
+        { "name": "Budget_Forecast_Q4.xlsx", "size": "750 KB", "type": "xls", "timestamp": "2025-08-22T14:30:00-05:00" },
+        { "name": "Stakeholder_Matrix.pdf", "size": "450 KB", "type": "pdf", "timestamp": "2025-07-28T09:00:00-05:00" },
+        { "name": "Risk_Assessment_Presentation.pptx", "size": "3.1 MB", "type": "ppt", "timestamp": "2025-06-15T11:20:00-05:00" },
+        { "name": "Meeting_Minutes_Archive_H1.zip", "size": "15.5 MB", "type": "zip", "timestamp": "2025-05-30T16:05:00-05:00" },
+        { "name": "Gantt_Chart_v3.mpp", "size": "2.8 MB", "type": "mpp", "timestamp": "2025-04-21T12:00:00-05:00" },
+        { "name": "Communications_Plan.docx", "size": "980 KB", "type": "doc", "timestamp": "2025-03-18T17:45:00-05:00" },
+        { "name": "Vendor_Contracts_Signed.pdf", "size": "5.6 MB", "type": "pdf", "timestamp": "2025-02-11T08:55:00-05:00" },
+        { "name": "Initial_Scope_Document.pdf", "size": "2.1 MB", "type": "pdf", "timestamp": "2025-01-20T13:10:00-05:00" },
+        { "name": "Resource_Allocation_Sheet.xlsx", "size": "620 KB", "type": "xls", "timestamp": "2024-12-05T10:00:00-05:00" }
+    ],
+    "conversation": [
+      {
+        "id": "msg1-1",
+        "sender": "Iya Owolabi",
+        "text": "Hey, how's the project coming along?",
+        "timestamp": "2025-09-02T10:20:00.000Z"
+      },
+      {
+        "id": "msg1-2",
+        "sender": "You",
+        "text": "Pretty good! I'm just finishing up the design mockups. Should be ready for review this afternoon.",
+        "timestamp": "2025-09-02T10:22:00.000Z"
+      },
+      {
+        "id": "msg1-3",
+        "sender": "Iya Owolabi",
+        "text": "Great to hear. Do you need any of the assets I mentioned last week?",
+        "timestamp": "2025-09-03T15:25:00.000Z"
+      },
+      {
+        "id": "msg1-4",
+        "sender": "Iya Owolabi",
+        "text": "Sounds good to me! I'll get it over to you...",
+        "timestamp": "2025-09-03T15:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Glinda",
+    "avatar": "https://xsgames.co/randomusers/assets/avatars/female/44.jpg",
+    "lastMessage": "Let's touch base in the morning to finalize...",
+    "timestamp": "2025-08-29T09:45:00-05:00",
+    "unreadCount": 0,
+    "isOnline": false,
+    "role": "Lead Developer",
+    "email": "glinda.dev@example.com",
+    "phone": "+1 (555) 987-6543",
+    "organization": "Spherule",
+    "timezone": "EST",
+    "location": "New York, NY",
+    "sharedLinks": [
+      { "url": "https://react.dev/", "timestamp": "2025-09-09T10:15:00-05:00" },
+      { "url": "https://developer.mozilla.org/en-US/", "timestamp": "2025-09-02T11:45:00-05:00" },
+      { "url": "https://stackoverflow.com/", "timestamp": "2025-08-25T09:00:00-05:00" },
+      { "url": "https://nodejs.org/en/docs", "timestamp": "2025-08-11T16:20:00-05:00" },
+      { "url": "https://github.com/features/copilot", "timestamp": "2025-07-30T12:00:00-05:00" }
+    ],
+    "media": [
+      {
+        "url": "https://picsum.photos/seed/glinda1/800/600",
+        "thumbnail": "https://picsum.photos/seed/glinda1/150/150",
+        "type": "image",
+        "timestamp": "2025-08-29T09:44:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/glinda2/800/600",
+        "thumbnail": "https://picsum.photos/seed/glinda2/150/150",
+        "type": "image",
+        "timestamp": "2025-08-28T18:20:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/glinda3/800/600",
+        "thumbnail": "https://picsum.photos/seed/glinda3/150/150",
+        "type": "image",
+        "timestamp": "2025-08-28T14:10:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/glinda4/800/600",
+        "thumbnail": "https://picsum.photos/seed/glinda4/150/150",
+        "type": "image",
+        "timestamp": "2025-08-27T17:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/glinda5/800/600",
+        "thumbnail": "https://picsum.photos/seed/glinda5/150/150",
+        "type": "image",
+        "timestamp": "2025-08-27T10:05:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/glinda6/800/600",
+        "thumbnail": "https://picsum.photos/seed/glinda6/150/150",
+        "type": "image",
+        "timestamp": "2025-08-26T13:40:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/glinda7/800/600",
+        "thumbnail": "https://picsum.photos/seed/glinda7/150/150",
+        "type": "image",
+        "timestamp": "2025-08-25T19:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/glinda8/800/600",
+        "thumbnail": "https://picsum.photos/seed/glinda8/150/150",
+        "type": "image",
+        "timestamp": "2025-08-25T11:50:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/glinda9/800/600",
+        "thumbnail": "https://picsum.photos/seed/glinda9/150/150",
+        "type": "image",
+        "timestamp": "2025-08-24T16:25:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/glinda10/800/600",
+        "thumbnail": "https://picsum.photos/seed/glinda10/150/150",
+        "type": "image",
+        "timestamp": "2025-08-23T12:00:00-05:00"
+      }
+    ],
+    "sharedFiles": [
+      { "name": "API_Documentation.docx", "size": "876 KB", "type": "doc", "timestamp": "2025-09-08T11:00:00-05:00" },
+      { "name": "Frontend_Components.zip", "size": "12.1 MB", "type": "zip", "timestamp": "2025-09-04T18:10:00-05:00" },
+      { "name": "Database_Schema.sql", "size": "150 KB", "type": "sql", "timestamp": "2025-08-19T09:25:00-05:00" },
+      { "name": "Auth_Service_Logic.js", "size": "45 KB", "type": "js", "timestamp": "2025-07-25T15:00:00-05:00" },
+      { "name": "Deployment_Script.yml", "size": "10 KB", "type": "yml", "timestamp": "2025-06-13T10:40:00-05:00" },
+      { "name": "Server_Config.json", "size": "5 KB", "type": "json", "timestamp": "2025-05-20T11:55:00-05:00" },
+      { "name": "Technical_Debt_Ledger.md", "size": "22 KB", "type": "md", "timestamp": "2025-04-16T14:15:00-05:00" },
+      { "name": "Sprint_Retrospective_Notes.pdf", "size": "300 KB", "type": "pdf", "timestamp": "2025-03-28T16:30:00-05:00" },
+      { "name": "Archived_Feature_Branches.zip", "size": "88.7 MB", "type": "zip", "timestamp": "2025-02-14T12:00:00-05:00" },
+      { "name": "Release_Notes_v2.1.txt", "size": "18 KB", "type": "txt", "timestamp": "2025-01-30T17:00:00-05:00" }
+    ],
+    "conversation": [
+      {
+        "id": "msg2-1",
+        "sender": "You",
+        "text": "Hey Glinda, I've pushed the latest changes to the staging server. Can you take a look?",
+        "timestamp": "2025-09-03T09:40:00.000Z"
+      },
+      {
+        "id": "msg2-2",
+        "sender": "Glinda",
+        "text": "Sure, I'll check it out now. I have a couple of quick questions about the implementation.",
+        "timestamp": "2025-09-03T09:42:00.000Z"
+      },
+      {
+        "id": "msg2-3",
+        "sender": "Glinda",
+        "text": "Let's touch base in the morning to finalize...",
+        "timestamp": "2025-09-03T09:45:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Gerard",
+    "avatar": "https://xsgames.co/randomusers/assets/avatars/male/56.jpg",
+    "lastMessage": "The new design looks great! Good job.",
+    "timestamp": "2025-08-28T16:00:00-05:00",
+    "unreadCount": 0,
+    "isOnline": true,
+    "role": "UX Designer",
+    "email": "gerard.design@example.com",
+    "phone": "+1 (555) 234-5678",
+    "organization": "Bespire",
+    "timezone": "CST",
+    "location": "Chicago, IL",
+    "sharedLinks": [
+      { "url": "https://www.nngroup.com/", "timestamp": "2025-09-10T13:00:00-05:00" },
+      { "url": "https://www.figma.com/community", "timestamp": "2025-08-29T10:25:00-05:00" },
+      { "url": "https://dribbble.com/", "timestamp": "2025-08-14T11:00:00-05:00" },
+      { "url": "https://www.awwwards.com/", "timestamp": "2025-07-21T15:30:00-05:00" },
+      { "url": "https://uxplanet.org/", "timestamp": "2025-06-30T09:10:00-05:00" }
+    ],
+    "media": [
+      {
+        "url": "https://picsum.photos/seed/gerard1/800/600",
+        "thumbnail": "https://picsum.photos/seed/gerard1/150/150",
+        "type": "image",
+        "timestamp": "2025-08-28T15:55:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/gerard2/800/600",
+        "thumbnail": "https://picsum.photos/seed/gerard2/150/150",
+        "type": "image",
+        "timestamp": "2025-08-28T11:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/gerard3/800/600",
+        "thumbnail": "https://picsum.photos/seed/gerard3/150/150",
+        "type": "image",
+        "timestamp": "2025-08-27T14:30:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/gerard4/800/600",
+        "thumbnail": "https://picsum.photos/seed/gerard4/150/150",
+        "type": "image",
+        "timestamp": "2025-08-27T09:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/gerard5/800/600",
+        "thumbnail": "https://picsum.photos/seed/gerard5/150/150",
+        "type": "image",
+        "timestamp": "2025-08-26T16:15:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/gerard6/800/600",
+        "thumbnail": "https://picsum.photos/seed/gerard6/150/150",
+        "type": "image",
+        "timestamp": "2025-08-26T10:45:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/gerard7/800/600",
+        "thumbnail": "https://picsum.photos/seed/gerard7/150/150",
+        "type": "image",
+        "timestamp": "2025-08-25T13:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/gerard8/800/600",
+        "thumbnail": "https://picsum.photos/seed/gerard8/150/150",
+        "type": "image",
+        "timestamp": "2025-08-25T08:30:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/gerard9/800/600",
+        "thumbnail": "https://picsum.photos/seed/gerard9/150/150",
+        "type": "image",
+        "timestamp": "2025-08-24T18:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/gerard10/800/600",
+        "thumbnail": "https://picsum.photos/seed/gerard10/150/150",
+        "type": "image",
+        "timestamp": "2025-08-23T14:20:00-05:00"
+      }
+    ],
+    "sharedFiles": [
+      { "name": "Dashboard_Mockups.psd", "size": "25.8 MB", "type": "psd", "timestamp": "2025-09-09T16:00:00-05:00" },
+      { "name": "User_Flows_Final.fig", "size": "45.2 MB", "type": "fig", "timestamp": "2025-08-21T11:30:00-05:00" },
+      { "name": "Wireframes_v2.sketch", "size": "18.9 MB", "type": "sketch", "timestamp": "2025-07-18T10:15:00-05:00" },
+      { "name": "Design_System_Components.zip", "size": "120.4 MB", "type": "zip", "timestamp": "2025-06-25T14:00:00-05:00" },
+      { "name": "Persona_Profiles.pdf", "size": "4.5 MB", "type": "pdf", "timestamp": "2025-05-12T09:45:00-05:00" },
+      { "name": "Usability_Testing_Report.docx", "size": "2.1 MB", "type": "doc", "timestamp": "2025-04-22T13:20:00-05:00" },
+      { "name": "Icon_Library.ai", "size": "8.7 MB", "type": "ai", "timestamp": "2025-03-14T17:00:00-05:00" },
+      { "name": "Moodboard_Inspiration.pdf", "size": "11.3 MB", "type": "pdf", "timestamp": "2025-02-19T10:05:00-05:00" },
+      { "name": "Low_Fidelity_Prototypes.zip", "size": "32.6 MB", "type": "zip", "timestamp": "2025-01-24T15:50:00-05:00" },
+      { "name": "Accessibility_Guidelines.docx", "size": "850 KB", "type": "doc", "timestamp": "2024-12-10T11:10:00-05:00" }
+    ],
+    "conversation": [
+      {
+        "id": "msg3-1",
+        "sender": "You",
+        "text": "The final designs for the dashboard are ready for your review.",
+        "timestamp": "2025-09-02T12:00:00.000Z"
+      },
+      {
+        "id": "msg3-2",
+        "sender": "Gerard",
+        "text": "Awesome, I'll take a look right now.",
+        "timestamp": "2025-09-02T12:01:00.000Z"
+      },
+      {
+        "id": "msg3-3",
+        "sender": "Gerard",
+        "text": "The new design looks great! Good job.",
+        "timestamp": "2025-09-02T12:05:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Michelle",
+    "avatar": "https://xsgames.co/randomusers/assets/avatars/female/59.jpg",
+    "lastMessage": "Perfect, thanks!",
+    "timestamp": "2025-08-27T11:00:00-05:00",
+    "unreadCount": 1,
+    "isOnline": false,
+    "role": "Client",
+    "email": "michelle@clientcorp.com",
+    "phone": "+1 (555) 876-5432",
+    "organization": "Client Corp",
+    "timezone": "PST",
+    "location": "Los Angeles, CA",
+    "sharedLinks": [
+      { "url": "https://www.similarweb.com/", "timestamp": "2025-09-05T16:00:00-05:00" },
+      { "url": "https://www.clientcorp.com/news", "timestamp": "2025-08-26T10:00:00-05:00" },
+      { "url": "https://www.competitor-site.com", "timestamp": "2025-08-22T13:45:00-05:00" },
+      { "url": "https://trends.google.com/trends/", "timestamp": "2025-07-19T09:20:00-05:00" },
+      { "url": "https://www.gartner.com/en/industries/high-tech", "timestamp": "2025-06-18T14:00:00-05:00" }
+    ],
+    "media": [
+      {
+        "url": "https://picsum.photos/seed/michelle1/800/600",
+        "thumbnail": "https://picsum.photos/seed/michelle1/150/150",
+        "type": "image",
+        "timestamp": "2025-08-27T10:58:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/michelle2/800/600",
+        "thumbnail": "https://picsum.photos/seed/michelle2/150/150",
+        "type": "image",
+        "timestamp": "2025-08-27T08:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/michelle3/800/600",
+        "thumbnail": "https://picsum.photos/seed/michelle3/150/150",
+        "type": "image",
+        "timestamp": "2025-08-26T15:10:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/michelle4/800/600",
+        "thumbnail": "https://picsum.photos/seed/michelle4/150/150",
+        "type": "image",
+        "timestamp": "2025-08-26T11:25:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/michelle5/800/600",
+        "thumbnail": "https://picsum.photos/seed/michelle5/150/150",
+        "type": "image",
+        "timestamp": "2025-08-25T14:40:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/michelle6/800/600",
+        "thumbnail": "https://picsum.photos/seed/michelle6/150/150",
+        "type": "image",
+        "timestamp": "2025-08-25T10:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/michelle7/800/600",
+        "thumbnail": "https://picsum.photos/seed/michelle7/150/150",
+        "type": "image",
+        "timestamp": "2025-08-24T17:30:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/michelle8/800/600",
+        "thumbnail": "https://picsum.photos/seed/michelle8/150/150",
+        "type": "image",
+        "timestamp": "2025-08-23T16:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/michelle9/800/600",
+        "thumbnail": "https://picsum.photos/seed/michelle9/150/150",
+        "type": "image",
+        "timestamp": "2025-08-22T12:12:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/michelle10/800/600",
+        "thumbnail": "https://picsum.photos/seed/michelle10/150/150",
+        "type": "image",
+        "timestamp": "2025-08-21T11:11:00-05:00"
+      }
+    ],
+    "sharedFiles": [
+      { "name": "Presentation_Deck.pptx", "size": "5.6 MB", "type": "pptx", "timestamp": "2025-09-10T10:00:00-05:00" },
+      { "name": "Brand_Assets.zip", "size": "32.4 MB", "type": "zip", "timestamp": "2025-08-15T14:20:00-05:00" },
+      { "name": "Quarterly_Report.pdf", "size": "2.1 MB", "type": "pdf", "timestamp": "2025-07-01T11:45:00-05:00" },
+      { "name": "Contract_Agreement.docx", "size": "950 KB", "type": "doc", "timestamp": "2025-06-20T16:00:00-05:00" },
+      { "name": "Invoice_09-2025.pdf", "size": "120 KB", "type": "pdf", "timestamp": "2025-05-30T09:30:00-05:00" },
+      { "name": "Project_Brief_Updated.docx", "size": "1.8 MB", "type": "doc", "timestamp": "2025-04-18T13:00:00-05:00" },
+      { "name": "Feedback_Consolidated.xlsx", "size": "400 KB", "type": "xls", "timestamp": "2025-03-22T10:10:00-05:00" },
+      { "name": "Marketing_Plan_Overview.pptx", "size": "4.2 MB", "type": "ppt", "timestamp": "2025-02-12T15:25:00-05:00" },
+      { "name": "Creative_Assets_Request.pdf", "size": "550 KB", "type": "pdf", "timestamp": "2025-01-15T12:00:00-05:00" },
+      { "name": "Onboarding_Documents.zip", "size": "6.7 MB", "type": "zip", "timestamp": "2024-12-19T11:00:00-05:00" }
+    ],
+    "conversation": [
+      {
+        "id": "msg4-1",
+        "sender": "Michelle",
+        "text": "Can you send over the latest files for the client presentation?",
+        "timestamp": "2025-09-01T16:15:00.000Z"
+      },
+      {
+        "id": "msg4-2",
+        "sender": "You",
+        "text": "Just sent them to your email.",
+        "timestamp": "2025-09-02T14:05:00.000Z"
+      },
+      {
+        "id": "msg4-3",
+        "sender": "Michelle",
+        "text": "Perfect, thanks!",
+        "timestamp": "2025-09-02T14:06:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Nathaniel",
+    "avatar": "https://xsgames.co/randomusers/assets/avatars/male/46.jpg",
+    "lastMessage": null,
+    "timestamp": "2025-08-26T10:00:00-05:00",
+    "unreadCount": 0,
+    "isOnline": true,
+    "role": "Marketing Head",
+    "email": "nathaniel.m@example.com",
+    "phone": "+1 (555) 111-2222",
+    "organization": "Bespire",
+    "timezone": "EST",
+    "location": "Boston, MA",
+    "sharedLinks": [
+      { "url": "https://analytics.google.com/", "timestamp": "2025-09-11T09:05:00-05:00" },
+      { "url": "https://moz.com/blog", "timestamp": "2025-09-03T12:00:00-05:00" },
+      { "url": "https://blog.hubspot.com/", "timestamp": "2025-08-27T14:50:00-05:00" },
+      { "url": "https://www.semrush.com/", "timestamp": "2025-08-12T11:30:00-05:00" },
+      { "url": "https://ads.google.com/", "timestamp": "2025-07-28T16:00:00-05:00" }
+    ],
+    "media": [
+      {
+        "url": "https://picsum.photos/seed/nathaniel1/800/600",
+        "thumbnail": "https://picsum.photos/seed/nathaniel1/150/150",
+        "type": "image",
+        "timestamp": "2025-08-26T09:55:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/nathaniel2/800/600",
+        "thumbnail": "https://picsum.photos/seed/nathaniel2/150/150",
+        "type": "image",
+        "timestamp": "2025-08-25T16:20:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/nathaniel3/800/600",
+        "thumbnail": "https://picsum.photos/seed/nathaniel3/150/150",
+        "type": "image",
+        "timestamp": "2025-08-25T11:30:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/nathaniel4/800/600",
+        "thumbnail": "https://picsum.photos/seed/nathaniel4/150/150",
+        "type": "image",
+        "timestamp": "2025-08-24T14:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/nathaniel5/800/600",
+        "thumbnail": "https://picsum.photos/seed/nathaniel5/150/150",
+        "type": "image",
+        "timestamp": "2025-08-24T09:15:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/nathaniel6/800/600",
+        "thumbnail": "https://picsum.photos/seed/nathaniel6/150/150",
+        "type": "image",
+        "timestamp": "2025-08-23T18:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/nathaniel7/800/600",
+        "thumbnail": "https://picsum.photos/seed/nathaniel7/150/150",
+        "type": "image",
+        "timestamp": "2025-08-23T10:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/nathaniel8/800/600",
+        "thumbnail": "https://picsum.photos/seed/nathaniel8/150/150",
+        "type": "image",
+        "timestamp": "2025-08-22T15:30:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/nathaniel9/800/600",
+        "thumbnail": "https://picsum.photos/seed/nathaniel9/150/150",
+        "type": "image",
+        "timestamp": "2025-08-21T17:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/nathaniel10/800/600",
+        "thumbnail": "https://picsum.photos/seed/nathaniel10/150/150",
+        "type": "image",
+        "timestamp": "2025-08-20T12:45:00-05:00"
+      }
+    ],
+    "sharedFiles": [
+      { "name": "Campaign_Analytics_Aug.csv", "size": "1.5 MB", "type": "csv", "timestamp": "2025-09-03T14:00:00-05:00" },
+      { "name": "Social_Media_Calendar_Q4.xlsx", "size": "800 KB", "type": "xls", "timestamp": "2025-08-14T11:10:00-05:00" },
+      { "name": "Press_Release_Draft.docx", "size": "600 KB", "type": "doc", "timestamp": "2025-07-29T16:30:00-05:00" },
+      { "name": "Market_Research_Report.pdf", "size": "6.2 MB", "type": "pdf", "timestamp": "2025-06-19T09:00:00-05:00" },
+      { "name": "Ad_Campaign_Creatives.zip", "size": "150.8 MB", "type": "zip", "timestamp": "2025-05-23T12:45:00-05:00" },
+      { "name": "SEO_Keyword_Strategy.xlsx", "size": "2.3 MB", "type": "xls", "timestamp": "2025-04-10T10:20:00-05:00" },
+      { "name": "Content_Strategy_Deck.pptx", "size": "9.8 MB", "type": "ppt", "timestamp": "2025-03-20T15:00:00-05:00" },
+      { "name": "Email_Campaign_Results.csv", "size": "950 KB", "type": "csv", "timestamp": "2025-02-27T11:00:00-05:00" },
+      { "name": "Brand_Voice_Guide.pdf", "size": "3.4 MB", "type": "pdf", "timestamp": "2025-01-16T14:50:00-05:00" },
+      { "name": "Competitor_Analysis.docx", "size": "1.9 MB", "type": "doc", "timestamp": "2024-12-11T09:30:00-05:00" }
+    ],
+    "conversation": []
+  },
+  {
+    "id": 6,
+    "name": "Bernard",
+    "avatar": "https://xsgames.co/randomusers/assets/avatars/male/32.jpg",
+    "lastMessage": null,
+    "timestamp": "2025-08-25T15:20:00-05:00",
+    "unreadCount": 0,
+    "isOnline": false,
+    "role": "Accountant",
+    "email": "bernard.a@example.com",
+    "phone": "+1 (555) 333-4444",
+    "organization": "Spherule",
+    "timezone": "CST",
+    "location": "Austin, TX",
+    "sharedLinks": [
+      { "url": "https://quickbooks.intuit.com/", "timestamp": "2025-09-08T14:00:00-05:00" },
+      { "url": "https://www.investopedia.com/", "timestamp": "2025-08-21T10:30:00-05:00" },
+      { "url": "https://www.bloomberg.com/markets", "timestamp": "2025-08-19T09:00:00-05:00" },
+      { "url": "https://www.irs.gov/businesses", "timestamp": "2025-07-25T11:15:00-05:00" },
+      { "url": "https://www.journalofaccountancy.com/", "timestamp": "2025-06-28T15:00:00-05:00" }
+    ],
+    "media": [
+      {
+        "url": "https://picsum.photos/seed/bernard1/800/600",
+        "thumbnail": "https://picsum.photos/seed/bernard1/150/150",
+        "type": "image",
+        "timestamp": "2025-08-25T15:15:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/bernard2/800/600",
+        "thumbnail": "https://picsum.photos/seed/bernard2/150/150",
+        "type": "image",
+        "timestamp": "2025-08-25T10:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/bernard3/800/600",
+        "thumbnail": "https://picsum.photos/seed/bernard3/150/150",
+        "type": "image",
+        "timestamp": "2025-08-24T16:45:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/bernard4/800/600",
+        "thumbnail": "https://picsum.photos/seed/bernard4/150/150",
+        "type": "image",
+        "timestamp": "2025-08-24T11:20:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/bernard5/800/600",
+        "thumbnail": "https://picsum.photos/seed/bernard5/150/150",
+        "type": "image",
+        "timestamp": "2025-08-23T14:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/bernard6/800/600",
+        "thumbnail": "https://picsum.photos/seed/bernard6/150/150",
+        "type": "image",
+        "timestamp": "2025-08-23T09:30:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/bernard7/800/600",
+        "thumbnail": "https://picsum.photos/seed/bernard7/150/150",
+        "type": "image",
+        "timestamp": "2025-08-22T17:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/bernard8/800/600",
+        "thumbnail": "https://picsum.photos/seed/bernard8/150/150",
+        "type": "image",
+        "timestamp": "2025-08-21T18:00:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/bernard9/800/600",
+        "thumbnail": "https://picsum.photos/seed/bernard9/150/150",
+        "type": "image",
+        "timestamp": "2025-08-20T13:10:00-05:00"
+      },
+      {
+        "url": "https://picsum.photos/seed/bernard10/800/600",
+        "thumbnail": "https://picsum.photos/seed/bernard10/150/150",
+        "type": "image",
+        "timestamp": "2025-08-19T10:20:00-05:00"
+      }
+    ],
+    "sharedFiles": [
+      { "name": "Expense_Report_Q3.xlsx", "size": "1.1 MB", "type": "xls", "timestamp": "2025-09-10T17:00:00-05:00" },
+      { "name": "Invoices_Archive_Aug.zip", "size": "22.5 MB", "type": "zip", "timestamp": "2025-08-30T16:40:00-05:00" },
+      { "name": "Payroll_Data_Aug.csv", "size": "3.2 MB", "type": "csv", "timestamp": "2025-07-28T11:00:00-05:00" },
+      { "name": "Balance_Sheet_EOY_2024.pdf", "size": "900 KB", "type": "pdf", "timestamp": "2025-06-15T14:30:00-05:00" },
+      { "name": "Tax_Documents_2024.zip", "size": "12.8 MB", "type": "zip", "timestamp": "2025-05-18T10:00:00-05:00" },
+      { "name": "Accounts_Receivable_Ledger.xlsx", "size": "2.5 MB", "type": "xls", "timestamp": "2025-04-29T09:15:00-05:00" },
+      { "name": "Financial_Projections.pptx", "size": "3.7 MB", "type": "ppt", "timestamp": "2025-03-12T13:20:00-05:00" },
+      { "name": "Audit_Report_Q1.pdf", "size": "1.8 MB", "type": "pdf", "timestamp": "2025-02-20T15:00:00-05:00" },
+      { "name": "Receipts_Jan.pdf", "size": "8.9 MB", "type": "pdf", "timestamp": "2025-01-31T18:00:00-05:00" },
+      { "name": "Vendor_Payment_Schedule.xlsx", "size": "650 KB", "type": "xls", "timestamp": "2024-12-16T11:45:00-05:00" }
+    ],
+    "conversation": []
+  }
+]
