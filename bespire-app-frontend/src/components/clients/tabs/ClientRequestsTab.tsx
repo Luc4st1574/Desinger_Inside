@@ -6,7 +6,7 @@ import ClientRequestsTable from "../ClientRequestsTable";
 import { getRequestsByStatus, getRequestsCounts } from "@/mocks/clientRequests";
 import RequestDetailsModal from "@/components/modals/RequestDetails/RequestDetailsModal";
 import { useRequestsByAdmin } from "@/hooks/requests/useRequestsByAdmin";
-import RequestsTabs from "@/components/requests/RequestsTabs";
+import RequestsTabs from "@/components/requests/requestList/RequestsTabs";
 
 interface ClientRequestsTabProps {
   client: any; // En una implementación real, usaríamos un tipo más específico

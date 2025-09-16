@@ -3,8 +3,8 @@
 import React, { useRef, useState } from "react";
 import { UserMember } from "@/types/users";
 import { RequestList } from "@/types/requests";
-import PriorityBadge from "../ui/PriorityBadge";
-import AssignMembersDropdownUniversal from "../ui/AssignMembersDropdownUniversal";
+import PriorityBadge from "../../ui/PriorityBadge";
+import AssignMembersDropdownUniversal from "../../ui/AssignMembersDropdownUniversal";
 import { useAppContext } from "@/context/AppContext";
 import { PERMISSIONS } from "@/constants/permissions";
 import { usePermission } from "@/hooks/usePermission";
@@ -28,7 +28,6 @@ type Props = {
 export default function RequestsTable({
   requests,
   usersMembers,
-  onUpdateAssignees,
   onSetRequest,
 }: Props) {
   console.log("RequestsTable rendered with requests:", requests, usersMembers);
