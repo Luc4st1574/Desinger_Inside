@@ -16,6 +16,7 @@ import RequestsList from "./RequestsList";
 import RequestBoard from "./RequestBoard";
 import RequestGantt from "./RequestGantt";
 import RequestDetailsModal from "../modals/RequestDetails/RequestDetailsModal";
+import CreateRequestModal from "../modals/CreateRequestModal"; // Import the modal
 
 // Configuration for the list view tabs
 const tabs = [
@@ -28,9 +29,6 @@ const tabs = [
 export default function RequestMain() {
   const { loadingUser } = useAppContext();
   
-  // --- STATE AND DATA MANAGEMENT ---
-  // All logic is lifted into this main container component.
-
   const { requests, loading: loadingRequests, error, assignUsers } = useRequests();
   const { members } = useMembersBespire();
   
@@ -39,9 +37,11 @@ export default function RequestMain() {
   const [requestId, setRequestId] = useState<string | null>(null);
   const [parentRequest, setParentRequest] = useState<any>(null);
   const [openModal, setOpenModal] = useState(false);
+  
+  // State for Create Modal
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
   // --- HANDLER FUNCTIONS ---
-
   const handleOpenRequest = (request: any) => {
     if (request.parentRequest) {
       const parent = requests.find((r: { id: any; }) => r.id === request.parentRequest);
@@ -62,9 +62,12 @@ export default function RequestMain() {
   const handleUpdateAssignees = (requestId: string, newUsers: UserMember[]) => {
     assignUsers(requestId, newUsers.map((u) => u.id));
   };
+  
+  const handleOpenCreateModal = () => {
+    setCreateModalOpen(true);
+  };
 
-  // --- MEMOIZED CALCULATIONS (for List View) ---
-
+  // --- MEMOIZED CALCULATIONS ---
   const counts = useMemo(() => {
     if (!requests) return {};
     const c: Record<string, number> = {};
@@ -83,7 +86,6 @@ export default function RequestMain() {
   }, [activeTab, requests]);
 
   // --- RENDER LOGIC ---
-
   if (loadingUser || loadingRequests) return <Spinner />;
   if (error) return <p>Error loading requests</p>;
 
@@ -91,7 +93,6 @@ export default function RequestMain() {
     <div>
       <ViewModeSwitcher activeMode={viewMode} onModeChange={setViewMode} />
       
-      {/* Conditional rendering of the active view */}
       {viewMode === "list" && (
         <RequestsList
           requests={filteredRequests}
@@ -111,9 +112,14 @@ export default function RequestMain() {
         />
       )}
       
-      {viewMode === "gantt" && <RequestGantt />}
+      {viewMode === "gantt" && (
+        <RequestGantt
+          requests={requests || []}
+          onAddRequest={handleOpenCreateModal} 
+        />
+      )}
 
-      {/* Modal is kept here to be accessible from any view */}
+      {/* Details Modal */}
       <RequestDetailsModal
         open={openModal}
         onClose={() => setOpenModal(false)}
@@ -132,6 +138,12 @@ export default function RequestMain() {
             setParentRequest(null);
           }
         }}
+      />
+      
+      {/* Create Modal */}
+      <CreateRequestModal 
+        isOpen={isCreateModalOpen}
+        onClose={() => setCreateModalOpen(false)}
       />
     </div>
   );
