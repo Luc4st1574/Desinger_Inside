@@ -34,10 +34,11 @@ const weekDiff = (startDate: Date, endDate: Date): number => {
 interface RequestGanttProps {
   requests: RequestList[];
   onAddRequest: () => void;
+  onOpenRequest: (request: RequestList) => void;
 }
 
 // --- MAIN GANTT COMPONENT ---
-export default function RequestGantt({ requests, onAddRequest }: RequestGanttProps) {
+export default function RequestGantt({ requests, onAddRequest, onOpenRequest }: RequestGanttProps) {
   const [openSections, setOpenSections] = useState({
     all_requests: true,
     in_progress: true,
@@ -58,30 +59,19 @@ export default function RequestGantt({ requests, onAddRequest }: RequestGanttPro
   }, [requests]);
 
   const { chartStartDate, chartEndDate } = useMemo(() => {
-    // Return a default range if there are no requests to plot
     if (!plottableRequests || plottableRequests.length === 0) {
       const now = new Date();
-      // Start of the current month
       const start = new Date(now.getFullYear(), now.getMonth(), 1);
-      // End of the month, 3 months from now (total of 4 months)
       const end = new Date(now.getFullYear(), now.getMonth() + 4, 0);
       return { chartStartDate: start, chartEndDate: end };
     }
-
-    // Find the earliest start date from all requests
     const firstRequestDate = new Date(
       Math.min(...plottableRequests.map(r => new Date(r.createdAt!).getTime()))
     );
-
-    // Set the chart start date to the beginning of that month
     const start = new Date(firstRequestDate.getFullYear(), firstRequestDate.getMonth(), 1);
-
-    // Set the chart end date to be 4 months after the start date
-    // The '0' for the day gets the last day of the previous month, creating a perfect 4-month block
     const end = new Date(start.getFullYear(), start.getMonth() + 4, 0);
-
     return { chartStartDate: start, chartEndDate: end };
-  }, [plottableRequests]); // Dependency updated to re-calculate when requests change
+  }, [plottableRequests]);
 
   const { monthHeaders, weekHeaders } = useMemo(() => {
     const weeks: { weekNum: number; startDate: Date }[] = [];
@@ -105,10 +95,9 @@ export default function RequestGantt({ requests, onAddRequest }: RequestGanttPro
 
   useEffect(() => {
     if (timelineContainerRef.current) {
-      // Scroll to the beginning of the timeline since the start is now dynamic
       timelineContainerRef.current.scrollLeft = 0;
     }
-  }, [chartStartDate]); // This effect runs whenever the start date changes
+  }, [chartStartDate]);
 
   const getTaskStyle = (task: RequestList) => {
     if (!task.createdAt || !task.dueDate) return { display: 'none' };
@@ -149,11 +138,8 @@ export default function RequestGantt({ requests, onAddRequest }: RequestGanttPro
               const groupRequests = group.status === null
                 ? plottableRequests
                 : plottableRequests.filter(r => r.status === group.status);
-
               if (groupRequests.length === 0) return null;
-
               const isOpen = openSections[group.id as keyof typeof openSections];
-
               return (
                 <div key={group.id}>
                   <div onClick={() => toggleSection(group.id)} className="flex items-center justify-between h-10 px-4 bg-gray-50 cursor-pointer">
@@ -168,7 +154,11 @@ export default function RequestGantt({ requests, onAddRequest }: RequestGanttPro
                     const start = new Date(task.createdAt!).toLocaleDateString('default', { month: 'short', day: 'numeric' });
                     const end = new Date(task.dueDate!).toLocaleDateString('default', { month: 'short', day: 'numeric' });
                     return (
-                      <div key={task.id} className="flex items-center justify-between h-12 px-4">
+                      <div
+                        key={task.id}
+                        className="flex items-center justify-between h-12 px-4 hover:bg-gray-50 cursor-pointer"
+                        onClick={() => onOpenRequest(task)}
+                      >
                         <div className="flex items-center justify-between w-3/5 pr-4">
                           <span className="truncate">{task.title}</span>
                           <div className="flex -space-x-2 flex-shrink-0">
@@ -215,10 +205,9 @@ export default function RequestGantt({ requests, onAddRequest }: RequestGanttPro
                 ))}
               </div>
             </div>
-
             <div className="relative">
               <div className="absolute inset-0 flex">
-                {weekHeaders.map((week, i) => (
+                {weekHeaders.map((_week, i) => (
                   <div key={i} className="flex-shrink-0 border-r border-gray-200" style={{ width: weekWidth }}></div>
                 ))}
               </div>
@@ -227,17 +216,18 @@ export default function RequestGantt({ requests, onAddRequest }: RequestGanttPro
                   const groupRequests = group.status === null
                     ? plottableRequests
                     : plottableRequests.filter(r => r.status === group.status);
-
                   if (groupRequests.length === 0) return null;
-
                   const isOpen = openSections[group.id as keyof typeof openSections];
-
                   return (
                     <div key={group.id}>
                       <div style={{ height: 40 }}></div>
                       {isOpen && groupRequests.map((task) => (
                         <div key={task.id} className="relative" style={{ height: rowHeight }}>
-                          <div className="absolute top-2 bottom-2 bg-lime-200 rounded flex items-center px-2" style={getTaskStyle(task)}>
+                          <div
+                            className="absolute top-2 bottom-2 bg-lime-200 rounded flex items-center px-2 cursor-pointer"
+                            style={getTaskStyle(task)}
+                            onClick={() => onOpenRequest(task)}
+                          >
                             <p className="text-xs font-medium text-lime-800 truncate">{task.title}</p>
                           </div>
                         </div>

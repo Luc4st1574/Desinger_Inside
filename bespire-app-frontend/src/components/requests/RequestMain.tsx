@@ -16,7 +16,7 @@ import RequestsList from "./RequestsList";
 import RequestBoard from "./RequestBoard";
 import RequestGantt from "./RequestGantt";
 import RequestDetailsModal from "../modals/RequestDetails/RequestDetailsModal";
-import CreateRequestModal from "../modals/CreateRequestModal"; // Import the modal
+import CreateRequestModal from "../modals/CreateRequestModal";
 
 // Configuration for the list view tabs
 const tabs = [
@@ -28,16 +28,16 @@ const tabs = [
 
 export default function RequestMain() {
   const { loadingUser } = useAppContext();
-  
+
   const { requests, loading: loadingRequests, error, assignUsers } = useRequests();
   const { members } = useMembersBespire();
-  
+
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [activeTab, setActiveTab] = useState("all");
   const [requestId, setRequestId] = useState<string | null>(null);
   const [parentRequest, setParentRequest] = useState<any>(null);
   const [openModal, setOpenModal] = useState(false);
-  
+
   // State for Create Modal
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
@@ -62,7 +62,7 @@ export default function RequestMain() {
   const handleUpdateAssignees = (requestId: string, newUsers: UserMember[]) => {
     assignUsers(requestId, newUsers.map((u) => u.id));
   };
-  
+
   const handleOpenCreateModal = () => {
     setCreateModalOpen(true);
   };
@@ -92,7 +92,7 @@ export default function RequestMain() {
   return (
     <div>
       <ViewModeSwitcher activeMode={viewMode} onModeChange={setViewMode} />
-      
+
       {viewMode === "list" && (
         <RequestsList
           requests={filteredRequests}
@@ -111,11 +111,12 @@ export default function RequestMain() {
           onSetRequest={handleOpenRequest}
         />
       )}
-      
+
       {viewMode === "gantt" && (
         <RequestGantt
           requests={requests || []}
-          onAddRequest={handleOpenCreateModal} 
+          onAddRequest={handleOpenCreateModal}
+          onOpenRequest={handleOpenRequest}
         />
       )}
 
@@ -139,9 +140,9 @@ export default function RequestMain() {
           }
         }}
       />
-      
+
       {/* Create Modal */}
-      <CreateRequestModal 
+      <CreateRequestModal
         isOpen={isCreateModalOpen}
         onClose={() => setCreateModalOpen(false)}
       />
