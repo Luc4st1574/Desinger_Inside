@@ -1,5 +1,5 @@
 {
-  "overviewMetrics": [
+  "keyMetrics": [
     {
       "title": "Overall Performance",
       "value": "8.2/10",
@@ -25,47 +25,53 @@
       "changeType": "increase"
     }
   ],
-  "performanceChartData": [
-    { "name": "Jan", "uv": 4000, "pv": 2400, "amt": 2400 },
-    { "name": "Feb", "uv": 3000, "pv": 1398, "amt": 2210 },
-    { "name": "Mar", "uv": 2000, "pv": 9800, "amt": 2290 },
-    { "name": "Apr", "uv": 2780, "pv": 3908, "amt": 2000 },
-    { "name": "May", "uv": 1890, "pv": 4800, "amt": 2181 },
-    { "name": "Jun", "uv": 2390, "pv": 3800, "amt": 2500 },
-    { "name": "Jul", "uv": 3490, "pv": 4300, "amt": 2100 }
+  "ratingsOverview": [
+    { "stars": 5, "count": 125, "total": 150 },
+    { "stars": 4, "count": 80, "total": 150 },
+    { "stars": 3, "count": 20, "total": 150 },
+    { "stars": 2, "count": 5, "total": 150 },
+    { "stars": 1, "count": 2, "total": 150 }
   ],
-  "performanceRecords": [
+  "taskCompletion": [
     {
       "id": "1",
-      "metricName": "Project Alpha",
-      "value": "In Progress",
-      "trend": "stable",
-      "period": "Q3 2025",
-      "details": "All milestones are being met on schedule."
+      "name": "Project Alpha",
+      "assignees": [
+        { "name": "User 1", "avatar": "/assets/avatars/avatar1.png" },
+        { "name": "User 2", "avatar": "/assets/avatars/avatar2.png" }
+      ],
+      "status": "Completed"
     },
     {
       "id": "2",
-      "metricName": "Support Tickets",
-      "value": "Completed",
-      "trend": "up",
-      "period": "Last 7 Days",
-      "details": "Resolution time has improved by 15%."
+      "name": "Support Tickets",
+      "assignees": [
+        { "name": "User 3", "avatar": "/assets/avatars/avatar3.png" }
+      ],
+      "status": "In Progress"
     },
     {
       "id": "3",
-      "metricName": "Feature X Rollout",
-      "value": "Revision",
-      "trend": "down",
-      "period": "Q3 2025",
-      "details": "Blocked by technical debt in legacy module."
-    },
-    {
-      "id": "4",
-      "metricName": "Client Onboarding",
-      "value": "Completed",
-      "trend": "up",
-      "period": "This Month",
-      "details": "Positive feedback from all new clients."
+      "name": "Feature X Rollout",
+      "assignees": [
+        { "name": "User 1", "avatar": "/assets/avatars/avatar1.png" },
+        { "name": "User 3", "avatar": "/assets/avatars/avatar3.png" }
+      ],
+      "status": "Completed"
     }
-  ]
+  ],
+  "taskDistribution": [
+    { "name": "Client A", "tasks": 40 },
+    { "name": "Client B", "tasks": 30 },
+    { "name": "Client C", "tasks": 20 },
+    { "name": "Client D", "tasks": 27 },
+    { "name": "Client E", "tasks": 18 },
+    { "name": "Client F", "tasks": 23 },
+    { "name": "Client G", "tasks": 34 }
+  ],
+  "totalTasks": {
+    "count": 237,
+    "change": "+12%",
+    "changeType": "increase"
+  }
 }

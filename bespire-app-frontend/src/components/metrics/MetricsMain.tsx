@@ -1,25 +1,37 @@
 import React from 'react';
-import type { Metric, ChartData, PerformanceRecord } from '@/types/performance';
+import type { Metric, Rating, Task, DistributionData, TotalTasks } from '@/types/metrics';
 import performanceData from '@/data/performanceMetrics.json';
-import OverviewMetrics from './MetricsOverview';
-import PerformanceCharts from './MetricsCharts';
-import PerformanceTable from './MetricsTable';
+import KeyPerformance from './KeyPerformance';
+import RatingsOverview from './RatingsOverview';
+import TaskCompletion from './TaskCompletion';
+import TaskDistribution from './TaskDistribution';
+import TotalTasksComponent from './TotalTasks';
 
-const PerformanceMain = () => {
-  const { overviewMetrics, performanceChartData, performanceRecords } = performanceData as {
-    overviewMetrics: Metric[];
-    performanceChartData: ChartData[];
-    performanceRecords: PerformanceRecord[];
+const MetricsMain = () => {
+  const { keyMetrics, ratingsOverview, taskCompletion, taskDistribution, totalTasks } = performanceData as {
+    keyMetrics: Metric[];
+    ratingsOverview: Rating[];
+    taskCompletion: Task[];
+    taskDistribution: DistributionData[];
+    totalTasks: TotalTasks;
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Performance Metrics</h1>
-      <OverviewMetrics metrics={overviewMetrics} />
-      <PerformanceCharts chartData={performanceChartData} />
-      <PerformanceTable records={performanceRecords} />
-    </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Main Content */}
+        <div className="lg:col-span-2 space-y-6">
+          <KeyPerformance metrics={keyMetrics} />
+          <RatingsOverview ratings={ratingsOverview} />
+          <TaskCompletion tasks={taskCompletion} />
+        </div>
+
+        {/* Sidebar */}
+        <div className="space-y-6">
+          <TaskDistribution data={taskDistribution} />
+          <TotalTasksComponent data={totalTasks} />
+        </div>
+      </div>
   );
 };
 
-export default PerformanceMain;
+export default MetricsMain;
