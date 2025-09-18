@@ -1,12 +1,32 @@
-import React from 'react';
-import type { Rating } from '@/types/metrics';
+import React, { useMemo } from 'react';
+import type { RawTask } from '@/types/metrics'; // Now needs both types
 import { Star } from 'lucide-react';
 
 interface RatingsOverviewProps {
-  ratings: Rating[];
+  tasks: RawTask[]; 
 }
 
-const RatingsOverview = ({ ratings }: RatingsOverviewProps) => {
+const RatingsOverview = ({ tasks }: RatingsOverviewProps) => {
+  const ratings = useMemo(() => {
+    const ratingCounts: { [key: number]: number } = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+    let totalRatedTasks = 0;
+
+    tasks.forEach(task => {
+      if (task.clientRating !== undefined && task.clientRating >= 1 && task.clientRating <= 5) {
+        ratingCounts[task.clientRating]++;
+        totalRatedTasks++;
+      }
+    });
+
+    return Object.entries(ratingCounts)
+      .map(([stars, count]) => ({
+        stars: parseInt(stars, 10),
+        count: count,
+        total: totalRatedTasks,
+      }))
+      .sort((a, b) => b.stars - a.stars);
+  }, [tasks]);
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <h3 className="text-lg font-semibold mb-4">Ratings Overview</h3>
@@ -21,7 +41,7 @@ const RatingsOverview = ({ ratings }: RatingsOverviewProps) => {
               <div className="w-full bg-gray-200 rounded-full h-2.5">
                 <div
                   className="bg-blue-600 h-2.5 rounded-full"
-                  style={{ width: `${(rating.count / rating.total) * 100}%` }}
+                  style={{ width: `${rating.total > 0 ? (rating.count / rating.total) * 100 : 0}%` }}
                 ></div>
               </div>
             </div>
