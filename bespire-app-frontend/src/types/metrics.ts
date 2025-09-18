@@ -1,8 +1,9 @@
-export interface Metric {
-  title: string;
-  value: string;
-  change: string;
-  changeType: "increase" | "decrease";
+export interface RawTask {
+  id: string;
+  completedAt: string; // ISO 8601 timestamp
+  completionTimeHours: number;
+  requiredRevision: boolean;
+  clientRating?: number; // Optional, from 1 to 5
 }
 
 export interface ChartData {

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Metric, Rating, Task, DistributionData, TotalTasks } from '@/types/metrics';
+import type { RawTask, Rating, Task, DistributionData, TotalTasks } from '@/types/metrics';
 import performanceData from '@/data/performanceMetrics.json';
 import KeyPerformance from './KeyPerformance';
 import RatingsOverview from './RatingsOverview';
@@ -8,8 +8,8 @@ import TaskDistribution from './TaskDistribution';
 import TotalTasksComponent from './TotalTasks';
 
 const MetricsMain = () => {
-  const { keyMetrics, ratingsOverview, taskCompletion, taskDistribution, totalTasks } = performanceData as {
-    keyMetrics: Metric[];
+  const { tasks, ratingsOverview, taskCompletion, taskDistribution, totalTasks } = performanceData as {
+    tasks: RawTask[];
     ratingsOverview: Rating[];
     taskCompletion: Task[];
     taskDistribution: DistributionData[];
@@ -18,14 +18,11 @@ const MetricsMain = () => {
 
   return (
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Main Content */}
         <div className="lg:col-span-2 space-y-6">
-          <KeyPerformance metrics={keyMetrics} />
+          <KeyPerformance tasks={tasks} />
           <RatingsOverview ratings={ratingsOverview} />
           <TaskCompletion tasks={taskCompletion} />
         </div>
-
-        {/* Sidebar */}
         <div className="space-y-6">
           <TaskDistribution data={taskDistribution} />
           <TotalTasksComponent data={totalTasks} />
