@@ -50,54 +50,5 @@
     { "id": "task_048", "completedAt": "2024-09-28T18:00:00Z", "completionTimeHours": 51, "requiredRevision": false, "clientRating": 4 },
     { "id": "task_049", "completedAt": "2024-09-20T10:00:00Z", "completionTimeHours": 36, "requiredRevision": false, "clientRating": 5 },
     { "id": "task_050", "completedAt": "2024-09-18T13:00:00Z", "completionTimeHours": 46, "requiredRevision": true, "clientRating": 4 }
-  ],
-  "ratingsOverview": [
-    { "stars": 5, "count": 125, "total": 150 },
-    { "stars": 4, "count": 80, "total": 150 },
-    { "stars": 3, "count": 20, "total": 150 },
-    { "stars": 2, "count": 5, "total": 150 },
-    { "stars": 1, "count": 2, "total": 150 }
-  ],
-  "taskCompletion": [
-    {
-      "id": "1",
-      "name": "Project Alpha",
-      "assignees": [
-        { "name": "User 1", "avatar": "/assets/avatars/avatar1.png" },
-        { "name": "User 2", "avatar": "/assets/avatars/avatar2.png" }
-      ],
-      "status": "Completed"
-    },
-    {
-      "id": "2",
-      "name": "Support Tickets",
-      "assignees": [
-        { "name": "User 3", "avatar": "/assets/avatars/avatar3.png" }
-      ],
-      "status": "In Progress"
-    },
-    {
-      "id": "3",
-      "name": "Feature X Rollout",
-      "assignees": [
-        { "name": "User 1", "avatar": "/assets/avatars/avatar1.png" },
-        { "name": "User 3", "avatar": "/assets/avatars/avatar3.png" }
-      ],
-      "status": "Completed"
-    }
-  ],
-  "taskDistribution": [
-    { "name": "Client A", "tasks": 40 },
-    { "name": "Client B", "tasks": 30 },
-    { "name": "Client C", "tasks": 20 },
-    { "name": "Client D", "tasks": 27 },
-    { "name": "Client E", "tasks": 18 },
-    { "name": "Client F", "tasks": 23 },
-    { "name": "Client G", "tasks": 34 }
-  ],
-  "totalTasks": {
-    "count": 237,
-    "change": "+12%",
-    "changeType": "increase"
-  }
+  ]
 }
