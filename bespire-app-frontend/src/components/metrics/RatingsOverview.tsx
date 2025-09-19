@@ -7,9 +7,10 @@ interface RatingsOverviewProps {
   tasks: RawTask[];
 }
 
-const roles = [
-  { id: 1, name: 'Designer' },
-  { id: 2, name: 'Client' },
+const viewOptions = [
+  { id: 1, name: 'Date' },
+  { id: 2, name: 'Designer' },
+  { id: 3, name: 'Client' },
 ];
 
 type Period = 'Day' | 'Week' | 'Month' | 'Year';
@@ -31,29 +32,40 @@ const calculateStats = (tasks: RawTask[]) => {
 };
 
 const RatingsOverview = ({ tasks }: RatingsOverviewProps) => {
-  const [selectedRole, setSelectedRole] = useState(roles[0]);
+  const [selectedView, setSelectedView] = useState(viewOptions[0]);
   const [activePeriod, setActivePeriod] = useState<Period>('Month');
   
   const now = useMemo(() => new Date('2025-09-18T14:17:04-05:00'), []);
 
   const periodTasks = useMemo(() => {
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const endDate = new Date(now);
+    endDate.setHours(23, 59, 59, 999);
+
+    let startDate: Date;
+
+    switch (activePeriod) {
+        case 'Day':
+            startDate = new Date(now);
+            startDate.setHours(0, 0, 0, 0);
+            break;
+        case 'Week':
+            startDate = new Date(now);
+            startDate.setHours(0, 0, 0, 0);
+            startDate.setDate(startDate.getDate() - 6);
+            break;
+        case 'Month':
+            startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+            break;
+        case 'Year':
+            startDate = new Date(now.getFullYear(), 0, 1);
+            break;
+        default:
+            return tasks;
+    }
+
     return tasks.filter(task => {
         const completedDate = new Date(task.completedAt);
-        switch (activePeriod) {
-            case 'Day':
-                return completedDate.toDateString() === today.toDateString();
-            case 'Week':
-                const oneWeekAgo = new Date(today);
-                oneWeekAgo.setDate(today.getDate() - 6);
-                return completedDate >= oneWeekAgo && completedDate <= now;
-            case 'Month':
-                return completedDate.getMonth() === today.getMonth() && completedDate.getFullYear() === today.getFullYear();
-            case 'Year':
-                return completedDate.getFullYear() === today.getFullYear();
-            default:
-                return true;
-        }
+        return completedDate >= startDate && completedDate <= endDate;
     });
   }, [tasks, activePeriod, now]);
 
@@ -69,43 +81,94 @@ const RatingsOverview = ({ tasks }: RatingsOverviewProps) => {
   const periodStats = useMemo(() => calculateStats(periodTasks), [periodTasks]);
   const baselineStats = useMemo(() => calculateStats(baselineTasks), [baselineTasks]);
   
+  // MODIFIED: This logic now changes the chart's granularity based on the active period.
   const chartData = useMemo(() => {
-    const key = selectedRole.name.toLowerCase() as 'designer' | 'client';
-    const groupedTasks: { [name: string]: RawTask[] } = {};
-    periodTasks.forEach(task => {
-        const groupName = task[key]?.name;
-        if (groupName) {
-            if (!groupedTasks[groupName]) {
-                groupedTasks[groupName] = [];
+    if (selectedView.name === 'Date') {
+        switch (activePeriod) {
+            case 'Year': {
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const tasksThisYear = tasks.filter(task => new Date(task.completedAt).getFullYear() === now.getFullYear());
+                const groupedByMonth: { [month: number]: RawTask[] } = {};
+                tasksThisYear.forEach(task => {
+                    const month = new Date(task.completedAt).getMonth();
+                    if (!groupedByMonth[month]) groupedByMonth[month] = [];
+                    groupedByMonth[month].push(task);
+                });
+                return months.map((name, index) => {
+                    const stats = calculateStats(groupedByMonth[index] || []);
+                    if (stats.count > 0) {
+                      // Note: avg is not a property of stats, so renaming here.
+                      return { name, min: stats.min, max: stats.max, avg: stats.average };
+                    }
+                    return null;
+                }).filter(Boolean) as { name: string; min: number; max: number; avg: number }[];
             }
-            groupedTasks[groupName].push(task);
+            case 'Month': {
+                const groupedByDay: { [day: number]: RawTask[] } = {};
+                periodTasks.forEach(task => { // `periodTasks` is already filtered for the current month
+                    const day = new Date(task.completedAt).getDate();
+                    if (!groupedByDay[day]) groupedByDay[day] = [];
+                    groupedByDay[day].push(task);
+                });
+                return Object.entries(groupedByDay).map(([day, tasksInDay]) => {
+                    const stats = calculateStats(tasksInDay);
+                    return { name: day, min: stats.min, max: stats.max, avg: stats.average };
+                }).sort((a,b) => parseInt(a.name) - parseInt(b.name));
+            }
+            case 'Week': {
+                const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                const groupedByDate: { [date: string]: RawTask[] } = {};
+                periodTasks.forEach(task => { // `periodTasks` is already filtered for the last 7 days
+                    const dateStr = new Date(task.completedAt).toDateString();
+                    if (!groupedByDate[dateStr]) groupedByDate[dateStr] = [];
+                    groupedByDate[dateStr].push(task);
+                });
+                return Object.entries(groupedByDate).map(([dateStr, tasksOnDate]) => {
+                    const date = new Date(dateStr);
+                    const stats = calculateStats(tasksOnDate);
+                    return {
+                        name: `${dayNames[date.getDay()]} ${date.getDate()}`,
+                        date: date,
+                        min: stats.min,
+                        max: stats.max,
+                        avg: stats.average
+                    };
+                }).sort((a,b) => a.date.getTime() - b.date.getTime());
+            }
+            case 'Day':
+            default:
+                return []; // No chart for a single day
         }
-    });
-    return Object.entries(groupedTasks)
-      .map(([name, tasksInGroup]) => {
-        const stats = calculateStats(tasksInGroup);
-        if (stats.count > 0) {
-          return {
-            name: name.split(' ')[0],
-            min: stats.min,
-            max: stats.max,
-            avg: stats.average,
-          };
-        }
-        return null;
-      })
-      .filter(Boolean) as { name: string; min: number; max: number; avg: number }[];
-  }, [periodTasks, selectedRole]);
+    } 
+    else { // 'Designer' or 'Client' view logic (unchanged)
+        const key = selectedView.name.toLowerCase() as 'designer' | 'client';
+        const groupedTasks: { [name: string]: RawTask[] } = {};
+        periodTasks.forEach(task => {
+            const groupName = task[key]?.name;
+            if (groupName) {
+                if (!groupedTasks[groupName]) groupedTasks[groupName] = [];
+                groupedTasks[groupName].push(task);
+            }
+        });
+        return Object.entries(groupedTasks).map(([name, tasksInGroup]) => {
+            const stats = calculateStats(tasksInGroup);
+            if (stats.count > 0) {
+              return { name: name.split(' ')[0], min: stats.min, max: stats.max, avg: stats.average };
+            }
+            return null;
+        }).filter(Boolean) as { name: string; min: number; max: number; avg: number }[];
+    }
+  }, [tasks, periodTasks, selectedView, activePeriod, now]);
 
   return (
     <>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 px-2">
         <div className="flex items-center mb-3 sm:mb-0">
           <h2 className="text-xl font-light text-gray-800 pr-2">Ratings Overview by</h2>
-          <Listbox value={selectedRole} onChange={setSelectedRole}>
+          <Listbox value={selectedView} onChange={setSelectedView}>
             <div className="relative">
               <Listbox.Button className="relative w-full cursor-default rounded-full border border-[#5b6f59] bg-transparent py-1 pl-4 pr-10 text-left text-sm font-medium text-[#5b6f59] focus:outline-none">
-                <span className="block truncate">{selectedRole.name}</span>
+                <span className="block truncate">{selectedView.name}</span>
                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5">
                   <ChevronDown className="h-4 w-4 text-[#5b6f59]" aria-hidden="true" />
                 </span>
@@ -117,14 +180,14 @@ const RatingsOverview = ({ tasks }: RatingsOverviewProps) => {
                 leaveTo="opacity-0"
               >
                 <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none focus:ring-0 sm:text-sm z-10">
-                  {roles.map((role) => (
+                  {viewOptions.map((view) => (
                     <Listbox.Option
-                      key={role.id}
+                      key={view.id}
                       className={({ active }) => `relative cursor-default select-none py-2 px-4 ${active ? 'bg-gray-100' : 'text-gray-900'}`}
-                      value={role}
+                      value={view}
                     >
                       {({ selected }) => (
-                        <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{role.name}</span>
+                        <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{view.name}</span>
                       )}
                     </Listbox.Option>
                   ))}
@@ -171,7 +234,6 @@ const RatingsOverview = ({ tasks }: RatingsOverviewProps) => {
           
           <div className="col-start-1 row-start-1 flex flex-col justify-between pr-4 text-right">
             {[5, 4, 3, 2, 1, 0].map(label => (
-                // --- MODIFICATION: Removed the conditional class to revert the '0' label's position ---
                 <div key={label} className="text-xs text-gray-400">
                     {label}
                 </div>
