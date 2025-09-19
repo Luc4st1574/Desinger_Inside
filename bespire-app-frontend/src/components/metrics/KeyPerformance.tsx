@@ -8,11 +8,11 @@ import Layers from "@/assets/icons/task_volume.svg";
 
 // This interface represents the RAW data from the backend
 export interface RawTask {
-  id: string;
-  completedAt: string;
-  completionTimeHours: number;
-  requiredRevision: boolean;
-  clientRating?: number;
+    id: string;
+    completedAt: string;
+    completionTimeHours: number;
+    requiredRevision: boolean;
+    clientRating?: number;
 }
 
 // This interface represents the final, CALCULATED metric to be displayed

@@ -1,54 +1,107 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, Fragment } from 'react';
 import type { RawTask } from '@/types/metrics';
-import { Star, ChevronDown } from 'lucide-react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 import { Listbox, Transition } from '@headlessui/react';
 
 interface RatingsOverviewProps {
   tasks: RawTask[];
 }
 
-// Data for the Listbox
 const roles = [
   { id: 1, name: 'Designer' },
   { id: 2, name: 'Client' },
 ];
 
-// Define the types and constants for the period selector buttons
 type Period = 'Day' | 'Week' | 'Month' | 'Year';
 const periods: Period[] = ['Day', 'Week', 'Month', 'Year'];
 
+const calculateStats = (tasks: RawTask[]) => {
+    const ratedTasks = tasks.filter(task => task.clientRating !== undefined && task.clientRating >= 1);
+    if (ratedTasks.length === 0) {
+        return { min: 0, max: 0, count: 0, average: 0 };
+    }
+    const ratings = ratedTasks.map(task => task.clientRating!);
+    const sum = ratings.reduce((acc, rating) => acc + rating, 0);
+    return {
+        min: Math.min(...ratings),
+        max: Math.max(...ratings),
+        count: ratedTasks.length,
+        average: sum / ratedTasks.length,
+    };
+};
 
 const RatingsOverview = ({ tasks }: RatingsOverviewProps) => {
   const [selectedRole, setSelectedRole] = useState(roles[0]);
+  const [activePeriod, setActivePeriod] = useState<Period>('Month');
+  
+  const now = useMemo(() => new Date('2025-09-18T14:17:04-05:00'), []);
 
-  const ratings = useMemo(() => {
-    const ratingCounts: { [key: number]: number } = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-    let totalRatedTasks = 0;
-
-    tasks.forEach(task => {
-      if (task.clientRating !== undefined && task.clientRating >= 1 && task.clientRating <= 5) {
-        ratingCounts[task.clientRating]++;
-        totalRatedTasks++;
-      }
+  const periodTasks = useMemo(() => {
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return tasks.filter(task => {
+        const completedDate = new Date(task.completedAt);
+        switch (activePeriod) {
+            case 'Day':
+                return completedDate.toDateString() === today.toDateString();
+            case 'Week':
+                const oneWeekAgo = new Date(today);
+                oneWeekAgo.setDate(today.getDate() - 6);
+                return completedDate >= oneWeekAgo && completedDate <= now;
+            case 'Month':
+                return completedDate.getMonth() === today.getMonth() && completedDate.getFullYear() === today.getFullYear();
+            case 'Year':
+                return completedDate.getFullYear() === today.getFullYear();
+            default:
+                return true;
+        }
     });
+  }, [tasks, activePeriod, now]);
 
-    return Object.entries(ratingCounts)
-      .map(([stars, count]) => ({
-        stars: parseInt(stars, 10),
-        count: count,
-        total: totalRatedTasks,
-      }))
-      .sort((a, b) => b.stars - a.stars);
-  }, [tasks]);
+  const baselineTasks = useMemo(() => {
+    const oneMonthAgo = new Date(now);
+    oneMonthAgo.setDate(now.getDate() - 30);
+    return tasks.filter(task => {
+        const completedDate = new Date(task.completedAt);
+        return completedDate >= oneMonthAgo && completedDate <= now;
+    });
+  }, [tasks, now]);
 
-  const activePeriod: Period = 'Week';
+  const periodStats = useMemo(() => calculateStats(periodTasks), [periodTasks]);
+  const baselineStats = useMemo(() => calculateStats(baselineTasks), [baselineTasks]);
+  
+  const chartData = useMemo(() => {
+    const key = selectedRole.name.toLowerCase() as 'designer' | 'client';
+    const groupedTasks: { [name: string]: RawTask[] } = {};
+    periodTasks.forEach(task => {
+        const groupName = task[key]?.name;
+        if (groupName) {
+            if (!groupedTasks[groupName]) {
+                groupedTasks[groupName] = [];
+            }
+            groupedTasks[groupName].push(task);
+        }
+    });
+    return Object.entries(groupedTasks)
+      .map(([name, tasksInGroup]) => {
+        const stats = calculateStats(tasksInGroup);
+        if (stats.count > 0) {
+          return {
+            name: name.split(' ')[0],
+            min: stats.min,
+            max: stats.max,
+            avg: stats.average,
+          };
+        }
+        return null;
+      })
+      .filter(Boolean) as { name: string; min: number; max: number; avg: number }[];
+  }, [periodTasks, selectedRole]);
 
   return (
     <>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 px-2">
         <div className="flex items-center mb-3 sm:mb-0">
           <h2 className="text-xl font-light text-gray-800 pr-2">Ratings Overview by</h2>
-          
           <Listbox value={selectedRole} onChange={setSelectedRole}>
             <div className="relative">
               <Listbox.Button className="relative w-full cursor-default rounded-full border border-[#5b6f59] bg-transparent py-1 pl-4 pr-10 text-left text-sm font-medium text-[#5b6f59] focus:outline-none">
@@ -58,7 +111,7 @@ const RatingsOverview = ({ tasks }: RatingsOverviewProps) => {
                 </span>
               </Listbox.Button>
               <Transition
-                as={React.Fragment}
+                as={Fragment}
                 leave="transition ease-in duration-100"
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
@@ -67,21 +120,11 @@ const RatingsOverview = ({ tasks }: RatingsOverviewProps) => {
                   {roles.map((role) => (
                     <Listbox.Option
                       key={role.id}
-                      className={({ active }) =>
-                        `relative cursor-default select-none py-2 px-4 ${
-                          active ? 'bg-gray-100' : 'text-gray-900'
-                        }`
-                      }
+                      className={({ active }) => `relative cursor-default select-none py-2 px-4 ${active ? 'bg-gray-100' : 'text-gray-900'}`}
                       value={role}
                     >
                       {({ selected }) => (
-                        <span
-                          className={`block truncate ${
-                            selected ? 'font-medium' : 'font-normal'
-                          }`}
-                        >
-                          {role.name}
-                        </span>
+                        <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{role.name}</span>
                       )}
                     </Listbox.Option>
                   ))}
@@ -89,13 +132,12 @@ const RatingsOverview = ({ tasks }: RatingsOverviewProps) => {
               </Transition>
             </div>
           </Listbox>
-
         </div>
-        
         <div className="flex items-center space-x-1 rounded-full border border-[#deefcf] bg-white p-1">
           {periods.map((period) => (
             <button
               key={period}
+              onClick={() => setActivePeriod(period)}
               className={`w-20 rounded-full py-1.5 text-sm font-medium transition-colors focus:outline-none ${
                 activePeriod === period ? 'bg-[#ceffa3] text-gray-900 shadow-sm' : 'text-gray-500 hover:bg-gray-100'
               }`}
@@ -106,25 +148,85 @@ const RatingsOverview = ({ tasks }: RatingsOverviewProps) => {
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <div className="space-y-4">
-          {ratings.map((rating) => (
-            <div key={rating.stars} className="flex items-center">
-              <div className="flex items-center w-16">
-                <span className="text-sm font-medium">{rating.stars}</span>
-                <Star className="h-4 w-4 text-yellow-400 ml-1" />
-              </div>
-              <div className="flex-1 mx-4">
-                <div className="w-full bg-gray-200 rounded-full h-2.5">
-                  <div
-                    className="bg-blue-600 h-2.5 rounded-full"
-                    style={{ width: `${rating.total > 0 ? (rating.count / rating.total) * 100 : 0}%` }}
-                  ></div>
-                </div>
-              </div>
-              <span className="text-sm text-gray-500 w-12 text-right">{rating.count}</span>
+      <div className="bg-white p-6 rounded-xl border border-gray-200">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8 mb-8 relative">
+            <div className="flex-1">
+                <p className="text-sm text-gray-500">Average {activePeriod}</p>
+                <p className="text-2xl font-semibold text-gray-800">
+                    {periodStats.count > 0 ? `${periodStats.min.toFixed(2)}-${periodStats.max.toFixed(2)}` : 'N/A'} <span className="text-lg font-normal">stars</span>
+                </p>
+                <p className="text-xs text-gray-400">Across {periodStats.count} completed tasks</p>
             </div>
-          ))}
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-200 hidden sm:block"></div> 
+            <div className="flex-1 pl-4 sm:pl-0">
+                <p className="text-sm text-gray-500">1-month Baseline</p>
+                <p className="text-2xl font-semibold text-gray-800">
+                    {baselineStats.count > 0 ? `${baselineStats.min.toFixed(2)}-${baselineStats.max.toFixed(2)}` : 'N/A'} <span className="text-lg font-normal">stars</span>
+                </p>
+                <p className="text-xs text-gray-400">Across {baselineStats.count} completed tasks</p>
+            </div>
+        </div>
+        
+        <div className="grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] h-56 mt-8">
+          
+          <div className="col-start-1 row-start-1 flex flex-col justify-between pr-4 text-right">
+            {[5, 4, 3, 2, 1, 0].map(label => (
+                // --- MODIFICATION: Removed the conditional class to revert the '0' label's position ---
+                <div key={label} className="text-xs text-gray-400">
+                    {label}
+                </div>
+            ))}
+          </div>
+
+          <div className="col-start-2 row-start-1 relative">
+            {/* Horizontal Grid Lines */}
+            {[0, 1, 2, 3, 4, 5].map(level => (
+              <div 
+                key={level} 
+                className={`absolute left-0 right-0 h-px ${level === 0 ? 'bg-gray-300' : 'bg-gray-100'}`}
+                style={{ bottom: `calc(${level / 5 * 100}%)` }}
+              ></div>
+            ))}
+            {/* Data Bars */}
+            <div className="absolute inset-0 grid gap-2" style={{ gridTemplateColumns: `repeat(${Math.max(chartData.length, 1)}, minmax(0, 1fr))` }}>
+              {chartData.map((data) => (
+                <div key={data.name} className="flex items-end justify-center">
+                  <div className="w-4 h-full relative">
+                    {/* Range Bar */}
+                    <div className="absolute w-full bg-[#697d67] rounded-full" style={{ top: `${(5 - data.max) / 5 * 100}%`, height: `${Math.max((data.max - data.min) / 5 * 100, 2)}%` }}></div>
+                    {/* Average Dot */}
+                    <div className="absolute w-2.5 h-2.5 bg-[#b9c3b4] rounded-full transform -translate-x-1/2 -translate-y-1/2" style={{ left: '50%', top: `${(5 - data.avg) / 5 * 100}%` }}></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* X-Axis Labels */}
+          <div className="col-start-2 row-start-2 grid gap-2 mt-1" style={{ gridTemplateColumns: `repeat(${Math.max(chartData.length, 1)}, minmax(0, 1fr))` }}>
+            {chartData.map((data) => (
+              <div key={data.name} className="text-center text-xs text-[#6e7b75] pt-2 truncate">
+                {data.name}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Legend Section */}
+        <div className="flex justify-between items-center mt-4">
+            <div className="flex items-center space-x-4">
+                <div className="flex items-center">
+                    <div className="w-4 h-4 rounded-full bg-[#697d67] mr-2"></div>
+                    <span className="text-sm text-[#6e7b75]">Range</span>
+                </div>
+                <div className="flex items-center">
+                    <div className="w-4 h-4 rounded-full bg-[#b9c3b4] mr-2"></div>
+                    <span className="text-sm text-[#7a8882]">Average</span>
+                </div>
+            </div>
+            <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-900 flex items-center">
+                View all <ChevronRight className="ml-1 h-4 w-4" />
+            </a>
         </div>
       </div>
     </>

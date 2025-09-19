@@ -4,4 +4,6 @@ export interface RawTask {
   completionTimeHours: number;
   requiredRevision: boolean;
   clientRating?: number;
+  designer: { name: string };
+  client: { name: string };
 }
