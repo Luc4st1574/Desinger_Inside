@@ -4,6 +4,8 @@ import performanceData from '@/data/performanceMetrics.json';
 import KeyPerformance from './KeyPerformance';
 import RatingsOverview from './RatingsOverview';
 import TaskCompletion from './TaskCompletion';
+import TaskDistribution from './TaskDistribution';
+import TotalTask from './TotalTask';
 
 const MetricsMain = () => {
   const { tasks } = performanceData as {
@@ -16,6 +18,11 @@ const MetricsMain = () => {
         <KeyPerformance tasks={tasks} />
         <RatingsOverview tasks={tasks} />
         <TaskCompletion tasks={tasks} />
+      </div>
+
+      <div className="lg:col-span-1 space-y-6">
+        <TaskDistribution tasks={tasks} />
+        <TotalTask tasks={tasks} />
       </div>
     </div>
   );
