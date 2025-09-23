@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
         return config;
     },
 
-   typescript: {
+    typescript: {
     // !! PELIGRO !!
     // Permite la compilación (build) de producción aunque tu proyecto tenga errores de tipo.
     ignoreBuildErrors: true,
