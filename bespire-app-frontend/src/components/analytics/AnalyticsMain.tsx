@@ -20,7 +20,11 @@ const AnalyticsMain = () => {
 
     const records = analytics_records
       .filter(r => r.clientId === selectedClientId)
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      .sort((a, b) => {
+        if (!a.date) return 1;
+        if (!b.date) return -1;
+        return new Date(b.date).getTime() - new Date(a.date).getTime()
+      });
 
     return { currentClient: client, clientRecords: records };
   }, [selectedClientId, clients, analytics_records]);

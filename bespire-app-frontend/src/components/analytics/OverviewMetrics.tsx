@@ -2,16 +2,43 @@
 
 import React, { useState, useMemo, Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { ChevronDown, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { ChevronDown, ArrowUpRight, ArrowDownRight, Minus } from 'lucide-react'; // <-- Import Minus icon
 import type { AnalyticsRecord } from '@/types/analytics';
 
+// --- Type Definitions ---
 type Period = '1 month' | '4 months' | '6 months' | '1 year';
 const periods: Period[] = ['1 month', '4 months', '6 months', '1 year'];
 
+type Trend = 'up' | 'down' | 'stable';
+
+// --- Improved Standalone Utility Function ---
+const calculateChange = (
+    current: number,
+    previous: number,
+    stabilityThreshold: number = 2.0 // Default: changes within +/- 2% are stable
+): { value: number, trend: Trend } => {
+    if (previous === 0 && current > 0) {
+        return { value: 100, trend: 'up' };
+    }
+    if (previous === 0) {
+        return { value: 0, trend: 'stable' };
+    }
+
+    const change = ((current - previous) / previous) * 100;
+
+    if (Math.abs(change) <= stabilityThreshold) {
+        return { value: change, trend: 'stable' };
+    }
+    
+    return { value: change, trend: change > 0 ? 'up' : 'down' };
+};
+
+
+// --- Chart Component (Unchanged) ---
 interface MetricChartProps {
-  data: { labels: string[], values: number[] };
-  lineColor: string;
-  gradientColor: string;
+    data: { labels: string[], values: number[] };
+    lineColor: string;
+    gradientColor: string;
 }
 
 const MetricChart = ({ data, lineColor, gradientColor }: MetricChartProps) => {
@@ -89,6 +116,8 @@ const MetricChart = ({ data, lineColor, gradientColor }: MetricChartProps) => {
     );
 };
 
+
+// --- Main Overview Metrics Component ---
 interface OverviewMetricsProps {
     clientRecords: AnalyticsRecord[];
 }
@@ -101,7 +130,11 @@ const OverviewMetrics = ({ clientRecords }: OverviewMetricsProps) => {
             '1 month': 2, '4 months': 4, '6 months': 6, '1 year': 12,
         };
         const monthsToShow = periodMap[activePeriod];
-        const records = [...clientRecords].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        const records = [...clientRecords].sort((a, b) => {
+            if (!a.date) return 1;
+            if (!b.date) return -1;
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
         
         if (records.length === 0) {
             return { filteredRecords: [], comparisonRecord: null, chartLabels: [] };
@@ -112,9 +145,9 @@ const OverviewMetrics = ({ clientRecords }: OverviewMetricsProps) => {
 
         let labels: string[] = [];
         if (activePeriod === '1 year') {
-            labels = latestRecords.map((r, i) => (i % 3 === 0) ? new Date(r.date).toLocaleString('default', { month: 'short' }) : '');
+            labels = latestRecords.map((r, i) => (i % 3 === 0) ? new Date(r.date ?? 0).toLocaleString('default', { month: 'short' }) : '');
         } else {
-            labels = latestRecords.map(r => new Date(r.date).toLocaleString('default', { month: 'short' }));
+            labels = latestRecords.map(r => new Date(r.date ?? 0).toLocaleString('default', { month: 'short' }));
         }
 
         return { filteredRecords: latestRecords, comparisonRecord: comparison, chartLabels: labels };
@@ -124,7 +157,7 @@ const OverviewMetrics = ({ clientRecords }: OverviewMetricsProps) => {
     
     if (!latestRecord || !comparisonRecord) {
         return (
-             <div>
+            <div>
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg font-light text-gray-700">Overview Metrics</h2>
                 </div>
@@ -135,33 +168,40 @@ const OverviewMetrics = ({ clientRecords }: OverviewMetricsProps) => {
         );
     }
     
-    const calculateChange = (current: number, previous: number) => {
-        if (previous === 0 && current > 0) return 100;
-        if (previous === 0) return 0;
-        return (((current - previous) / previous) * 100);
-    };
-
     const getTotalFollowers = (record: AnalyticsRecord) => 
-        record.social_fb_likes + 
-        record.social_twitter_followers + 
-        record.social_linkedin_followers + 
-        record.social_instagram_followers +
-        record.social_tiktok_followers;
+        (record.social_fb_likes ?? 0) + 
+        (record.social_twitter_followers ?? 0) + 
+        (record.social_linkedin_followers ?? 0) + 
+        (record.social_instagram_followers ?? 0) +
+        (record.social_tiktok_followers ?? 0);
     
     const latestTotalFollowers = getTotalFollowers(latestRecord);
     const comparisonTotalFollowers = getTotalFollowers(comparisonRecord);
 
     const metricsConfig = [
         { title: "Social Following", value: latestTotalFollowers.toLocaleString(), subtitle: "Total Follower Growth", change: calculateChange(latestTotalFollowers, comparisonTotalFollowers), dataKey: 'social_total_followers', colors: { line: '#81c7e9', gradient: '#81c7e9' }},
-        { title: "SEO Performance", value: latestRecord.seo_organic_traffic.toLocaleString(), subtitle: "Organic Traffic Insights", change: calculateChange(latestRecord.seo_organic_traffic, comparisonRecord.seo_organic_traffic), dataKey: 'seo_organic_traffic', colors: { line: '#a5d6a7', gradient: '#a5d6a7' }},
-        { title: "Web Analytics", value: latestRecord.web_sessions.toLocaleString(), subtitle: "Website Sessions Tracked", change: calculateChange(latestRecord.web_sessions, comparisonRecord.web_sessions), dataKey: 'web_sessions', colors: { line: '#ffcc80', gradient: '#ffcc80' }},
-        { title: "Email Analytics", value: `${(latestRecord.email_conversion_rate * 100).toFixed(2)}%`, subtitle: "Conversion Rate Growth", change: calculateChange(latestRecord.email_conversion_rate, comparisonRecord.email_conversion_rate), dataKey: 'email_conversion_rate', colors: { line: '#616161', gradient: '#bdbdbd' }}
+        { title: "SEO Performance", value: (latestRecord.seo_organic_traffic ?? 0).toLocaleString(), subtitle: "Organic Traffic Insights", change: calculateChange(latestRecord.seo_organic_traffic ?? 0, comparisonRecord.seo_organic_traffic ?? 0), dataKey: 'seo_organic_traffic', colors: { line: '#a5d6a7', gradient: '#a5d6a7' }},
+        { title: "Web Analytics", value: (latestRecord.web_sessions ?? 0).toLocaleString(), subtitle: "Website Sessions Tracked", change: calculateChange(latestRecord.web_sessions ?? 0, comparisonRecord.web_sessions ?? 0), dataKey: 'web_sessions', colors: { line: '#ffcc80', gradient: '#ffcc80' }},
+        { title: "Email Analytics", value: `${(((latestRecord.email_conversion_rate ?? 0) / (latestRecord.email_total_contacts ?? 1)) * 100).toFixed(2)}%`, subtitle: "Conversion Rate Growth", change: calculateChange(latestRecord.email_conversion_rate ?? 0, comparisonRecord.email_conversion_rate ?? 0), dataKey: 'email_conversion_rate', colors: { line: '#616161', gradient: '#bdbdbd' }}
     ];
+
+    const getTrendVisuals = (trend: Trend) => {
+        switch (trend) {
+            case 'up':
+                return { icon: <ArrowUpRight className="h-4 w-4 text-[#89a479]" />, colorClass: 'text-[#89a479]' };
+            case 'down':
+                return { icon: <ArrowDownRight className="h-4 w-4 text-[#f01616]" />, colorClass: 'text-[#f01616]' };
+            case 'stable':
+                return { icon: <Minus className="h-4 w-4 text-gray-500" />, colorClass: 'text-gray-500' };
+            default:
+                return { icon: null, colorClass: 'text-gray-500' };
+        }
+    };
 
     return (
         <div>
             <div className="flex justify-between items-center mb-4">
-                 <h2 className="text-lg font-light text-gray-700">Overview Metrics</h2>
+                <h2 className="text-lg font-light text-gray-700">Overview Metrics</h2>
                 <Listbox value={activePeriod} onChange={setActivePeriod}>
                     <div className="relative w-auto">
                         <Listbox.Button className="relative w-full cursor-pointer rounded-full border border-[#697d67] bg-transparent py-1.5 pl-4 pr-10 text-left text-sm font-medium text-[#697d67] focus:outline-none ring-0">
@@ -190,9 +230,12 @@ const OverviewMetrics = ({ clientRecords }: OverviewMetricsProps) => {
                             if (metric.dataKey === 'social_total_followers') {
                                 return getTotalFollowers(r);
                             }
-                            return r[metric.dataKey as keyof AnalyticsRecord] as number
+                            return (r[metric.dataKey as keyof AnalyticsRecord] as number) ?? 0;
                         })
                     };
+                    
+                    const visuals = getTrendVisuals(metric.change.trend);
+
                     return (
                         <div key={metric.title} className="bg-white p-6 rounded-lg border border-gray-200">
                             <div className="flex justify-between items-start">
@@ -201,15 +244,11 @@ const OverviewMetrics = ({ clientRecords }: OverviewMetricsProps) => {
                                     <p className="text-2xl font-bold text-gray-800 mt-1">{metric.value}</p>
                                     <p className="text-xs text-gray-400 mt-1">{metric.subtitle}</p>
                                 </div>
-                                <div className="flex items-center gap-1">
+                                <div className={`flex items-center gap-1 ${visuals.colorClass}`}>
                                     <span className="text-xs font-semibold text-gray-900">
-                                        {metric.change.toFixed(2)}%
+                                        {metric.change.value.toFixed(2)}%
                                     </span>
-                                    {metric.change >= 0 ? (
-                                        <ArrowUpRight className="h-4 w-4 text-[#89a479]" />
-                                    ) : (
-                                        <ArrowDownRight className="h-4 w-4 text-[#f01616]" />
-                                    )}
+                                    {visuals.icon}
                                 </div>
                             </div>
                             <MetricChart data={chartData} lineColor={metric.colors.line} gradientColor={metric.colors.gradient} />
