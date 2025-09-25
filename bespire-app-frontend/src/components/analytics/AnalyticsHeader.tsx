@@ -10,9 +10,10 @@ interface AnalyticsHeaderProps {
     client: Client;
     clients: Client[];
     setSelectedClientId: (id: string) => void;
+    onAddDataClick: () => void;
 }
 
-const AnalyticsHeader = ({ client, clients, setSelectedClientId }: AnalyticsHeaderProps) => {
+const AnalyticsHeader = ({ client, clients, setSelectedClientId, onAddDataClick }: AnalyticsHeaderProps) => {
     
     const selectedClient = clients.find(c => c.clientId === client.clientId) || client;
 
@@ -86,6 +87,7 @@ const AnalyticsHeader = ({ client, clients, setSelectedClientId }: AnalyticsHead
             <div className="mt-4 sm:mt-0">
                 <button
                     type="button"
+                    onClick={onAddDataClick} // <-- Attach the click handler
                     className="flex items-center gap-2 rounded-full bg-[#697d67] px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90 focus:outline-none"
                 >
                     <span>Add Data</span>
