@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState, useMemo } from 'react';
@@ -31,40 +32,65 @@ const AnalyticsMain = () => {
 
         return { currentClient: client, clientRecords: records };
     }, [selectedClientId, clients, analytics_records]);
-  
+ 
     const handleAddData = (newData: Partial<AnalyticsRecord>, clientId: string) => {
-        const baseRecord: Omit<AnalyticsRecord, 'recordId' | 'clientId' | 'date'> = {
-            social_fb_likes: null,
-            social_twitter_followers: null,
-            social_linkedin_followers: null,
-            social_instagram_followers: null,
-            social_tiktok_followers: null,
-            seo_organic_traffic: null,
-            seo_referring_domains: null,
-            seo_backlinks: null,
-            seo_organic_keywords: null,
-            web_sessions: null,
-            web_new_users: null,
-            web_avg_engagement_secs: null,
-            web_bounce_rate: null,
-            email_total_contacts: null,
-            email_open_rate: null,
-            email_click_rate: null,
-            email_conversion_rate: null,
-        };
+        if (!newData.date) return;
 
-        const newRecord: AnalyticsRecord = {
-            ...baseRecord,
-            ...newData,
-            recordId: `rec_${Date.now()}`,
-            clientId: clientId,
-            date: newData.date || new Date().toISOString().split('T')[0],
-        };
+        const newDate = new Date(newData.date);
+        const year = newDate.getUTCFullYear();
+        const month = newDate.getUTCMonth();
         
-        setLocalAnalyticsData(prevData => ({
-            ...prevData,
-            analytics_records: [...prevData.analytics_records, newRecord],
-        }));
+        setLocalAnalyticsData(prevData => {
+            const newRecords = [...prevData.analytics_records];
+            const recordIndex = newRecords.findIndex(r => {
+                if (!r.date || r.clientId !== clientId) return false;
+                const existingDate = new Date(r.date);
+                return existingDate.getUTCFullYear() === year && existingDate.getUTCMonth() === month;
+            });
+
+            if (recordIndex > -1) {
+                const existingRecord = { ...newRecords[recordIndex] };
+                
+                const summableKeys: (keyof AnalyticsRecord)[] = [
+                    'social_fb_likes', 'social_twitter_followers', 'social_linkedin_followers',
+                    'social_instagram_followers', 'social_tiktok_followers', 'seo_organic_traffic',
+                    'seo_referring_domains', 'seo_backlinks', 'seo_organic_keywords',
+                    'web_sessions', 'web_new_users', 'email_open_rate', 'email_click_rate',
+                    'email_conversion_rate'
+                ];
+
+                for (const key in newData) {
+                    const typedKey = key as keyof AnalyticsRecord;
+                    const value = newData[typedKey];
+                    
+                    if (value !== null && value !== undefined && typeof value === 'number') {
+                        if (summableKeys.includes(typedKey)) {
+                            (existingRecord as any)[typedKey] = ((existingRecord[typedKey] as number | null) ?? 0) + value;
+                        } else {
+                            (existingRecord as any)[typedKey] = value;
+                        }
+                    }
+                }
+                newRecords[recordIndex] = existingRecord;
+            } else {
+                const baseRecord: AnalyticsRecord = {
+                    recordId: `rec_${Date.now()}`,
+                    clientId: clientId,
+                    date: new Date(Date.UTC(year, month, 1)).toISOString(),
+                    social_fb_likes: 0, social_twitter_followers: 0, social_linkedin_followers: 0,
+                    social_instagram_followers: 0, social_tiktok_followers: 0, seo_organic_traffic: 0,
+                    seo_referring_domains: 0, seo_backlinks: 0, seo_organic_keywords: 0,
+                    web_sessions: 0, web_new_users: 0, web_avg_engagement_secs: 0,
+                    web_bounce_rate: 0, email_total_contacts: 0, email_open_rate: 0,
+                    email_click_rate: 0, email_conversion_rate: 0,
+                };
+                
+                const newRecord = { ...baseRecord, ...newData };
+                newRecords.push(newRecord);
+            }
+            
+            return { ...prevData, analytics_records: newRecords };
+        });
     };
 
     if (!currentClient) {

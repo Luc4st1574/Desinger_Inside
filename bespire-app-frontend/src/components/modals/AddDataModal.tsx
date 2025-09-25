@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState, useEffect, Fragment } from 'react';
@@ -20,9 +21,9 @@ interface AddDataModalProps {
 
 type AnalyticsCategory = 'social' | 'seo' | 'web' | 'email';
 
-export default function AddDataModal({ isOpen, onClose, onAddData, clients }: AddDataModalProps) {
+export default function AddDataModal({ isOpen, onClose, onAddData, clients, initialClientId }: AddDataModalProps) {
     const [activeTab, setActiveTab] = useState<AnalyticsCategory | null>(null);
-    const [selectedClientId, setSelectedClientId] = useState<string | null>(null);
+    const [selectedClientId, setSelectedClientId] = useState<string | null>(initialClientId);
     const methods = useForm<AddDataFormData>({ mode: 'onSubmit', reValidateMode: 'onChange' });
     const { register, handleSubmit, reset, watch, setValue, formState: { errors, isValid, isSubmitted } } = methods;
 
@@ -39,23 +40,25 @@ export default function AddDataModal({ isOpen, onClose, onAddData, clients }: Ad
     useEffect(() => {
         if (isOpen) {
             setActiveTab(null);
-            setSelectedClientId(null);
+            setSelectedClientId(initialClientId);
             reset({ date: '' });
         }
-    }, [isOpen, reset]);
-
-    useEffect(() => {
-        if (activeTab) {
-            setValue('date', '', { shouldValidate: true });
-        }
-    }, [activeTab, setValue]);
+    }, [isOpen, reset, initialClientId]);
 
     const onSubmit = (data: AddDataFormData) => {
         if (isSubmittable && selectedClientId && data.date) {
             const [month, day, year] = data.date.split('/');
             const formattedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
             
-            onAddData({ ...data, date: formattedDate }, selectedClientId);
+            const cleanData: AddDataFormData = {};
+            for (const key in data) {
+                const typedKey = key as keyof AddDataFormData;
+                if (data[typedKey] !== '' && data[typedKey] !== null) {
+                    (cleanData as any)[typedKey] = data[typedKey];
+                }
+            }
+
+            onAddData({ ...cleanData, date: formattedDate }, selectedClientId);
             onClose();
         }
     };
