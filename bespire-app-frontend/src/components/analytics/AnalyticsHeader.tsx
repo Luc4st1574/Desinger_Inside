@@ -87,7 +87,7 @@ const AnalyticsHeader = ({ client, clients, setSelectedClientId, onAddDataClick 
             <div className="mt-4 sm:mt-0">
                 <button
                     type="button"
-                    onClick={onAddDataClick} // <-- Attach the click handler
+                    onClick={onAddDataClick}
                     className="flex items-center gap-2 rounded-full bg-[#697d67] px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90 focus:outline-none"
                 >
                     <span>Add Data</span>

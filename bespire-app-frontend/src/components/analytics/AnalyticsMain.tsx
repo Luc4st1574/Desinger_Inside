@@ -23,11 +23,15 @@ const AnalyticsMain = () => {
 
         const records = analytics_records
             .filter(r => r.clientId === selectedClientId)
-            .sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime());
+            .sort((a, b) => {
+                if (!a.date) return 1;
+                if (!b.date) return -1;
+                return new Date(b.date).getTime() - new Date(a.date).getTime()
+            });
 
         return { currentClient: client, clientRecords: records };
     }, [selectedClientId, clients, analytics_records]);
-    
+  
     const handleAddData = (newData: Partial<AnalyticsRecord>, clientId: string) => {
         const baseRecord: Omit<AnalyticsRecord, 'recordId' | 'clientId' | 'date'> = {
             social_fb_likes: null,
@@ -49,32 +53,12 @@ const AnalyticsMain = () => {
             email_conversion_rate: null,
         };
 
-        const processedData: Partial<AnalyticsRecord> = {};
-        (Object.keys(newData) as Array<keyof Partial<AnalyticsRecord>>).forEach(key => {
-            const value = newData[key];
-
-            if (key === 'recordId' || key === 'clientId' || key === 'date') {
-                // --- FIX APPLIED HERE ---
-                // Changed `as string | null` to `as string` to match the property's expected type (`string | undefined`).
-                processedData[key] = value as string;
-                return;
-            }
-
-            if (typeof value === 'string' && value.trim() !== '' && !isNaN(Number(value))) {
-                processedData[key] = Number(value);
-            } else if (typeof value === 'number' && isFinite(value)) {
-                processedData[key] = value;
-            } else {
-                processedData[key] = null;
-            }
-        });
-        
         const newRecord: AnalyticsRecord = {
             ...baseRecord,
-            ...processedData,
+            ...newData,
             recordId: `rec_${Date.now()}`,
             clientId: clientId,
-            date: newData.date || new Date().toISOString(),
+            date: newData.date || new Date().toISOString().split('T')[0],
         };
         
         setLocalAnalyticsData(prevData => ({
@@ -95,9 +79,9 @@ const AnalyticsMain = () => {
     return (
         <>
             <div className="space-y-8 p-1">
-                <AnalyticsHeader
-                    client={currentClient}
-                    clients={clients}
+                <AnalyticsHeader 
+                    client={currentClient} 
+                    clients={clients} 
                     setSelectedClientId={setSelectedClientId}
                     onAddDataClick={() => setIsAddDataModalOpen(true)}
                 />
