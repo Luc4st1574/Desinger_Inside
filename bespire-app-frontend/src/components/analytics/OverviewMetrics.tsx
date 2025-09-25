@@ -10,27 +10,67 @@ const periods: Period[] = ['1 month', '4 months', '6 months', '1 year'];
 
 type Trend = 'up' | 'down' | 'stable';
 
+// --- HELPER FUNCTIONS ---
+
+const aggregateRecordsByMonth = (records: AnalyticsRecord[]): AnalyticsRecord[] => {
+    const monthlyData: { [key: string]: AnalyticsRecord } = {};
+
+    records.forEach(record => {
+        if (!record.date || typeof record.date !== 'string') return;
+        
+        const year = parseInt(record.date.substring(0, 4), 10);
+        const month = parseInt(record.date.substring(5, 7), 10);
+        const monthKey = `${year}-${month}`;
+
+        if (!monthlyData[monthKey]) {
+            monthlyData[monthKey] = {
+                ...record,
+                date: new Date(Date.UTC(year, month - 1, 1)).toISOString(),
+                social_fb_likes: 0,
+                social_twitter_followers: 0,
+                social_linkedin_followers: 0,
+                social_instagram_followers: 0,
+                social_tiktok_followers: 0,
+                seo_organic_traffic: 0,
+                web_sessions: 0,
+                web_new_users: 0,
+                email_conversion_rate: 0,
+            };
+        }
+
+        const currentMonth = monthlyData[monthKey];
+        currentMonth.social_fb_likes = (currentMonth.social_fb_likes ?? 0) + (record.social_fb_likes ?? 0);
+        currentMonth.social_twitter_followers = (currentMonth.social_twitter_followers ?? 0) + (record.social_twitter_followers ?? 0);
+        currentMonth.social_linkedin_followers = (currentMonth.social_linkedin_followers ?? 0) + (record.social_linkedin_followers ?? 0);
+        currentMonth.social_instagram_followers = (currentMonth.social_instagram_followers ?? 0) + (record.social_instagram_followers ?? 0);
+        currentMonth.social_tiktok_followers = (currentMonth.social_tiktok_followers ?? 0) + (record.social_tiktok_followers ?? 0);
+        currentMonth.seo_organic_traffic = (currentMonth.seo_organic_traffic ?? 0) + (record.seo_organic_traffic ?? 0);
+        currentMonth.web_sessions = (currentMonth.web_sessions ?? 0) + (record.web_sessions ?? 0);
+        currentMonth.web_new_users = (currentMonth.web_new_users ?? 0) + (record.web_new_users ?? 0);
+        currentMonth.email_conversion_rate = (currentMonth.email_conversion_rate ?? 0) + (record.email_conversion_rate ?? 0);
+        currentMonth.email_total_contacts = record.email_total_contacts;
+    });
+
+    return Object.values(monthlyData);
+};
+
+
 const calculateChange = (
     current: number,
     previous: number,
     stabilityThreshold: number = 2.0
 ): { value: number, trend: Trend } => {
-    if (previous === 0 && current > 0) {
-        return { value: 100, trend: 'up' };
-    }
-    if (previous === 0) {
-        return { value: 0, trend: 'stable' };
-    }
+    if (previous === 0 && current > 0) return { value: 100, trend: 'up' };
+    if (previous === 0) return { value: 0, trend: 'stable' };
 
     const change = ((current - previous) / previous) * 100;
 
-    if (Math.abs(change) <= stabilityThreshold) {
-        return { value: change, trend: 'stable' };
-    }
+    if (Math.abs(change) <= stabilityThreshold) return { value: change, trend: 'stable' };
     
     return { value: change, trend: change > 0 ? 'up' : 'down' };
 };
 
+// --- CHART COMPONENT (Unchanged) ---
 interface MetricChartProps {
     data: { labels: string[], values: number[] };
     lineColor: string;
@@ -112,6 +152,8 @@ const MetricChart = ({ data, lineColor, gradientColor }: MetricChartProps) => {
     );
 };
 
+
+// --- MAIN COMPONENT ---
 interface OverviewMetricsProps {
     clientRecords: AnalyticsRecord[];
 }
@@ -119,35 +161,58 @@ interface OverviewMetricsProps {
 const OverviewMetrics = ({ clientRecords }: OverviewMetricsProps) => {
     const [activePeriod, setActivePeriod] = useState<Period>('4 months');
     
-    const { filteredRecords, comparisonRecord, chartLabels } = useMemo(() => {
+    const { chartRecords, latestRecord, comparisonRecord, chartLabels } = useMemo(() => {
+        const aggregated = aggregateRecordsByMonth(clientRecords);
+
+        const sortedRecords = aggregated.sort((a, b) => 
+            new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime()
+        );
+
+        if (sortedRecords.length < 2) {
+            return { chartRecords: [], latestRecord: sortedRecords[0] || null, comparisonRecord: null, chartLabels: [] };
+        }
+        
+        const latest = sortedRecords[0];
+        const comparison = sortedRecords[1];
+
         const periodMap: Record<Period, number> = {
             '1 month': 2, '4 months': 4, '6 months': 6, '1 year': 12,
         };
         const monthsToShow = periodMap[activePeriod];
-        const records = [...clientRecords].sort((a, b) => {
-            if (!a.date) return 1;
-            if (!b.date) return -1;
-            return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
         
-        if (records.length === 0) {
-            return { filteredRecords: [], comparisonRecord: null, chartLabels: [] };
-        }
+        const recordsForChart = sortedRecords.slice(0, monthsToShow).reverse();
         
-        const latestRecords = records.slice(0, monthsToShow).reverse();
-        const comparison = records[1] || records[0];
+        /**
+         * [FINAL FIX] Get month label by manually parsing the ISO string.
+         * This is immune to system date formats and timezones.
+         */
+        const getMonthLabel = (dateString: string): string => {
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            if (!dateString || dateString.length < 7) return '';
+            
+            // Extract month number (e.g., "09") from "YYYY-MM-DD..."
+            const monthNumber = parseInt(dateString.substring(5, 7), 10);
+            
+            // Return the correct abbreviation from the array (adjusting for 0-index)
+            return monthNames[monthNumber - 1] || '';
+        };
 
         let labels: string[] = [];
         if (activePeriod === '1 year') {
-            labels = latestRecords.map((r, i) => (i % 3 === 0) ? new Date(r.date ?? 0).toLocaleString('default', { month: 'short' }) : '');
+            labels = recordsForChart.map((r, i) => 
+                (i % 3 === 0) ? getMonthLabel(r.date ?? '') : ''
+            );
         } else {
-            labels = latestRecords.map(r => new Date(r.date ?? 0).toLocaleString('default', { month: 'short' }));
+            labels = recordsForChart.map(r => getMonthLabel(r.date ?? ''));
         }
 
-        return { filteredRecords: latestRecords, comparisonRecord: comparison, chartLabels: labels };
+        return { 
+            chartRecords: recordsForChart, 
+            latestRecord: latest, 
+            comparisonRecord: comparison, 
+            chartLabels: labels 
+        };
     }, [clientRecords, activePeriod]);
-
-    const latestRecord = filteredRecords[filteredRecords.length - 1];
     
     if (!latestRecord || !comparisonRecord) {
         return (
@@ -181,14 +246,9 @@ const OverviewMetrics = ({ clientRecords }: OverviewMetricsProps) => {
 
     const getTrendVisuals = (trend: Trend) => {
         switch (trend) {
-            case 'up':
-                return { icon: <ArrowUpRight className="h-4 w-4 text-[#89a479]" />, colorClass: 'text-[#89a479]' };
-            case 'down':
-                return { icon: <ArrowDownRight className="h-4 w-4 text-[#f01616]" />, colorClass: 'text-[#f01616]' };
-            case 'stable':
-                return { icon: <Minus className="h-4 w-4 text-gray-500" />, colorClass: 'text-gray-500' };
-            default:
-                return { icon: null, colorClass: 'text-gray-500' };
+            case 'up': return { icon: <ArrowUpRight className="h-4 w-4 text-[#89a479]" />, colorClass: 'text-[#89a479]' };
+            case 'down': return { icon: <ArrowDownRight className="h-4 w-4 text-[#f01616]" />, colorClass: 'text-[#f01616]' };
+            default: return { icon: <Minus className="h-4 w-4 text-gray-500" />, colorClass: 'text-gray-500' };
         }
     };
 
@@ -220,10 +280,8 @@ const OverviewMetrics = ({ clientRecords }: OverviewMetricsProps) => {
                 {metricsConfig.map(metric => {
                     const chartData = {
                         labels: chartLabels,
-                        values: filteredRecords.map((r: AnalyticsRecord) => {
-                            if (metric.dataKey === 'social_total_followers') {
-                                return getTotalFollowers(r);
-                            }
+                        values: chartRecords.map((r: AnalyticsRecord) => {
+                            if (metric.dataKey === 'social_total_followers') return getTotalFollowers(r);
                             return (r[metric.dataKey as keyof AnalyticsRecord] as number) ?? 0;
                         })
                     };
