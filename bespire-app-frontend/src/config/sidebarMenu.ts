@@ -183,7 +183,11 @@ export const ALL_EXPLORE_MENU: SidebarMenuItem[] = [
     icon: IconPlans,
     roles: ["admin"],
   },
-  { label: "Template Library", href: "/templates", icon: IconLibrary }, // Todos pueden ver
+  { label: "Template Library",
+    href: "/templates",
+    icon: IconLibrary,
+    roles: ["admin", "client", "designer", "success_manager"],
+  },
   {
     label: "Feedback Center",
     href: "/feedback",
