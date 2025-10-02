@@ -1,4 +1,3 @@
-// src/components/templates/TemplatesPage.tsx
 'use client';
 
 import React from 'react';
@@ -8,11 +7,8 @@ import { useTemplates } from '@/hooks/templates/useTemplates';
 import FeaturedTemplatesSection from './FeaturedTemplatesSection';
 import ClientTemplatesList from './ClientTemplatesList';
 
-interface TemplatesPageProps {
-  isClientView: boolean;
-}
-
-const TemplatesPage: React.FC<TemplatesPageProps> = ({ isClientView }) => {
+// Props: isClientView determines which view to render
+const TemplatesPage = ({ isClientView }) => {
   // Data fetching is now only for the default (non-client) view
   const { loading, error } = useTemplates();
 
