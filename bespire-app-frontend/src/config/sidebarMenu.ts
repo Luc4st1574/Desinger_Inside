@@ -186,7 +186,7 @@ export const ALL_EXPLORE_MENU: SidebarMenuItem[] = [
   { label: "Template Library",
     href: "/templates",
     icon: IconLibrary,
-    roles: ["admin", "client", "designer", "success_manager"],
+    roles: ["admin", "client", "designer", "success_manager", "sales_manager"],
   },
   {
     label: "Feedback Center",

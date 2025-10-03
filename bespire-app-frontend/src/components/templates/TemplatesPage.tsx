@@ -8,12 +8,11 @@ import FeaturedTemplatesSection from './FeaturedTemplatesSection';
 import ClientTemplatesList from './ClientTemplatesList';
 
 // Props: isClientView determines which view to render
-const TemplatesPage = ({ isClientView }) => {
-  // Data fetching is now only for the default (non-client) view
+const TemplatesPage = ({ isClientView , isSalesManager }) => {
   const { loading, error } = useTemplates();
 
   // Render Client View
-  if (isClientView) {
+  if (isClientView || isSalesManager) {
     return (
       <div className="container mx-auto">
         <FeaturedTemplatesSection />

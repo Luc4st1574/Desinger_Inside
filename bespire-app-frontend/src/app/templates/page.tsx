@@ -10,11 +10,12 @@ import TemplatesPage from "@/components/templates/TemplatesPage";
 export default function TemplatesPageMain() {
   const { user } = useAppContext();
   const isClient = user?.role === 'client';
+  const isSalesManager = user?.role === 'sales_manager';
 
   return (
     <PermissionGuard required={PERMISSIONS.VIEW_TEMPLATES}>
       <DashboardLayout>
-        <TemplatesPage isClientView={isClient} />
+        <TemplatesPage isClientView={isClient} isSalesManager={isSalesManager} />
       </DashboardLayout>
     </PermissionGuard>
   );

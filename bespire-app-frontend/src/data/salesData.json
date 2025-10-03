@@ -1,0 +1,79 @@
+{
+    "prospects": {
+        "stages": [
+        { "name": "Prospecting", "count": 5 },
+        { "name": "Meeting", "count": 2 },
+        { "name": "Proposal", "count": 2 },
+        { "name": "Deal", "count": 3 }
+        ],
+        "list": [
+        {
+            "id": 1,
+            "title": "Zenaero Innovations",
+            "since": "Dec 12, 2024",
+            "contact": "Mateo Delgado",
+            "industry": "Aerotech",
+            "targetPlan": "Pro Plan",
+            "assigned": ["GB", "LH", "BC"],
+            "priority": "High"
+        },
+        {
+            "id": 2,
+            "title": "NovaSphere Technologies",
+            "since": "Dec 5, 2024",
+            "contact": "Elijah Thompson",
+            "industry": "Agency",
+            "targetPlan": "Growth Plan",
+            "assigned": ["GB", "LH", "BC"],
+            "priority": "Medium"
+        },
+        {
+            "id": 3,
+            "title": "Aether Consulting Group",
+            "since": "Dec 10, 2024",
+            "contact": "Camilia Reyes",
+            "industry": "Consulting",
+            "targetPlan": "Starter Plan",
+            "assigned": ["GB", "LH", "BC"],
+            "priority": "Low"
+        },
+        {
+            "id": 4,
+            "title": "Spherule",
+            "since": "Dec 14, 2024",
+            "contact": "Emília Kovács",
+            "industry": "Cybersecurity",
+            "targetPlan": "Growth Plan",
+            "assigned": ["GB", "LH", "BC"],
+            "priority": "High"
+        }
+        ]
+    },
+    "salesManager": {
+        "name": "Tony Brown",
+        "title": "Sales Manager",
+        "avatar": "/avatars/tony-brown.png",
+        "stats": {
+        "activeProspects": 10,
+        "breakdown": "5 New • 2 Meeting • 3 Proposals",
+        "dealsWon": 24,
+        "conversionRate": "38.56%"
+        },
+        "recentProspects": [
+        { "name": "Spherule", "type": "Outreach", "time": "1 day ago" },
+        { "name": "Quantum Nexus Solutions", "type": "Inbound", "time": "2 days ago" },
+        { "name": "NeuroWave Technologies", "type": "Outreach", "time": "3 days ago" }
+        ]
+    },
+    "team": [
+        { "name": "Glinda Bren", "role": "Sales Associate", "avatar": "/avatars/glinda-bren.png" },
+        { "name": "Lila Hart", "role": "Administrator", "avatar": "/avatars/lila-hart.png" },
+        { "name": "Bernard Co", "role": "Creative Director", "avatar": "/avatars/bernard-co.png" }
+    ],
+    "resources": [
+        { "title": "How to Qualify Leads Efficiently", "icon": "flag" },
+        { "title": "How to Organize Contracts and Files", "icon": "folder" },
+        { "title": "How to Track Proposal Status", "icon": "pie" },
+        { "title": "How to Analyze your Conversion", "icon": "chart" }
+    ]
+}
