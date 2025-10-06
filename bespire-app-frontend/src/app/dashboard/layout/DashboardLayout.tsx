@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { usePathname } from "next/navigation";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { Toaster } from "sonner";
@@ -10,28 +9,23 @@ import { AuthProvider } from "@/hooks/useAuth";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  sidebar?: React.ReactNode;
 }
 
-const DashboardLayout = React.memo(({
-  children,
-  sidebar,
-}: DashboardLayoutProps) => {
+const DashboardLayout = React.memo(({ children }: DashboardLayoutProps) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const pathname = usePathname();
-  // Check if the current route starts with /chat
-  const isChatPage = pathname.startsWith('/chat');
 
   return (
     <AuthProvider>
       <AuthGuard requireWorkspace>
         <div className="flex h-screen bg-[#fbfff7] text-sm text-brand-dark">
+          {/* Permanent Left Navigation */}
           <div className="hidden lg:flex lg:flex-shrink-0">
             <div className="w-64">
               <Sidebar />
             </div>
           </div>
 
+          {/* Mobile Sidebar */}
           {isSidebarOpen && (
             <div className="lg:hidden fixed inset-0 z-50 flex">
               <div
@@ -44,20 +38,11 @@ const DashboardLayout = React.memo(({
             </div>
           )}
 
+          {/* Main Content Area */}
           <div className="flex flex-col flex-1 min-w-0">
             <Header />
-            {/* Main content area now correctly handles chat page height */}
-            <main className={`flex-1 p-6 ${isChatPage ? 'flex flex-col' : 'overflow-y-auto'}`}>
-              <div className={`flex gap-6 ${isChatPage ? 'flex-1' : 'flex-col lg:flex-row'}`}>
-                <div className={`min-w-0 ${isChatPage ? 'flex flex-1' : 'flex-1'}`}>
-                  {children}
-                </div>
-                {sidebar && (
-                  <aside className="w-full lg:w-[250px] shrink-0">
-                    {sidebar}
-                  </aside>
-                )}
-              </div>
+            <main className="flex-1 p-6 overflow-y-auto">
+              {children}
             </main>
             <Toaster
               position="bottom-right"
@@ -74,5 +59,5 @@ const DashboardLayout = React.memo(({
   );
 });
 
-DashboardLayout.displayName = 'DashboardLayout';
+DashboardLayout.displayName = "DashboardLayout";
 export default DashboardLayout;

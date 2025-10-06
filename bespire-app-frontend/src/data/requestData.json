@@ -1,0 +1,250 @@
+{
+    "clientInfo": {
+        "name": "Spherule",
+        "accountType": "PRO ACCOUNT",
+        "logo": "assets/logos/Avatar-Circle2.png",
+        "totalCredits": 200,
+        "usedCredits": 100
+    },
+    "requests": {
+        "stages": [
+            { "name": "Requests" },
+            { "name": "In Progress" },
+            { "name": "Pending" },
+            { "name": "Completed" }
+        ],
+        "list": [
+            {
+                "id": 101,
+                "title": "Hero Image for Halloween Campaign",
+                "submittedDate": "Sep 28, 2025",
+                "deadline": "Oct 14, 2025",
+                "submittedBy": "Gerard Santos",
+                "category": "Ads Design",
+                "assigned": [
+                    { "name": "Glinda Bren", "avatar": "/assets/avatars/glinda.png" },
+                    { "name": "Michelle Cruz", "avatar": "/assets/avatars/michelle.png" }
+                ],
+                "priority": "Low",
+                "stage": "In Progress",
+                "credits": 5,
+                "bgColor": "#f3fee7"
+            },
+            {
+                "id": 102,
+                "title": "Business Cards for New Hires",
+                "submittedDate": "Oct 1, 2025",
+                "deadline": "Oct 8, 2025",
+                "submittedBy": "Iya Coronel",
+                "category": "Print Design",
+                "assigned": [
+                    { "name": "Michelle Cruz", "avatar": "/assets/avatars/michelle.png" }
+                ],
+                "priority": "High",
+                "stage": "In Progress",
+                "credits": 2,
+                "bgColor": "#fee7e7"
+            },
+            {
+                "id": 103,
+                "title": "Social Media Posts for Q4",
+                "submittedDate": "Sep 25, 2025",
+                "deadline": "Oct 18, 2025",
+                "submittedBy": "Nathaniel Drew",
+                "category": "Social Media",
+                "assigned": [
+                    { "name": "Michelle Cruz", "avatar": "/assets/avatars/michelle.png" },
+                    { "name": "Glinda Bren", "avatar": "/assets/avatars/glinda.png" },
+                    { "name": "Bernard Co", "avatar": "/assets/avatars/bernard.png" }
+                ],
+                "priority": "Medium",
+                "stage": "Requests",
+                "credits": 15,
+                "bgColor": "#e7f9fe"
+            },
+            {
+                "id": 104,
+                "title": "Website Banner Update - Autumn Sale",
+                "submittedDate": "Sep 10, 2025",
+                "deadline": "Sep 26, 2025",
+                "submittedBy": "Gerard Santos",
+                "category": "Web Design",
+                "assigned": [
+                    { "name": "Michelle Cruz", "avatar": "/assets/avatars/michelle.png" }
+                ],
+                "priority": "High",
+                "stage": "Completed",
+                "credits": 8,
+                "bgColor": "#fef8e7"
+            },
+            {
+                "id": 105,
+                "title": "Product Explainer Video Script",
+                "submittedDate": "Sep 9, 2025",
+                "deadline": "Oct 20, 2025",
+                "submittedBy": "Nathaniel Drew",
+                "category": "Video Editing",
+                "assigned": [
+                    { "name": "Bernard Co", "avatar": "/assets/avatars/bernard.png" }
+                ],
+                "priority": "Medium",
+                "stage": "In Progress",
+                "credits": 12,
+                "bgColor": "#fde7fe"
+            },
+            {
+                "id": 106,
+                "title": "Brand Guidelines Document",
+                "submittedDate": "Jul 25, 2025",
+                "deadline": "Aug 15, 2025",
+                "submittedBy": "Gerard Santos",
+                "category": "Branding",
+                "assigned": [
+                    { "name": "Bernard Co", "avatar": "/assets/avatars/bernard.png" },
+                    { "name": "Glinda Bren", "avatar": "/assets/avatars/glinda.png" }
+                ],
+                "priority": "High",
+                "stage": "Completed",
+                "credits": 25,
+                "bgColor": "#e7fef4"
+            },
+            {
+                "id": 107,
+                "title": "Blog Post Graphics for 'AI in Marketing'",
+                "submittedDate": "Aug 20, 2025",
+                "deadline": "Aug 28, 2025",
+                "submittedBy": "Iya Coronel",
+                "category": "Content Design",
+                "assigned": [
+                    { "name": "Michelle Cruz", "avatar": "/assets/avatars/michelle.png" }
+                ],
+                "priority": "Low",
+                "stage": "Completed",
+                "credits": 6,
+                "bgColor": "#f4e7fe"
+            },
+            {
+                "id": 108,
+                "title": "Waiting for client feedback on Logo drafts",
+                "submittedDate": "Sep 29, 2025",
+                "deadline": "Oct 15, 2025",
+                "submittedBy": "Gerard Santos",
+                "category": "Branding",
+                "assigned": [
+                    { "name": "Bernard Co", "avatar": "/assets/avatars/bernard.png" }
+                ],
+                "priority": "High",
+                "stage": "Pending",
+                "credits": 10,
+                "bgColor": "#fef4e7"
+            },
+            {
+                "id": 109,
+                "title": "Revise Presentation Deck",
+                "submittedDate": "Oct 3, 2025",
+                "deadline": "Oct 17, 2025",
+                "submittedBy": "Nathaniel Drew",
+                "category": "Presentation Design",
+                "assigned": [
+                    { "name": "Glinda Bren", "avatar": "/assets/avatars/glinda.png" }
+                ],
+                "priority": "Medium",
+                "stage": "Requests",
+                "credits": 7,
+                "bgColor": "#eefee7"
+            },
+            {
+                "id": 110,
+                "title": "UX/UI Mockups for Mobile App",
+                "submittedDate": "Sep 26, 2025",
+                "deadline": "Oct 24, 2025",
+                "submittedBy": "Gerard Santos",
+                "category": "Web Design",
+                "assigned": [
+                    { "name": "Michelle Cruz", "avatar": "/assets/avatars/michelle.png" }
+                ],
+                "priority": "High",
+                "stage": "Requests",
+                "credits": 20,
+                "bgColor": "#fee7e7"
+            },
+            {
+                "id": 111,
+                "title": "Marketing Email Campaign Template",
+                "submittedDate": "Jul 22, 2025",
+                "deadline": "Aug 5, 2025",
+                "submittedBy": "Nathaniel Drew",
+                "category": "Email Design",
+                "assigned": [
+                    { "name": "Glinda Bren", "avatar": "/assets/avatars/glinda.png" },
+                    { "name": "Michelle Cruz", "avatar": "/assets/avatars/michelle.png" }
+                ],
+                "priority": "Low",
+                "stage": "Completed",
+                "credits": 8,
+                "bgColor": "#e7fef4"
+            },
+            {
+                "id": 112,
+                "title": "Infographics for Annual Shareholder Meeting",
+                "submittedDate": "Oct 1, 2025",
+                "deadline": "Oct 25, 2025",
+                "submittedBy": "Iya Coronel",
+                "category": "Presentation Design",
+                "assigned": [
+                    { "name": "Bernard Co", "avatar": "/assets/avatars/bernard.png" }
+                ],
+                "priority": "High",
+                "stage": "Requests",
+                "credits": 18,
+                "bgColor": "#fef8e7"
+            },
+            {
+                "id": 113,
+                "title": "Awaiting copy for the Fall Newsletter",
+                "submittedDate": "Sep 15, 2025",
+                "deadline": "Oct 18, 2025",
+                "submittedBy": "Gerard Santos",
+                "category": "Content Design",
+                "assigned": [
+                    { "name": "Michelle Cruz", "avatar": "/assets/avatars/michelle.png" }
+                ],
+                "priority": "Medium",
+                "stage": "Pending",
+                "credits": 5,
+                "bgColor": "#fef4e7"
+            },
+            {
+                "id": 114,
+                "title": "Animated Logo for Video Intros",
+                "submittedDate": "Oct 5, 2025",
+                "deadline": "Oct 28, 2025",
+                "submittedBy": "Nathaniel Drew",
+                "category": "Video Editing",
+                "assigned": [
+                    { "name": "Bernard Co", "avatar": "/assets/avatars/bernard.png" }
+                ],
+                "priority": "Medium",
+                "stage": "Requests",
+                "credits": 14,
+                "bgColor": "#fde7fe"
+            }
+        ]
+    },
+    "serviceProvider": {
+        "name": "Bespire",
+        "team": [
+            { "name": "Glinda Bren", "title": "Project Manager", "avatar": "/assets/avatars/glinda.png" },
+            { "name": "Bernard Co", "title": "Creative Director", "avatar": "/assets/avatars/bernard.png" },
+            { "name": "Michelle Cruz", "title": "Designer", "avatar": "/assets/avatars/michelle.png" }
+        ]
+    },
+    "ClientTeam": {
+        "name": "Spherule Team",
+        "members": [
+            { "name": "Iya Coronel", "title": "Content Strategist", "avatar": "/assets/avatars/iya.png" },
+            { "name": "Nathaniel Drew", "title": "Video Producer", "avatar": "/assets/avatars/nathaniel.png" },
+            { "name": "Gerard Santos", "title": "Web Developer", "avatar": "/assets/avatars/gerard.png" }
+        ]
+    }
+}

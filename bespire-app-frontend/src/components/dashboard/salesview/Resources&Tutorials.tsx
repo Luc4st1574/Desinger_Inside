@@ -1,27 +1,46 @@
 "use client";
 import React from 'react';
-import salesData from '@/data/salesData.json';
-
-// Placeholder for icons. In a real app, you'd use an icon library like Heroicons.
-const icons = {
-    flag: '🚩',
-    folder: '📁',
-    pie: '🥧',
-    chart: '📊',
-};
+import { ArrowRight } from 'lucide-react';
+import FlagGolf from '@/assets/icons/flag_golf.svg';
+import FolderClosed from '@/assets/icons/closed_folder.svg';
+import CroppedCircle from '@/assets/icons/cropped_circle.svg';
+import FormsGeometric from '@/assets/icons/forms_geometric.svg';
 
 export default function ResourcesAndTutorials() {
+    const iconColor = "#697d67";
+
     return (
-        <div className="p-8 mt-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Resources & Tutorials →</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {salesData.resources.map((resource) => (
-            <div key={resource.title} className="p-6 bg-gray-50 rounded-lg border border-gray-200 text-center">
-                <div className="text-4xl mb-4">{icons[resource.icon]}</div>
-                <h3 className="font-semibold text-gray-700">{resource.title}</h3>
+        <div className="pt-6">
+            <h2 className="text-2xl font-light text-black mb-6 flex items-center gap-2">
+                Resources & Tutorials <ArrowRight className="h-6 w-6" />
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                {/* UPDATED: Changed p-6 to p-4 to reduce height */}
+                <div className="p-4 bg-white rounded-lg border border-gray-200">
+                    <FlagGolf className="h-7 w-7 mb-3" style={{ color: iconColor }} strokeWidth={1.5}/>
+                    <h3 className="font-light text-black">How to Qualify <br/> Leads Efficiently</h3>
+                </div>
+
+                {/* UPDATED: Changed p-6 to p-4 to reduce height */}
+                <div className="p-4 bg-white rounded-lg border border-gray-200">
+                    <FolderClosed className="h-7 w-7 mb-3" style={{ color: iconColor }} strokeWidth={1.5} />
+                    <h3 className="font-light text-black">How to Organize <br/> Contracts and Files</h3>
+                </div>
+
+                {/* UPDATED: Changed p-6 to p-4 to reduce height */}
+                <div className="p-4 bg-white rounded-lg border border-gray-200">
+                    <CroppedCircle className="h-7 w-7 mb-3" style={{ color: iconColor }} strokeWidth={1.5}/>
+                    <h3 className="font-light text-black">How to Track <br/> Proposal Status</h3>
+                </div>
+
+                {/* UPDATED: Changed p-6 to p-4 to reduce height */}
+                <div className="p-4 bg-white rounded-lg border border-gray-200">
+                    <FormsGeometric className="h-7 w-7 mb-3" style={{ color: iconColor }} strokeWidth={1.5}/>
+                    <h3 className="font-light text-black">How to Analyze <br/> your Conversion</h3>
+                </div>
+
             </div>
-            ))}
-        </div>
         </div>
     );
 }

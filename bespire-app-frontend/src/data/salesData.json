@@ -1,79 +1,250 @@
 {
-    "prospects": {
-        "stages": [
-        { "name": "Prospecting", "count": 5 },
-        { "name": "Meeting", "count": 2 },
-        { "name": "Proposal", "count": 2 },
-        { "name": "Deal", "count": 3 }
-        ],
-        "list": [
-        {
-            "id": 1,
-            "title": "Zenaero Innovations",
-            "since": "Dec 12, 2024",
-            "contact": "Mateo Delgado",
-            "industry": "Aerotech",
-            "targetPlan": "Pro Plan",
-            "assigned": ["GB", "LH", "BC"],
-            "priority": "High"
-        },
-        {
-            "id": 2,
-            "title": "NovaSphere Technologies",
-            "since": "Dec 5, 2024",
-            "contact": "Elijah Thompson",
-            "industry": "Agency",
-            "targetPlan": "Growth Plan",
-            "assigned": ["GB", "LH", "BC"],
-            "priority": "Medium"
-        },
-        {
-            "id": 3,
-            "title": "Aether Consulting Group",
-            "since": "Dec 10, 2024",
-            "contact": "Camilia Reyes",
-            "industry": "Consulting",
-            "targetPlan": "Starter Plan",
-            "assigned": ["GB", "LH", "BC"],
-            "priority": "Low"
-        },
-        {
-            "id": 4,
-            "title": "Spherule",
-            "since": "Dec 14, 2024",
-            "contact": "Emília Kovács",
-            "industry": "Cybersecurity",
-            "targetPlan": "Growth Plan",
-            "assigned": ["GB", "LH", "BC"],
-            "priority": "High"
-        }
-        ]
-    },
-    "salesManager": {
-        "name": "Tony Brown",
-        "title": "Sales Manager",
-        "avatar": "/avatars/tony-brown.png",
-        "stats": {
-        "activeProspects": 10,
-        "breakdown": "5 New • 2 Meeting • 3 Proposals",
-        "dealsWon": 24,
-        "conversionRate": "38.56%"
-        },
-        "recentProspects": [
-        { "name": "Spherule", "type": "Outreach", "time": "1 day ago" },
-        { "name": "Quantum Nexus Solutions", "type": "Inbound", "time": "2 days ago" },
-        { "name": "NeuroWave Technologies", "type": "Outreach", "time": "3 days ago" }
-        ]
-    },
-    "team": [
-        { "name": "Glinda Bren", "role": "Sales Associate", "avatar": "/avatars/glinda-bren.png" },
-        { "name": "Lila Hart", "role": "Administrator", "avatar": "/avatars/lila-hart.png" },
-        { "name": "Bernard Co", "role": "Creative Director", "avatar": "/avatars/bernard-co.png" }
+  "prospects": {
+    "stages": [
+      { "name": "Prospecting" },
+      { "name": "Meeting" },
+      { "name": "Proposal" },
+      { "name": "Deal" }
     ],
-    "resources": [
-        { "title": "How to Qualify Leads Efficiently", "icon": "flag" },
-        { "title": "How to Organize Contracts and Files", "icon": "folder" },
-        { "title": "How to Track Proposal Status", "icon": "pie" },
-        { "title": "How to Analyze your Conversion", "icon": "chart" }
+    "list": [
+      {
+        "id": 1,
+        "title": "Zenaero Innovations",
+        "since": "Oct 2, 2025",
+        "contact": "Mateo Delgado",
+        "industry": "Aerotech",
+        "targetPlan": "Pro Plan",
+        "logo": "https://avatar.vercel.sh/Zenaero%20Innovations.svg?text=Z",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" },
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" },
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "High",
+        "stage": "Prospecting",
+        "source": "Outreach",
+        "bgColor": "#f3fee7"
+      },
+      {
+        "id": 2,
+        "title": "NovaSphere Technologies",
+        "since": "Sep 25, 2025",
+        "contact": "Elijah Thompson",
+        "industry": "Agency",
+        "targetPlan": "Growth Plan",
+        "logo": "https://avatar.vercel.sh/NovaSphere%20Technologies.svg?text=N",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" },
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" }
+        ],
+        "priority": "Medium",
+        "stage": "Prospecting",
+        "source": "Inbound",
+        "bgColor": "#defcbd"
+      },
+      {
+        "id": 3,
+        "title": "Aether Consulting Group",
+        "since": "Sep 20, 2025",
+        "contact": "Camilia Reyes",
+        "industry": "Consulting",
+        "targetPlan": "Starter Plan",
+        "logo": "https://avatar.vercel.sh/Aether%20Consulting%20Group.svg?text=A",
+        "assigned": [
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "Low",
+        "stage": "Prospecting",
+        "source": "Outreach",
+        "bgColor": "#f0f3f4"
+      },
+      {
+        "id": 4,
+        "title": "Spherule",
+        "since": "Oct 5, 2025",
+        "contact": "Emília Kovács",
+        "industry": "Cybersecurity",
+        "targetPlan": "Growth Plan",
+        "logo": "https://avatar.vercel.sh/Spherule.svg?text=S",
+        "assigned": [
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" },
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "High",
+        "stage": "Prospecting",
+        "source": "Outreach",
+        "bgColor": "#f1f3ee"
+      },
+      {
+        "id": 5,
+        "title": "QuantumLeap AI",
+        "since": "Sep 15, 2025",
+        "contact": "Isabella Rossi",
+        "industry": "AI/ML",
+        "targetPlan": "Pro Plan",
+        "logo": "https://avatar.vercel.sh/QuantumLeap%20AI.svg?text=Q",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" }
+        ],
+        "priority": "Medium",
+        "stage": "Prospecting",
+        "source": "Outreach",
+        "bgColor": "#e7f9fe"
+      },
+      {
+        "id": 6,
+        "title": "Helios Energy Solutions",
+        "since": "Sep 28, 2025",
+        "contact": "Kenji Tanaka",
+        "industry": "Renewable Energy",
+        "targetPlan": "Growth Plan",
+        "logo": "https://avatar.vercel.sh/Helios%20Energy%20Solutions.svg?text=H",
+        "assigned": [
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" }
+        ],
+        "priority": "High",
+        "stage": "Meeting",
+        "source": "Inbound",
+        "bgColor": "#fef8e7"
+      },
+      {
+        "id": 7,
+        "title": "BioGen Futures",
+        "since": "Sep 22, 2025",
+        "contact": "Dr. Aris Thorne",
+        "industry": "Biotech",
+        "targetPlan": "Pro Plan",
+        "logo": "https://avatar.vercel.sh/BioGen%20Futures.svg?text=B",
+        "assigned": [
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" },
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" }
+        ],
+        "priority": "Medium",
+        "stage": "Meeting",
+        "source": "Outreach",
+        "bgColor": "#fde7fe"
+      },
+      {
+        "id": 8,
+        "title": "Nexus Logistics",
+        "since": "Sep 19, 2025",
+        "contact": "Fatima Al-Jamil",
+        "industry": "Supply Chain",
+        "targetPlan": "Pro Plan",
+        "logo": "https://avatar.vercel.sh/Nexus%20Logistics.svg?text=N",
+        "assigned": [
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" },
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "High",
+        "stage": "Proposal",
+        "source": "Inbound",
+        "bgColor": "#e7fef4"
+      },
+      {
+        "id": 9,
+        "title": "Veridian Dynamics",
+        "since": "Sep 11, 2025",
+        "contact": "Chloe Sullivan",
+        "industry": "R&D",
+        "targetPlan": "Growth Plan",
+        "logo": "https://avatar.vercel.sh/Veridian%20Dynamics.svg?text=V",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" }
+        ],
+        "priority": "Low",
+        "stage": "Proposal",
+        "source": "Outreach",
+        "bgColor": "#f4e7fe"
+      },
+      {
+        "id": 10,
+        "title": "Starlight Financial",
+        "since": "Aug 30, 2025",
+        "contact": "Marcus Wright",
+        "industry": "Fintech",
+        "targetPlan": "Pro Plan",
+        "logo": "https://avatar.vercel.sh/Starlight%20Financial.svg?text=S",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" },
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" },
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "High",
+        "stage": "Deal",
+        "source": "Inbound",
+        "bgColor": "#fee7e7"
+      },
+      {
+        "id": 11,
+        "title": "AquaPure Systems",
+        "since": "Aug 25, 2025",
+        "contact": "Javier Morales",
+        "industry": "Water Tech",
+        "targetPlan": "Pro Plan",
+        "logo": "https://avatar.vercel.sh/AquaPure%20Systems.svg?text=A",
+        "assigned": [
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" },
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" }
+        ],
+        "priority": "Medium",
+        "stage": "Deal",
+        "source": "Outreach",
+        "bgColor": "#eefee7"
+      },
+      {
+        "id": 12,
+        "title": "Momentum Robotics",
+        "since": "Aug 15, 2025",
+        "contact": "Sofia Chen",
+        "industry": "Automation",
+        "targetPlan": "Growth Plan",
+        "logo": "https://avatar.vercel.sh/Momentum%20Robotics.svg?text=M",
+        "assigned": [
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" }
+        ],
+        "priority": "High",
+        "stage": "Deal",
+        "source": "Inbound",
+        "bgColor": "#fef4e7"
+      },
+      {
+        "id": 13,
+        "title": "Quantum Nexus Solutions",
+        "since": "Oct 4, 2025",
+        "contact": "Ben Carter",
+        "industry": "Quantum Computing",
+        "targetPlan": "Enterprise Plan",
+        "logo": "https://avatar.vercel.sh/Quantum%20Nexus%20Solutions.svg?text=Q",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" }
+        ],
+        "priority": "High",
+        "stage": "Meeting",
+        "source": "Inbound",
+        "bgColor": "#e7f9ff"
+      },
+      {
+        "id": 14,
+        "title": "NeuroWave Technologies",
+        "since": "Oct 3, 2025",
+        "contact": "Dr. Lena Petrova",
+        "industry": "Neurotech",
+        "targetPlan": "Pro Plan",
+        "logo": "https://avatar.vercel.sh/NeuroWave%20Technologies.svg?text=N",
+        "assigned": [
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "Medium",
+        "stage": "Proposal",
+        "source": "Outreach",
+        "bgColor": "#f0e7ff"
+      }
     ]
+  },
+  "salesManager": {
+    "name": "Tony Brown",
+    "title": "Sales Manager",
+    "avatar": "/assets/avatars/tony.svg"
+  }
 }

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 
 const Links = [
   {
@@ -44,12 +45,13 @@ export default function QuickLinksSection({ onHide }: { onHide: () => void }) {
             <div
               key={index}
               className={` ${item.bg} border border-gray-200 rounded-lg px-4 py-3 flex flex-col
-                 items-start gap-3 hover:shadow-sm transition cursor-pointer`}
-            >
-              <img
+                  items-start gap-3 hover:shadow-sm transition cursor-pointer`}>
+              <Image
                 src={item.icon}
                 alt={item.title}
-                className="w-8 h-8 object-contain"
+                width={32}
+                height={32}
+                className="object-contain"
               />
               <div className="text-base md:text-lg lg:text-xl font-medium text-black">
                 {item.title}

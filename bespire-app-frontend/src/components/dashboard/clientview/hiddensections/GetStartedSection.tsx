@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { ChevronRight } from "lucide-react";
-import Button from "../ui/Button";
+import Button from "../../../ui/Button";
 const steps = [
     {
       title: "Set Up Your Brand Kit",
