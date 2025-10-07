@@ -26,6 +26,7 @@ export type MenuRole =
   | "admin"
   | "client"
   | "designer"
+  | "team_member"
   | "success_manager"
   | "sales_manager"
   | "viewer"
@@ -46,14 +47,14 @@ export const ALL_MAIN_MENU: SidebarMenuItem[] = [
     label: "Dashboard",
     href: "/dashboard",
     icon: IconDashboard,
-    roles: ["admin", "client", "designer", "success_manager", "sales_manager", "frontend_dev"],
+    roles: ["admin", "client", "designer", "success_manager", "sales_manager", "frontend_dev","team_member"],
   },
 
   {
     label: "Requests",
     href: "/requests",
     icon: IconRequests,
-    roles: ["client", "designer", "success_manager"],
+    roles: ["client", "designer", "success_manager","team_member"],
   },
   {
     label: "Sales Pipeline",
@@ -77,7 +78,7 @@ export const ALL_MAIN_MENU: SidebarMenuItem[] = [
     label: "Clients",
     href: "/clients",
     icon: Client,
-    roles: ["admin", "designer"],
+    roles: ["admin", "designer","team_member"],
   },
   {
     label: "Team",
@@ -105,7 +106,7 @@ export const ALL_EXPLORE_MENU: SidebarMenuItem[] = [
     label: "File Manager",
     href: "/files",
     icon: IconFileManager,
-    roles: ["client", "designer", "success_manager", "admin", "sales_manager"],
+    roles: ["client", "designer", "success_manager", "admin", "sales_manager","team_member"],
     children: [
       {
         label: "Folders",
@@ -149,13 +150,13 @@ export const ALL_EXPLORE_MENU: SidebarMenuItem[] = [
     label: "Calendar",
     href: "/calendar",
     icon: IconCalendar,
-    roles: ["admin", "designer", "success_manager", "sales_manager", "client"],
+    roles: ["admin", "designer", "success_manager", "sales_manager", "client","team_member"],
   },
   {
     label: "Analytics",
     href: "/analytics",
     icon: IconAnalitycs,
-    roles: ["admin", "client", "designer", "success_manager"],
+    roles: ["admin", "client", "designer", "success_manager","team_member"],
   },
    {
     label: "Sales Analytics",
@@ -186,7 +187,7 @@ export const ALL_EXPLORE_MENU: SidebarMenuItem[] = [
   { label: "Template Library",
     href: "/templates",
     icon: IconLibrary,
-    roles: ["admin", "client", "designer", "success_manager", "sales_manager"],
+    roles: ["admin", "client", "designer", "success_manager", "sales_manager","team_member"],
   },
   {
     label: "Feedback Center",

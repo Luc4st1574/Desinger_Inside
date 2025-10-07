@@ -154,6 +154,20 @@ export const PERMISSIONS = {
   EDIT_BLOGS: 'edit_blogs',
   DELETE_BLOGS: 'delete_blogs',
 
+  //prospects
+  MANAGE_PROSPECTS: 'manage_prospects',
+  CREATE_PROSPECTS: 'create_prospects',
+  VIEW_PROSPECTS: 'view_prospects',
+  EDIT_PROSPECTS: 'edit_prospects',
+  DELETE_PROSPECTS: 'delete_prospects',
+
+  //contracts
+  MANAGE_CONTRACTS: 'manage_contracts',
+  CREATE_CONTRACTS: 'create_contracts',
+  VIEW_CONTRACTS: 'view_contracts',
+  EDIT_CONTRACTS: 'edit_contracts',
+  DELETE_CONTRACTS: 'delete_contracts',
+
 } as const;
 
 export type Permission = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];

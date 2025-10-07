@@ -1,0 +1,233 @@
+{
+  "designerRequests": {
+    "stages": [
+      { "name": "Requests" },
+      { "name": "In Progress" },
+      { "name": "Pending" },
+      { "name": "Completed" }
+    ],
+    "list": [
+      {
+        "id": 1,
+        "title": "Hero Image for Christmas Campaign",
+        "requestDate": "Oct 05, 2025",
+        "client": "Spherule",
+        "logo": "https://avatar.vercel.sh/Spherule.svg?text=S",
+        "category": "Ads Design",
+        "bgColor": "#e7f9ee",
+        "deadline": "Oct 24, 2025",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" },
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" }
+        ],
+        "priority": "Low",
+        "stage": "Requests",
+        "rating": 0.0
+      },
+      {
+        "id": 2,
+        "title": "Business Cards",
+        "requestDate": "Oct 04, 2025",
+        "client": "Quantum Nexus Solutions",
+        "logo": "https://avatar.vercel.sh/Quantum%20Nexus%20Solutions.svg?text=Q",
+        "category": "Print Design",
+        "bgColor": "#e7f4fe",
+        "deadline": "Oct 18, 2025",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" },
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "High",
+        "stage": "Requests",
+        "rating": 0.0
+      },
+      {
+        "id": 3,
+        "title": "Spherule Landing Page Mockup",
+        "requestDate": "Oct 03, 2025",
+        "client": "NeuroWave Technologies",
+        "logo": "https://avatar.vercel.sh/NeuroWave%20Technologies.svg?text=N",
+        "category": "Presentation",
+        "bgColor": "#f4e7fe",
+        "deadline": "Oct 29, 2025",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" },
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" },
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "Medium",
+        "stage": "Requests",
+        "rating": 0.0
+      },
+      {
+        "id": 4,
+        "title": "Social Media Ad Creatives",
+        "requestDate": "Oct 02, 2025",
+        "client": "Zenaero Innovations",
+        "logo": "https://avatar.vercel.sh/Zenaero%20Innovations.svg?text=Z",
+        "category": "Social Media",
+        "bgColor": "#e7fefd",
+        "deadline": "Nov 05, 2025",
+        "assigned": [
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" }
+        ],
+        "priority": "Medium",
+        "stage": "Requests",
+        "rating": 0.0
+      },
+      {
+        "id": 5,
+        "title": "Product Launch Video Editing",
+        "requestDate": "Sep 30, 2025",
+        "client": "NovaSphere Technologies",
+        "logo": "https://avatar.vercel.sh/NovaSphere%20Technologies.svg?text=N",
+        "category": "Video Editing",
+        "bgColor": "#fef8e7",
+        "deadline": "Nov 15, 2025",
+        "assigned": [
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "High",
+        "stage": "Requests",
+        "rating": 0.0
+      },
+      {
+        "id": 6,
+        "title": "Q4 Investor Deck Presentation",
+        "requestDate": "Sep 29, 2025",
+        "client": "Starlight Financial",
+        "logo": "https://avatar.vercel.sh/Starlight%20Financial.svg?text=S",
+        "category": "Presentation",
+        "bgColor": "#f4e7fe",
+        "deadline": "Oct 17, 2025",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" },
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "High",
+        "stage": "In Progress",
+        "rating": 0.0
+      },
+      {
+        "id": 7,
+        "title": "Redesign Logistics Dashboard UI",
+        "requestDate": "Sep 28, 2025",
+        "client": "Nexus Logistics",
+        "logo": "https://avatar.vercel.sh/Nexus%20Logistics.svg?text=N",
+        "category": "UI/UX Design",
+        "bgColor": "#e7fef4",
+        "deadline": "Nov 10, 2025",
+        "assigned": [
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" },
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" }
+        ],
+        "priority": "High",
+        "stage": "In Progress",
+        "rating": 0.0
+      },
+      {
+        "id": 8,
+        "title": "New Website Icon Set",
+        "requestDate": "Sep 26, 2025",
+        "client": "BioGen Futures",
+        "logo": "https://avatar.vercel.sh/BioGen%20Futures.svg?text=B",
+        "category": "Illustration",
+        "bgColor": "#fde7fe",
+        "deadline": "Oct 30, 2025",
+        "assigned": [
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "Medium",
+        "stage": "In Progress",
+        "rating": 0.0
+      },
+      {
+        "id": 9,
+        "title": "Animated Logo for Intro",
+        "requestDate": "Sep 25, 2025",
+        "client": "Momentum Robotics",
+        "logo": "https://avatar.vercel.sh/Momentum%20Robotics.svg?text=M",
+        "category": "Animation",
+        "bgColor": "#fef4e7",
+        "deadline": "Nov 22, 2025",
+        "assigned": [
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" },
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "Low",
+        "stage": "In Progress",
+        "rating": 0.0
+      },
+      {
+        "id": 10,
+        "title": "Brand Style Guide Update",
+        "requestDate": "Sep 22, 2025",
+        "client": "Aether Consulting Group",
+        "logo": "https://avatar.vercel.sh/Aether%20Consulting%20Group.svg?text=A",
+        "category": "Branding",
+        "bgColor": "#eefee7",
+        "deadline": "Jan 10, 2026",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" }
+        ],
+        "priority": "Low",
+        "stage": "Pending",
+        "rating": 0.0
+      },
+      {
+        "id": 11,
+        "title": "Conference Booth Banner",
+        "requestDate": "Sep 20, 2025",
+        "client": "Helios Energy Solutions",
+        "logo": "https://avatar.vercel.sh/Helios%20Energy%20Solutions.svg?text=H",
+        "category": "Print Design",
+        "bgColor": "#e7f4fe",
+        "deadline": "Dec 01, 2025",
+        "assigned": [
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" }
+        ],
+        "priority": "Medium",
+        "stage": "Pending",
+        "rating": 0.0
+      },
+      {
+        "id": 12,
+        "title": "Annual Report Print Layout",
+        "requestDate": "Aug 15, 2025",
+        "client": "Starlight Financial",
+        "logo": "https://avatar.vercel.sh/Starlight%20Financial.svg?text=S",
+        "category": "Print Design",
+        "bgColor": "#e7f4fe",
+        "deadline": "Sep 15, 2025",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" },
+          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+        ],
+        "priority": "High",
+        "stage": "Completed",
+        "rating": 5.0
+      },
+      {
+        "id": 13,
+        "title": "Water Tech Expo Booth Design",
+        "requestDate": "Aug 10, 2025",
+        "client": "AquaPure Systems",
+        "logo": "https://avatar.vercel.sh/AquaPure%20Systems.svg?text=A",
+        "category": "Branding",
+        "bgColor": "#eefee7",
+        "deadline": "Sep 01, 2025",
+        "assigned": [
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" }
+        ],
+        "priority": "Medium",
+        "stage": "Completed",
+        "rating": 4.5
+      }
+    ]
+  },
+  "designManager": {
+    "name": "Alina Vance",
+    "title": "Creative Director",
+    "avatar": "/assets/avatars/alina.svg"
+  }
+}

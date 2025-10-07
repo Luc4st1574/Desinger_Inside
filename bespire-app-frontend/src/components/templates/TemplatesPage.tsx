@@ -8,11 +8,17 @@ import FeaturedTemplatesSection from './FeaturedTemplatesSection';
 import ClientTemplatesList from './ClientTemplatesList';
 
 // Props: isClientView determines which view to render
-const TemplatesPage = ({ isClientView , isSalesManager }) => {
+interface TemplatesPageProps {
+  isClientView?: boolean;
+  isSalesManager?: boolean;
+  isTeamMember?: boolean;
+}
+
+const TemplatesPage: React.FC<TemplatesPageProps> = ({ isClientView, isSalesManager, isTeamMember }) => {
   const { loading, error } = useTemplates();
 
   // Render Client View
-  if (isClientView || isSalesManager) {
+  if (isClientView || isSalesManager || isTeamMember) {
     return (
       <div className="container mx-auto">
         <FeaturedTemplatesSection />

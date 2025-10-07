@@ -8,12 +8,20 @@ import { PERMISSIONS } from "@/constants/permissions";
 export default function DashboardPage() {
   const { user } = useAppContext();
   const isSalesManager = user?.role === 'sales_manager';
+  const isClient = user?.role === 'client';
+  const isAdmin = user?.role === 'admin';
+  const isTeamMember = user?.role === 'team_member';
   console.log("DashboardLayout user", user);
 
   return (
     <PermissionGuard required={PERMISSIONS.VIEW_DASHBOARD}>
       <DashboardLayout>
-        <DashboardMain isSalesManager={isSalesManager} />
+        <DashboardMain 
+          isSalesManager={isSalesManager}
+          isClient={isClient} 
+          isAdmin={isAdmin}
+          isTeamMember={isTeamMember}
+          />
       </DashboardLayout>
     </PermissionGuard>
   );

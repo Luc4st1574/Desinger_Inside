@@ -11,9 +11,10 @@ export default function ResourcesAndTutorials() {
 
     return (
         <div className="pt-6">
-            <h2 className="text-2xl font-light text-black mb-6 flex items-center gap-2">
-                Resources & Tutorials <ArrowRight className="h-6 w-6" />
-            </h2>
+            <a href="#" className="text-2xl font-light text-gray-800 flex items-center gap-3 group mb-6">
+                Resources & Tutorials
+            <ArrowRight className="h-5 w-5 text-gray-500 group-hover:translate-x-1 transition-transform" />
+            </a>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
                 {/* UPDATED: Changed p-6 to p-4 to reduce height */}

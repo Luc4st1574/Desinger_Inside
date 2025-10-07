@@ -11,11 +11,12 @@ export default function TemplatesPageMain() {
   const { user } = useAppContext();
   const isClient = user?.role === 'client';
   const isSalesManager = user?.role === 'sales_manager';
+  const isTeamMember = user?.role === 'team_member';
 
   return (
     <PermissionGuard required={PERMISSIONS.VIEW_TEMPLATES}>
       <DashboardLayout>
-        <TemplatesPage isClientView={isClient} isSalesManager={isSalesManager} />
+        <TemplatesPage isClientView={isClient} isSalesManager={isSalesManager} isTeamMember={isTeamMember} />
       </DashboardLayout>
     </PermissionGuard>
   );

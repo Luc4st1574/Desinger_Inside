@@ -4,9 +4,9 @@ import { ArrowRight } from 'lucide-react';
 
 // Import your SVG icons as React components
 import Focus7Icon from '@/assets/icons/focus7.svg';
-import LoadingIcon from '@/assets/icons/loading.svg';
+import LoadingIcon from '@/assets/icons/circle dot.svg';
 import BillingIcon from '@/assets/icons/icon_billing.svg';
-import ResourcesIcon from '@/assets/icons/resources.svg';
+import ResourcesIcon from '@/assets/icons/forms_geometric.svg';
 
 export default function DashboardResources() {
   const iconColor = "#697d67";
