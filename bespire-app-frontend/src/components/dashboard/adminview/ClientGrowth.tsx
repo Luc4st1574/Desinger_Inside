@@ -36,18 +36,23 @@ const ChartTooltip = ({ info, year }) => {
 
     const StatPill = ({ value, isGood }) => {
         const isIncrease = value >= 0
-        const colorClass =
-            (isGood && isIncrease) || (!isGood && !isIncrease)
-                ? 'bg-green-100 text-green-800'
-                : 'bg-red-100 text-red-800'
+        const isPositiveOutcome = (isGood && isIncrease) || (!isGood && !isIncrease)
 
         return (
-            <span
-                className={`inline-flex items-center space-x-1 rounded-full px-2 py-px text-xs font-medium ${colorClass}`}
+            <div
+                className={`flex items-center space-x-0.5 rounded-full py-px pl-1.5 pr-0 text-[11px] font-normal text-gray-900 ${
+                    isPositiveOutcome ? 'bg-[#f3fee7]' : 'bg-[#ffe8e8]'
+                }`}
             >
                 <span>{Math.abs(value).toFixed(0)}%</span>
-                {isIncrease ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
-            </span>
+                <span className="mt-px">
+                    {isIncrease ? (
+                        <ArrowUpRight size={10} strokeWidth={3} className="text-[#62864d]" />
+                    ) : (
+                        <ArrowDownRight size={10} strokeWidth={3} className="text-[#f01616]" />
+                    )}
+                </span>
+            </div>
         )
     }
 
@@ -425,14 +430,20 @@ const ClientGrowth = () => {
                         <p className="text-sm text-[#5e6b66]">New Active Clients</p>
                         <p className="mt-1 text-3xl font-light text-gray-800">{activeClients.current}</p>
                         <div className="mt-2 flex items-center gap-x-2">
-                            <span
-                                className={`inline-flex items-center space-x-1 rounded-full px-2 py-px text-xs font-medium ${
-                                    isIncreaseForActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                            <div
+                                className={`flex items-center space-x-0.5 rounded-full py-px pl-1.5 pr-0 text-[11px] font-normal text-gray-900 ${
+                                    isIncreaseForActive ? 'bg-[#f3fee7]' : 'bg-[#ffe8e8]'
                                 }`}
                             >
-                                {isIncreaseForActive ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
                                 <span>{Math.abs(activeClients.change).toFixed(1)}%</span>
-                            </span>
+                                <span className="mt-px">
+                                    {isIncreaseForActive ? (
+                                        <ArrowUpRight size={10} strokeWidth={3} className="text-[#62864d]" />
+                                    ) : (
+                                        <ArrowDownRight size={10} strokeWidth={3} className="text-[#f01616]" />
+                                    )}
+                                </span>
+                            </div>
                             <span className="text-xs text-gray-400">{comparisonLabel}</span>
                         </div>
                     </div>
@@ -440,14 +451,20 @@ const ClientGrowth = () => {
                         <p className="text-sm text-[#5e6b66]">New Unsubscribed</p>
                         <p className="mt-1 text-3xl font-light text-gray-800">{unsubscribedClients.current}</p>
                         <div className="mt-2 flex items-center gap-x-2">
-                            <span
-                                className={`inline-flex items-center space-x-1 rounded-full px-2 py-px text-xs font-medium ${
-                                    !isIncreaseForUnsubscribed ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                            <div
+                                className={`flex items-center space-x-0.5 rounded-full py-px pl-1.5 pr-0 text-[11px] font-normal text-gray-900 ${
+                                    !isIncreaseForUnsubscribed ? 'bg-[#f3fee7]' : 'bg-[#ffe8e8]'
                                 }`}
                             >
-                                {!isIncreaseForUnsubscribed ? <ArrowDownRight size={12} /> : <ArrowUpRight size={12} />}
                                 <span>{Math.abs(unsubscribedClients.change).toFixed(1)}%</span>
-                            </span>
+                                <span className="mt-px">
+                                    {isIncreaseForUnsubscribed ? (
+                                        <ArrowUpRight size={10} strokeWidth={3} className="text-[#62864d]" />
+                                    ) : (
+                                        <ArrowDownRight size={10} strokeWidth={3} className="text-[#f01616]" />
+                                    )}
+                                </span>
+                            </div>
                             <span className="text-xs text-gray-400">{comparisonLabel}</span>
                         </div>
                     </div>
