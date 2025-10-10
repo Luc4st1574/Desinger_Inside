@@ -1,216 +1,282 @@
-"use client";
-import { useState } from 'react';
-import { Listbox } from '@headlessui/react';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
-import requestData from '@/data/requestData.json';
+import {
+  Banknote,
+  Repeat,
+  Users,
+  ArrowUpRight,
+  ArrowDownRight,
+  ChevronDown,
+} from 'lucide-react';
+import adminData from '@/data/adminData.json';
 
-const timeRanges = [
-  { value: '1m', label: '1 month' },
-  { value: '3m', label: '3 months' },
-  { value: '6m', label: '6 months' },
-];
+// --- Type Definitions ---
+type Period = 'Week' | 'Month' | 'Year';
 
-type Priority = 'High' | 'Medium' | 'Low';
-
-const priorityStyles: Record<Priority, { container: string; bar: string }> = {
-    High: {
-        container: "bg-[#ff6a6a] text-white",
-        bar: "bg-[#c70000]",
-    },
-    Medium: {
-        container: "bg-[#fedaa0] text-black",
-        bar: "bg-[#ca820e]",
-    },
-    Low: {
-        container: "bg-[#defcbd] text-black",
-        bar: "bg-[#b8df91]",
-    },
+// --- Date Helper Functions ---
+const getStartOfWeek = (date: Date) => {
+  const d = new Date(date);
+  // Note: setDate adjusts the month/year automatically if the day goes out of bounds.
+  // getDay() returns 0 for Sunday, 1 for Monday, etc.
+  d.setDate(d.getDate() - d.getDay());
+  d.setHours(0, 0, 0, 0);
+  return d;
 };
 
-export default function DashboardRequestsPreview() {
-  const [selectedTimeRange, setSelectedTimeRange] = useState(timeRanges[0]);
-  const { requests } = requestData;
-  const [activeStage, setActiveStage] = useState('Requests');
+const getStartOfMonth = (date: Date) => {
+  const d = new Date(date.getFullYear(), date.getMonth(), 1);
+  d.setHours(0, 0, 0, 0);
+  return d;
+};
 
-  // --- CORRECTED FILTERING LOGIC STARTS HERE ---
-  const filteredList = requests.list.filter((request) => {
-    // 1. First, filter by the active stage (no change here)
-    const isInStage = request.stage === activeStage;
-    if (!isInStage) return false;
+// --- Helper function to calculate percentage change ---
+const calculatePercentageChange = (current: number, previous: number): number => {
+  if (previous === 0) return current > 0 ? 100 : 0;
+  return ((current - previous) / previous) * 100;
+};
 
-    // 2. Corrected date filtering logic
-    const today = new Date(); // Current date: Oct 6, 2025
-    const deadline = new Date(request.deadline);
 
-    // Set the end of our filter range to the last moment of the current month
-    const endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-    endDate.setHours(23, 59, 59, 999);
+// --- Main Revenue Overview Component ---
+const RevenueOverview = () => {
+  const [activePeriod, setActivePeriod] = useState<Period>('Month');
+  const periods: Period[] = ['Week', 'Month', 'Year'];
+  const { clients, plans, team } = adminData.dashboardData;
 
-    // Determine how many past months to include based on the selection
-    let monthsToSubtract = 0;
-    if (selectedTimeRange.value === '1m') {
-      monthsToSubtract = 0; // Current month
-    } else if (selectedTimeRange.value === '3m') {
-      monthsToSubtract = 2; // Current month + 2 previous months
-    } else if (selectedTimeRange.value === '6m') {
-      monthsToSubtract = 5; // Current month + 5 previous months
+  // --- Logic for Top KPI Cards ---
+  const revenueData = useMemo(() => {
+    const now = new Date('2025-10-10T12:00:00-05:00');
+    let currentStartDate: Date, previousStartDate: Date;
+
+    switch (activePeriod) {
+      case 'Week':
+        currentStartDate = getStartOfWeek(now);
+        const lastWeek = new Date(now);
+        lastWeek.setDate(now.getDate() - 7);
+        previousStartDate = getStartOfWeek(lastWeek);
+        break;
+      case 'Year':
+        currentStartDate = new Date(now.getFullYear(), 0, 1);
+        previousStartDate = new Date(now.getFullYear() - 1, 0, 1);
+        break;
+      case 'Month':
+      default:
+        currentStartDate = getStartOfMonth(now);
+        const lastMonth = new Date(now);
+        lastMonth.setMonth(now.getMonth() - 1);
+        previousStartDate = getStartOfMonth(lastMonth);
+        break;
     }
-    
-    // Set the start of our filter range to the first moment of the calculated month
-    const startDate = new Date(today.getFullYear(), today.getMonth() - monthsToSubtract, 1);
-    startDate.setHours(0, 0, 0, 0);
 
-    // 3. Return true only if the deadline falls within this new range
-    return deadline >= startDate && deadline <= endDate;
-  });
-  // --- CORRECTED FILTERING LOGIC ENDS HERE ---
+    const calculateMetricsForPeriod = (startDate: Date) => {
+      let revenue = 0;
+      // This logic calculates MRR based on all active clients who joined *before* the period started.
+      const activeClientsInPeriod = clients.filter(client => {
+        const joinDate = new Date(client.joinDate);
+        return client.status === 'Active' && joinDate <= startDate;
+      });
 
-  const rowLayout = "grid items-center gap-4 px-6";
-  const gridTemplateColumns = { 
-      gridTemplateColumns: 'minmax(200px, 1fr) 130px 120px 120px 100px 100px' 
+      activeClientsInPeriod.forEach(client => {
+        const planKey = client.planId as keyof typeof plans;
+        if (plans[planKey]) {
+          revenue += plans[planKey].price;
+        }
+      });
+      return { revenue, clientCount: activeClientsInPeriod.length };
+    };
+
+    const currentData = calculateMetricsForPeriod(currentStartDate);
+    const previousData = calculateMetricsForPeriod(previousStartDate);
+
+    const revenuePerClient = currentData.clientCount > 0 ? currentData.revenue / currentData.clientCount : 0;
+    const prevRevenuePerClient = previousData.clientCount > 0 ? previousData.revenue / previousData.clientCount : 0;
+
+    return {
+      totalRevenue: { current: currentData.revenue, previous: previousData.revenue },
+      recurringRevenue: { current: currentData.revenue, previous: previousData.revenue },
+      revenuePerClient: { current: revenuePerClient, previous: prevRevenuePerClient },
+    };
+  }, [activePeriod, clients, plans]);
+
+  const totalRevenueChange = calculatePercentageChange(revenueData.totalRevenue.current, revenueData.totalRevenue.previous);
+  const recurringRevenueChange = calculatePercentageChange(revenueData.recurringRevenue.current, revenueData.recurringRevenue.previous);
+  const revenuePerClientChange = calculatePercentageChange(revenueData.revenuePerClient.current, revenueData.revenuePerClient.previous);
+
+  const kpiMetrics = [
+    { title: 'Total Revenue', icon: Banknote, value: revenueData.totalRevenue.current, change: totalRevenueChange, label: 'All client payments' },
+    { title: 'Recurring Revenue', icon: Repeat, value: revenueData.recurringRevenue.current, change: recurringRevenueChange, label: 'Subscriptions and one-time' },
+    { title: 'Revenue per Client', icon: Users, value: revenueData.revenuePerClient.current, change: revenuePerClientChange, label: 'Average per client' },
+  ];
+
+  // --- [MODIFIED] Logic for Bottom Detailed Client Table ---
+  const processedClients = useMemo(() => {
+    const now = new Date('2025-10-10T12:00:00-05:00');
+    let periodStartDate: Date;
+
+    // 1. Determine the start date for the filter based on the active period
+    switch (activePeriod) {
+      case 'Week':
+        periodStartDate = getStartOfWeek(now);
+        break;
+      case 'Year':
+        periodStartDate = new Date(now.getFullYear(), 0, 1);
+        break;
+      case 'Month':
+      default:
+        periodStartDate = getStartOfMonth(now);
+        break;
+    }
+
+    const mappedClients = clients
+      // 2. Filter clients who joined within the selected period (from periodStartDate to now)
+      .filter(client => {
+        const joinDate = new Date(client.joinDate);
+        return client.status === 'Active' && joinDate >= periodStartDate && joinDate <= now;
+      })
+      .map(client => {
+        const clientPlan = plans[client.planId as keyof typeof plans];
+        if (!clientPlan) return null;
+
+        const joinDate = new Date(client.joinDate);
+        const renewalDate = new Date(joinDate);
+        renewalDate.setFullYear(joinDate.getFullYear() + 1);
+
+        // This calculates total revenue since joining (Lifetime Value)
+        const monthsDifference = (now.getFullYear() - joinDate.getFullYear()) * 12 + (now.getMonth() - joinDate.getMonth());
+        // We add 1 to include the current month's payment
+        const totalRevenue = clientPlan.price * (monthsDifference + 1);
+        
+        return { ...client, plan: clientPlan, joinDate, renewalDate, totalRevenue };
+      });
+
+    const validClients = mappedClients.filter(
+      (client): client is NonNullable<typeof client> => client !== null
+    );
+
+    return validClients.sort((clientA, clientB) => 
+      clientB.joinDate.getTime() - clientA.joinDate.getTime()
+    );
+  // 3. Add `activePeriod` to the dependency array to re-run this logic when the period changes
+  }, [activePeriod, clients, plans]);
+
+  const getPlanStyles = (planId: string) => {
+    switch (planId) {
+      case 'growth': return 'bg-[#f3fee7] text-black';
+      case 'pro': return 'bg-[#defcbd] text-black';
+      case 'starter': return 'bg-[#f0f3f4] text-black';
+      default: return 'bg-gray-100 text-gray-800';
+    }
   };
 
   return (
-    <section className="mb-6">
-      <div className="flex justify-between items-center mb-4">
-        <a href="#" className="text-2xl font-light text-gray-800 flex items-center gap-3 group">
-          Requests
-          <ArrowRight className="h-5 w-5 text-gray-500 group-hover:translate-x-1 transition-transform" />
-        </a>
-        
-        <Listbox value={selectedTimeRange} onChange={setSelectedTimeRange}>
-          <div className="relative w-fit"> 
-            <Listbox.Button className="relative w-full cursor-default rounded-full border border-gray-300 bg-white py-1 pl-4 pr-10 text-left text-sm text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500">
-              <span className="block truncate">{selectedTimeRange.label}</span>
-              <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                <ChevronDown className="h-4 w-4 text-gray-400" aria-hidden="true" />
-              </span>
-            </Listbox.Button>
-            
-            <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-              {timeRanges.map((range, rangeIdx) => (
-                <Listbox.Option
-                  key={rangeIdx}
-                  className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-4 pr-4 ${
-                      active ? 'bg-gray-100' : 'text-gray-900'
-                    }`
-                  }
-                  value={range}
-                >
-                  {({ selected }) => (
-                      <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
-                        {range.label}
-                      </span>
-                  )}
-                </Listbox.Option>
-              ))}
-            </Listbox.Options>
-          </div>
-        </Listbox>
-      </div>
-
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        <div className="grid grid-cols-4">
-          {requests.stages.map((stage) => {
-              const isActive = stage.name === activeStage;
-              
-              // Also update the count logic to use the same corrected date filter
-              const count = requests.list.filter(p => {
-                const today = new Date();
-                const deadline = new Date(p.deadline);
-                const endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-                let monthsToSubtract = 0;
-                if (selectedTimeRange.value === '1m') monthsToSubtract = 0;
-                else if (selectedTimeRange.value === '3m') monthsToSubtract = 2;
-                else if (selectedTimeRange.value === '6m') monthsToSubtract = 5;
-                const startDate = new Date(today.getFullYear(), today.getMonth() - monthsToSubtract, 1);
-                
-                return p.stage === stage.name && (deadline >= startDate && deadline <= endDate);
-              }).length;
-
-              return (
-                  <div
-                      key={stage.name}
-                      className={`p-4 cursor-pointer transition-colors text-[#5e6b66] ${isActive ? 'bg-white border-t-8 border-[#004049]' : 'bg-gray-100'}`}
-                      onClick={() => setActiveStage(stage.name)}
-                  >
-                      <p className="text-[#5e6b66]">{stage.name}</p>
-                      <p className="text-3xl text-[#5e6b66]">{count}</p>
-                  </div>
-              )
-          })}
-        </div>
-
-        <div 
-          className={`${rowLayout} py-3 text-gray-500 text-sm font-medium border-b border-gray-200`}
-          style={gridTemplateColumns}
-        >
-          <div className="flex items-center">Title <ChevronDown className="w-4 h-4 ml-1" /></div>
-          <div className="flex items-center">Category <ChevronDown className="w-4 h-4 ml-1" /></div>
-          <div className="flex items-center">Deadline <ChevronDown className="w-4 h-4 ml-1" /></div>
-          <div className="flex items-center">Assigned <ChevronDown className="w-4 h-4 ml-1" /></div>
-          <div className="flex items-center">Credits <ChevronDown className="w-4 h-4 ml-1" /></div>
-          <div className="flex items-center">Priority <ChevronDown className="w-4 h-4 ml-1" /></div>
-        </div>
-
-        <div className="overflow-y-auto h-[260px]">
-          {filteredList.map((request) => (
-            <div 
-              key={request.id} 
-              className={`${rowLayout} py-4 border-t border-gray-100 hover:bg-gray-50 text-sm`}
-              style={gridTemplateColumns}
+    <div className="pb-8">
+      {/* --- TOP PART: HEADER AND KPI CARDS --- */}
+      <div className="mb-6 flex flex-col items-start justify-between sm:flex-row sm:items-center">
+        <h2 className="mb-3 text-xl font-semibold text-gray-800 sm:mb-0">
+          Revenue
+        </h2>
+        <div className="flex items-center space-x-1 rounded-full border border-[#deefcf] bg-white p-1">
+          {periods.map(period => (
+            <button
+              key={period}
+              onClick={() => setActivePeriod(period)}
+              className={`w-20 rounded-full py-1.5 text-sm font-medium transition-colors focus:outline-none ${
+                activePeriod === period
+                  ? 'bg-[#ceffa3] text-gray-900 shadow-sm'
+                  : 'text-gray-500 hover:bg-gray-100'
+              }`}
             >
-              <div>
-                <p className="font-medium text-gray-800 truncate">{request.title}</p>
-                <p className="text-xs text-gray-500">Submitted {request.submittedDate}</p>
-              </div>
-              <div>
-                <span 
-                  className="px-2 py-1 text-xs font-medium rounded-full"
-                  style={{ backgroundColor: request.bgColor }}
-                >
-                  {request.category}
-                </span>
-              </div>
-              <div className="text-gray-700">{request.deadline}</div>
-              <div>
-                <div className="flex -space-x-2">
-                  {request.assigned.map((person) => (
-                    <Image
-                      key={person.name}
-                      src={person.avatar}
-                      alt={person.name}
-                      title={person.name}
-                      width={32}
-                      height={32}
-                      className="rounded-full object-cover border-2 border-white"
-                    />
-                  ))}
-                </div>
-              </div>
-              <div className="flex items-center text-[#62864d]">
-                <span className="w-2 h-2 mr-2 bg-[#62864d] rounded-full"></span>
-                {request.credits} Credits
-              </div>
-              
-              <div>
-                <div 
-                  className={`inline-flex items-center gap-x-2 px-3 py-1 text-sm font-medium rounded-lg ${priorityStyles[request.priority as Priority].container}`}
-                >
-                  <span 
-                    className={`w-1 h-4 ${priorityStyles[request.priority as Priority].bar}`}
-                  ></span>
-                  <span>
-                    {request.priority}
-                  </span>
-                </div>
-              </div>
-            </div>
+              {period}
+            </button>
           ))}
         </div>
       </div>
-    </section>
+      <div className="mb-8 flex divide-x divide-gray-200 rounded-md border border-gray-200 bg-white shadow-sm">
+        {kpiMetrics.map((metric, index) => {
+          const isIncrease = metric.change >= 0;
+          const formattedValue = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(metric.value);
+          return (
+            <div key={index} className="flex-1 p-5">
+              <metric.icon className="h-6 w-6 text-[#697d67]" strokeWidth={1.5} />
+              <p className="mt-4 text-base font-light text-[#5e6b66]">{metric.title}</p>
+              <div className="mt-1 flex items-baseline space-x-2">
+                <p className="text-xl font-light text-black">{formattedValue}</p>
+                <div className={`flex items-center space-x-0.5 rounded-full py-px pl-1.5 pr-0 text-[11px] font-normal text-gray-900 ${isIncrease ? 'bg-[#f3fee7]' : 'bg-[#ffe8e8]'}`}>
+                  <span>{Math.abs(metric.change).toFixed(2)}%</span>
+                  <span className="mt-px">
+                    {isIncrease ? <ArrowUpRight size={10} strokeWidth={3} className="text-[#62864d]" /> : <ArrowDownRight size={10} strokeWidth={3} className="text-[#f01616]" />}
+                  </span>
+                </div>
+              </div>
+              <p className="mt-2 text-xs text-gray-500">{metric.label}</p>
+            </div>
+          );
+        })}
+      </div>
+      <div className="overflow-hidden rounded-md border border-gray-200 shadow-sm">
+        <table className="w-full table-fixed">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="w-[30%] px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <div className="flex items-center">Company<ChevronDown className="ml-1 h-4 w-4 text-gray-400" /></div>
+              </th>
+              <th className="w-[12%] px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <div className="flex items-center">Plan<ChevronDown className="ml-1 h-4 w-4 text-gray-400" /></div>
+              </th>
+              <th className="w-[12%] px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <div className="flex items-center">Price<ChevronDown className="ml-1 h-4 w-4 text-gray-400" /></div>
+              </th>
+              <th className="w-[16%] px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <div className="flex items-center">Renewal Date<ChevronDown className="ml-1 h-4 w-4 text-gray-400" /></div>
+              </th>
+              <th className="w-[15%] px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <div className="flex items-center">Total Revenue<ChevronDown className="ml-1 h-4 w-4 text-gray-400" /></div>
+              </th>
+              <th className="w-[15%] px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <div className="flex items-center">Assigned<ChevronDown className="ml-1 h-4 w-4 text-gray-400" /></div>
+              </th>
+            </tr>
+          </thead>
+        </table>
+        <div className="h-[360px] overflow-y-auto">
+          <table className="min-w-full table-fixed">
+            <tbody className="divide-y divide-gray-200 bg-white">
+              {processedClients.length > 0 ? (
+                processedClients.map(client => {
+                  const assignedMembers = client.assignedTeamMemberIds.map(id => team.find(member => member.id === id));
+                  return (
+                    <tr key={client.id}>
+                      <td className="w-[30%] px-6 py-4">
+                        <div className="font-medium text-gray-900">{client.name}</div>
+                        <div className="text-sm font-light text-gray-500">Since {client.joinDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
+                      </td>
+                      <td className="w-[12%] whitespace-nowrap px-6 py-4">
+                        <span className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold leading-5 ${getPlanStyles(client.planId)}`}>{client.plan.name}</span>
+                      </td>
+                      <td className="w-[12%] whitespace-nowrap px-6 py-4 text-sm text-gray-700">${client.plan.price.toLocaleString()}/mo</td>
+                      <td className="w-[16%] whitespace-nowrap px-6 py-4 text-sm text-gray-500">{client.renewalDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</td>
+                      <td className="w-[15%] whitespace-nowrap px-6 py-4 text-sm font-semibold text-gray-800">${client.totalRevenue.toLocaleString()}</td>
+                      <td className="w-[15%] whitespace-nowrap px-6 py-4">
+                        <div className="flex -space-x-2 overflow-hidden">
+                          {assignedMembers.map(member => member && (<Image key={member.id} className="inline-block h-8 w-8 rounded-full ring-2 ring-white" src={member.avatar} alt={member.name} width={32} height={32} />))}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                // 5. Added a message for when no new clients are found for the period
+                <tr>
+                  <td colSpan={6} className="py-12 text-center text-gray-500">
+                    No new clients joined in this period.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   );
-}
+};
+
+export default RevenueOverview;

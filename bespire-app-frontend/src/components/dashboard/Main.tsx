@@ -79,7 +79,7 @@ export default function DashboardMain({ isSalesManager, isClient, isAdmin, isTea
           <RevenueOverview />
           <AdminRequestTable />
         </div>
-        <aside className="w-full lg:w-[250px] shrink-0">
+        <aside>
           <AdminSidebar />
         </aside>
       </div>
