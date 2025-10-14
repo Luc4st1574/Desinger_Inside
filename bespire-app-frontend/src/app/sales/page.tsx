@@ -3,13 +3,12 @@
 import PermissionGuard from "@/guards/PermissionGuard";
 import DashboardLayout from "../dashboard/layout/DashboardLayout";
 import { PERMISSIONS } from "@/constants/permissions";
+import SalesMain from "@/components/sales/SalesMain";
 export default function SalesPageMain() {
   return (
     <PermissionGuard required={PERMISSIONS.VIEW_SALES}>
       <DashboardLayout  >
-        <div>
-            Sales page
-        </div>
+        <SalesMain />
       </DashboardLayout>
     </PermissionGuard>
   );

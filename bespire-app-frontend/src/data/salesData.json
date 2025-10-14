@@ -10,45 +10,71 @@
       {
         "id": 1,
         "title": "Zenaero Innovations",
-        "since": "Oct 2, 2025",
+        "since": "Dec 27, 2024",
         "contact": "Mateo Delgado",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/male/46.jpg",
         "industry": "Aerotech",
+        "description": "Zenaero is at the forefront of aerospace technology, developing next-generation drone systems and sustainable aviation solutions.",
+        "website": "https://zenaero-innovations.com",
         "targetPlan": "Pro Plan",
+        "value": 3500,
         "logo": "https://avatar.vercel.sh/Zenaero%20Innovations.svg?text=Z",
-        "assigned": [
-          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" },
-          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" },
-          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
-        ],
-        "priority": "High",
-        "stage": "Prospecting",
-        "source": "Outreach",
-        "bgColor": "#f3fee7"
-      },
-      {
-        "id": 2,
-        "title": "NovaSphere Technologies",
-        "since": "Sep 25, 2025",
-        "contact": "Elijah Thompson",
-        "industry": "Agency",
-        "targetPlan": "Growth Plan",
-        "logo": "https://avatar.vercel.sh/NovaSphere%20Technologies.svg?text=N",
         "assigned": [
           { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" },
           { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" }
         ],
+        "priority": "High",
+        "stage": "Prospecting",
+        "source": "Outreach",
+        "bgColor": "#f3fee7",
+        "followUps": ["Oct 18, 2025", "Nov 05, 2025"],
+        "files": [
+          { "name": "Zenaero_Intro_Deck.pdf", "author": "Michelle Owolabi", "date": "Dec 28, 2024" },
+          { "name": "Initial_Requirements.docx", "author": "Mateo Delgado", "date": "Dec 29, 2024" }
+        ],
+        "comments": [
+          { "person": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png", "action": "created this lead.", "timestamp": "Dec 27, 2024, 10:11 am" },
+          { "person": "Mateo Delgado", "avatar": "https://xsgames.co/randomusers/assets/avatars/male/46.jpg", "action": "Thanks for reaching out. The deck looks interesting. When can we connect?", "timestamp": "Dec 28, 2024, 3:45 pm" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "NovaSphere Technologies",
+        "since": "Dec 5, 2024",
+        "contact": "Elijah Thompson",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/male/23.jpg",
+        "industry": "Agency",
+        "description": "A full-service digital agency specializing in branding, web development, and performance marketing for high-growth startups.",
+        "website": "https://novaspheretech.com",
+        "targetPlan": "Growth Plan",
+        "value": 2700,
+        "logo": "https://avatar.vercel.sh/NovaSphere%20Technologies.svg?text=N",
+        "assigned": [
+          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" }
+        ],
         "priority": "Medium",
         "stage": "Prospecting",
         "source": "Inbound",
-        "bgColor": "#defcbd"
+        "bgColor": "#defcbd",
+        "followUps": ["Oct 21, 2025"],
+        "files": [
+            { "name": "Inbound_Request_Details.txt", "author": "System", "date": "Dec 5, 2024" }
+        ],
+        "comments": [
+            { "person": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png", "action": "Elijah, thanks for your interest. I've reviewed your request and will follow up with some initial thoughts shortly.", "timestamp": "Dec 6, 2024, 11:30 am" }
+        ]
       },
       {
         "id": 3,
         "title": "Aether Consulting Group",
-        "since": "Sep 20, 2025",
+        "since": "Dec 10, 2024",
         "contact": "Camilia Reyes",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/female/24.jpg",
         "industry": "Consulting",
+        "description": "Management consulting firm that helps organizations improve their performance and efficiency through strategic planning.",
+        "website": "https://aetherconsulting.com",
         "targetPlan": "Starter Plan",
+        "value": 1200,
         "logo": "https://avatar.vercel.sh/Aether%20Consulting%20Group.svg?text=A",
         "assigned": [
           { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
@@ -56,32 +82,55 @@
         "priority": "Low",
         "stage": "Prospecting",
         "source": "Outreach",
-        "bgColor": "#f0f3f4"
+        "bgColor": "#f0f3f4",
+        "followUps": [],
+        "files": [],
+        "comments": [
+            { "person": "Gerard Smith", "avatar": "/assets/avatars/gerard.png", "action": "Sent initial outreach email. Awaiting response.", "timestamp": "Dec 10, 2024, 2:00 pm" }
+        ]
       },
       {
         "id": 4,
         "title": "Spherule",
-        "since": "Oct 5, 2025",
+        "since": "Dec 14, 2024",
         "contact": "Emília Kovács",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/female/33.jpg",
         "industry": "Cybersecurity",
+        "description": "Spherule is an innovative tech company dedicated to creating seamless solutions that enhance everyday life. We specialize in developing cutting-edge software that integrates artificial intelligence.",
+        "website": "https://spherule-security.com",
         "targetPlan": "Growth Plan",
+        "value": 2700,
         "logo": "https://avatar.vercel.sh/Spherule.svg?text=S",
         "assigned": [
           { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" },
           { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
         ],
         "priority": "High",
-        "stage": "Prospecting",
+        "stage": "Meeting",
         "source": "Outreach",
-        "bgColor": "#f1f3ee"
+        "bgColor": "#f1f3ee",
+        "followUps": ["Oct 25, 2025"],
+        "files": [
+            { "name": "Brand Guide 2024.pdf", "author": "Gerard Smith", "date": "Dec 20, 2024" },
+            { "name": "Marketing Plan 2024.docx", "author": "Gerard Smith", "date": "Dec 20, 2024" }
+        ],
+        "comments": [
+            { "person": "Gerard Smith", "avatar": "/assets/avatars/gerard.png", "action": "created this lead.", "timestamp": "Dec 14, 2024, 10:11 am" },
+            { "person": "Emília Kovács", "avatar": "https://xsgames.co/randomusers/assets/avatars/female/33.jpg", "action": "Thanks for our call. We are excited about the potential.", "timestamp": "Dec 24, 2024, 12:15 pm" },
+            { "person": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png", "action": "Great call, Gerard. I've scheduled the follow-up for next week to discuss the proposal.", "timestamp": "Dec 24, 2024, 1:00 pm" }
+        ]
       },
       {
         "id": 5,
         "title": "QuantumLeap AI",
-        "since": "Sep 15, 2025",
+        "since": "Jan 10, 2025",
         "contact": "Isabella Rossi",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/female/45.jpg",
         "industry": "AI/ML",
+        "description": "A research-focused company building safe and beneficial artificial general intelligence.",
+        "website": "https://quantumleap-ai.dev",
         "targetPlan": "Pro Plan",
+        "value": 3500,
         "logo": "https://avatar.vercel.sh/QuantumLeap%20AI.svg?text=Q",
         "assigned": [
           { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" }
@@ -89,15 +138,26 @@
         "priority": "Medium",
         "stage": "Prospecting",
         "source": "Outreach",
-        "bgColor": "#e7f9fe"
+        "bgColor": "#e7f9fe",
+        "followUps": ["Oct 19, 2025"],
+        "files": [
+            { "name": "Use_Case_Analysis.pdf", "author": "Michelle Owolabi", "date": "Jan 11, 2025" }
+        ],
+        "comments": [
+            { "person": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png", "action": "Initial contact made. Isabella seems interested in our AI ethics model.", "timestamp": "Jan 10, 2025, 4:30 pm" }
+        ]
       },
       {
         "id": 6,
         "title": "Helios Energy Solutions",
-        "since": "Sep 28, 2025",
+        "since": "Jan 18, 2025",
         "contact": "Kenji Tanaka",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/male/50.jpg",
         "industry": "Renewable Energy",
+        "description": "Developing and deploying large-scale solar and wind energy projects to accelerate the transition to a clean energy future.",
+        "website": "https://helios.energy",
         "targetPlan": "Growth Plan",
+        "value": 2700,
         "logo": "https://avatar.vercel.sh/Helios%20Energy%20Solutions.svg?text=H",
         "assigned": [
           { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" }
@@ -105,15 +165,28 @@
         "priority": "High",
         "stage": "Meeting",
         "source": "Inbound",
-        "bgColor": "#fef8e7"
+        "bgColor": "#fef8e7",
+        "followUps": ["Oct 28, 2025", "Nov 15, 2025"],
+        "files": [
+            { "name": "Project_Scope_Helios.pdf", "author": "Kenji Tanaka", "date": "Jan 19, 2025" },
+            { "name": "Meeting_Agenda.docx", "author": "Nathaniel Michaels", "date": "Jan 20, 2025" }
+        ],
+        "comments": [
+            { "person": "Kenji Tanaka", "avatar": "https://xsgames.co/randomusers/assets/avatars/male/50.jpg", "action": "Here is the project scope document we discussed. Looking forward to our meeting.", "timestamp": "Jan 19, 2025, 2:15 pm" },
+            { "person": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png", "action": "Thanks, Kenji. I've attached the agenda for our call.", "timestamp": "Jan 20, 2025, 9:00 am" }
+        ]
       },
       {
         "id": 7,
         "title": "BioGen Futures",
-        "since": "Sep 22, 2025",
+        "since": "Feb 5, 2025",
         "contact": "Dr. Aris Thorne",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/male/55.jpg",
         "industry": "Biotech",
+        "description": "Pioneering new therapies and diagnostics through genetic research and cellular engineering.",
+        "website": "https://biogenfutures.com",
         "targetPlan": "Pro Plan",
+        "value": 3500,
         "logo": "https://avatar.vercel.sh/BioGen%20Futures.svg?text=B",
         "assigned": [
           { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" },
@@ -122,32 +195,51 @@
         "priority": "Medium",
         "stage": "Meeting",
         "source": "Outreach",
-        "bgColor": "#fde7fe"
+        "bgColor": "#fde7fe",
+        "followUps": ["Nov 02, 2025"],
+        "files": [],
+        "comments": [
+            { "person": "Gerard Smith", "avatar": "/assets/avatars/gerard.png", "action": "First meeting complete. They have a strong need for data management. Michelle will take the lead on the technical proposal.", "timestamp": "Feb 6, 2025, 1:00 pm" }
+        ]
       },
       {
         "id": 8,
         "title": "Nexus Logistics",
-        "since": "Sep 19, 2025",
+        "since": "Jan 1, 2025",
         "contact": "Fatima Al-Jamil",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/female/60.jpg",
         "industry": "Supply Chain",
+        "description": "A global logistics and supply chain management company providing automated solutions for warehousing and distribution.",
+        "website": "https://nexus-logistics.com",
         "targetPlan": "Pro Plan",
+        "value": 3500,
         "logo": "https://avatar.vercel.sh/Nexus%20Logistics.svg?text=N",
         "assigned": [
-          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" },
-          { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
+          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" }
         ],
         "priority": "High",
         "stage": "Proposal",
         "source": "Inbound",
-        "bgColor": "#e7fef4"
+        "bgColor": "#e7fef4",
+        "followUps": ["Oct 16, 2025"],
+        "files": [
+            { "name": "Nexus_Proposal_Draft.pdf", "author": "Nathaniel Michaels", "date": "Jan 5, 2025" }
+        ],
+        "comments": [
+            { "person": "Fatima Al-Jamil", "avatar": "https://xsgames.co/randomusers/assets/avatars/female/60.jpg", "action": "The proposal looks solid, Nathaniel. We'll be reviewing it internally this week.", "timestamp": "Jan 6, 2025, 10:45 am" }
+        ]
       },
       {
         "id": 9,
         "title": "Veridian Dynamics",
-        "since": "Sep 11, 2025",
+        "since": "Feb 11, 2025",
         "contact": "Chloe Sullivan",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/female/2.jpg",
         "industry": "R&D",
+        "description": "A secretive but highly innovative research and development company working on next-generation materials and robotics.",
+        "website": "https://veridian-dynamics.tech",
         "targetPlan": "Growth Plan",
+        "value": 2700,
         "logo": "https://avatar.vercel.sh/Veridian%20Dynamics.svg?text=V",
         "assigned": [
           { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" }
@@ -155,33 +247,54 @@
         "priority": "Low",
         "stage": "Proposal",
         "source": "Outreach",
-        "bgColor": "#f4e7fe"
+        "bgColor": "#f4e7fe",
+        "followUps": [],
+        "files": [
+            { "name": "Veridian_RFP_Response.docx", "author": "Michelle Owolabi", "date": "Feb 15, 2025" }
+        ],
+        "comments": [
+            { "person": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png", "action": "Submitted the proposal for their RFP. Awaiting their review cycle.", "timestamp": "Feb 15, 2025, 5:00 pm" }
+        ]
       },
       {
         "id": 10,
         "title": "Starlight Financial",
-        "since": "Aug 30, 2025",
+        "since": "Feb 20, 2025",
         "contact": "Marcus Wright",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/male/32.jpg",
         "industry": "Fintech",
+        "description": "Starlight Financial provides cutting-edge AI-driven tools for financial forecasting, risk management, and algorithmic trading.",
+        "website": "https://starlight-financial.io",
         "targetPlan": "Pro Plan",
+        "value": 3500,
         "logo": "https://avatar.vercel.sh/Starlight%20Financial.svg?text=S",
         "assigned": [
-          { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" },
-          { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" },
           { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
         ],
         "priority": "High",
         "stage": "Deal",
         "source": "Inbound",
-        "bgColor": "#fee7e7"
+        "bgColor": "#fee7e7",
+        "followUps": [],
+        "files": [
+            { "name": "Service_Agreement_Signed.pdf", "author": "Marcus Wright", "date": "Mar 3, 2025" }
+        ],
+        "comments": [
+            { "person": "Gerard Smith", "avatar": "/assets/avatars/gerard.png", "action": "had a great final call. They are ready to sign.", "timestamp": "Feb 28, 2025, 4:00 pm" },
+            { "person": "Marcus Wright", "avatar": "https://xsgames.co/randomusers/assets/avatars/male/32.jpg", "action": "Received and signed. Looking forward to working together.", "timestamp": "Mar 3, 2025, 11:00 am" }
+        ]
       },
       {
         "id": 11,
         "title": "AquaPure Systems",
-        "since": "Aug 25, 2025",
+        "since": "Mar 5, 2025",
         "contact": "Javier Morales",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/male/11.jpg",
         "industry": "Water Tech",
+        "description": "Innovators in water purification and desalination technology, providing clean water solutions for communities and industries.",
+        "website": "https://aquapure.systems",
         "targetPlan": "Pro Plan",
+        "value": 3500,
         "logo": "https://avatar.vercel.sh/AquaPure%20Systems.svg?text=A",
         "assigned": [
           { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" },
@@ -190,15 +303,27 @@
         "priority": "Medium",
         "stage": "Deal",
         "source": "Outreach",
-        "bgColor": "#eefee7"
+        "bgColor": "#eefee7",
+        "followUps": ["Oct 30, 2025"],
+        "files": [
+            { "name": "Contract_AquaPure.pdf", "author": "Gerard Smith", "date": "Mar 10, 2025" },
+            { "name": "Implementation_Plan.docx", "author": "Michelle Owolabi", "date": "Mar 11, 2025" }
+        ],
+        "comments": [
+            { "person": "Gerard Smith", "avatar": "/assets/avatars/gerard.png", "action": "Deal closed! Great teamwork, Michelle. Set a follow-up for kickoff.", "timestamp": "Mar 10, 2025, 3:20 pm" }
+        ]
       },
       {
         "id": 12,
         "title": "Momentum Robotics",
-        "since": "Aug 15, 2025",
+        "since": "Mar 15, 2025",
         "contact": "Sofia Chen",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/female/12.jpg",
         "industry": "Automation",
+        "description": "Building advanced robotics and automation systems for manufacturing, logistics, and healthcare industries.",
+        "website": "https://momentum-robotics.com",
         "targetPlan": "Growth Plan",
+        "value": 2700,
         "logo": "https://avatar.vercel.sh/Momentum%20Robotics.svg?text=M",
         "assigned": [
           { "name": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png" }
@@ -206,15 +331,26 @@
         "priority": "High",
         "stage": "Deal",
         "source": "Inbound",
-        "bgColor": "#fef4e7"
+        "bgColor": "#fef4e7",
+        "followUps": [],
+        "files": [
+            { "name": "MSA_Signed_Momentum.pdf", "author": "Sofia Chen", "date": "Mar 20, 2025" }
+        ],
+        "comments": [
+            { "person": "Nathaniel Michaels", "avatar": "/assets/avatars/nathaniel.png", "action": "Sofia has confirmed they are moving forward. Contract signed, onboarding complete.", "timestamp": "Mar 20, 2025, 11:00 am" }
+        ]
       },
       {
         "id": 13,
         "title": "Quantum Nexus Solutions",
-        "since": "Oct 4, 2025",
+        "since": "Feb 8, 2025",
         "contact": "Ben Carter",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/male/13.jpg",
         "industry": "Quantum Computing",
-        "targetPlan": "Enterprise Plan",
+        "description": "Providing quantum computing power and algorithmic solutions as a cloud service for complex problem-solving.",
+        "website": "https://quantum-nexus.com",
+        "targetPlan": "Pro Plan",
+        "value": 3500,
         "logo": "https://avatar.vercel.sh/Quantum%20Nexus%20Solutions.svg?text=Q",
         "assigned": [
           { "name": "Michelle Owolabi", "avatar": "/assets/avatars/michelle.png" }
@@ -222,15 +358,26 @@
         "priority": "High",
         "stage": "Meeting",
         "source": "Inbound",
-        "bgColor": "#e7f9ff"
+        "bgColor": "#e7f9ff",
+        "followUps": ["Oct 22, 2025"],
+        "files": [
+            { "name": "Technical_Overview.pdf", "author": "Michelle Owolabi", "date": "Feb 9, 2025" }
+        ],
+        "comments": [
+            { "person": "Ben Carter", "avatar": "https://xsgames.co/randomusers/assets/avatars/male/13.jpg", "action": "Looking forward to the technical deep-dive next week.", "timestamp": "Feb 10, 2025, 9:30 am" }
+        ]
       },
       {
         "id": 14,
         "title": "NeuroWave Technologies",
-        "since": "Oct 3, 2025",
+        "since": "Feb 1, 2025",
         "contact": "Dr. Lena Petrova",
+        "contactAvatar": "https://xsgames.co/randomusers/assets/avatars/female/14.jpg",
         "industry": "Neurotech",
+        "description": "Developing brain-computer interfaces (BCIs) to help individuals with motor impairments and to enhance human potential.",
+        "website": "https://neurowave.tech",
         "targetPlan": "Pro Plan",
+        "value": 3500,
         "logo": "https://avatar.vercel.sh/NeuroWave%20Technologies.svg?text=N",
         "assigned": [
           { "name": "Gerard Smith", "avatar": "/assets/avatars/gerard.png" }
@@ -238,7 +385,15 @@
         "priority": "Medium",
         "stage": "Proposal",
         "source": "Outreach",
-        "bgColor": "#f0e7ff"
+        "bgColor": "#f0e7ff",
+        "followUps": ["Oct 17, 2025", "Nov 01, 2025", "Nov 15, 2025"],
+        "files": [
+            { "name": "Proposal_NeuroWave.pdf", "author": "Gerard Smith", "date": "Feb 5, 2025" },
+            { "name": "Research_Paper_BCI.pdf", "author": "Dr. Lena Petrova", "date": "Feb 6, 2025" }
+        ],
+        "comments": [
+            { "person": "Dr. Lena Petrova", "avatar": "https://xsgames.co/randomusers/assets/avatars/female/14.jpg", "action": "Thank you for the proposal. We are reviewing it alongside the technical specs.", "timestamp": "Feb 7, 2025, 12:00 pm" }
+        ]
       }
     ]
   },
