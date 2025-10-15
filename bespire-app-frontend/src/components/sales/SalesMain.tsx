@@ -12,7 +12,7 @@ type Prospect = {
     logo: string;
     since: string;
     value: number;
-    stage: 'Prospecting' | 'Meeting' | 'Proposal' | 'Deal';
+    stage: 'Prospecting' | 'Meeting' | 'Proposal' | 'Deal' | 'Lost';
     targetPlan: string;
     priority: 'High' | 'Medium' | 'Low';
     industry: string;
@@ -20,6 +20,7 @@ type Prospect = {
     assigned: { name: string; avatar?: string; }[];
     followUps?: unknown[];
     comments?: unknown[];
+    term: number;
     files?: unknown[];
 };
 
@@ -39,12 +40,8 @@ export default function SalesMain() {
 
     return (
         <>
-            {/* The board now has a function to call when a card is clicked */}
             <ProspectsBoard onSetProspect={handleSetProspect} />
 
-            {/* The modal is always rendered, but its visibility is controlled by its internal state
-                based on the 'open' prop. We use !! to turn the prospectId (or null) into a boolean.
-             */}
             <SalesDetailsModal
                 open={!!selectedProspectId}
                 onClose={handleCloseModal}

@@ -1,106 +1,146 @@
 // components/SalesOverviewSidebar.tsx
 import Image from 'next/image';
-import PriorityBadge from "../../ui/PriorityBadge";
-import CustomDatePicker from "../../ui/CustomDatePicker";
+import { Calendar, BarChart3, Wallet, ClipboardCheck } from 'lucide-react';
 import salesData from "@/data/salesData.json";
 
 type Prospect = (typeof salesData.prospects.list)[0];
-
-// FIX 1: Define the Priority type with lowercase values to match the component's expectation.
-type Priority = 'high' | 'medium' | 'low';
 
 type SalesOverviewSidebarProps = {
   prospect: Prospect;
 };
 
+// A reusable component for each section to keep the code clean
+const Section = ({ title, children }: { title: string, children: React.ReactNode }) => (
+    <div className="flex flex-col gap-2">
+        <h3 className="text-sm text-[#5E6B66]">{title}</h3>
+        <div>{children}</div>
+    </div>
+);
+
 export default function SalesOverviewSidebar({ prospect }: SalesOverviewSidebarProps) {
-  return (
-    <aside className="w-70 min-w-[260px] p-6 border-r border-[#E2E6E4] flex flex-col gap-2 overflow-y-auto">
-      <h1 className="font-medium text-xl">Overview</h1>
-      
-      {/* Priority */}
-      <div className="flex flex-col items-start gap-2">
-        <div className="text-base text-[#5E6B66]">Priority</div>
-        <PriorityBadge
-            // FIX 2: Convert the numeric 'id' to a string.
-            requestId={prospect.id.toString()}
-            // FIX 3: Convert the priority from the JSON ('High') to lowercase ('high') before casting.
-            priority={prospect.priority.toLowerCase() as Priority}
-            editable={false}
-        />
-      </div>
+    const expectedRevenue = prospect.value * prospect.term;
 
-      {/* Contact */}
-      <div className="flex flex-col items-start gap-2">
-        <div className="text-base text-[#5E6B66]">Contact</div>
-        <div className="flex items-center gap-2">
-          <Image
-            src={prospect.contactAvatar}
-            alt={prospect.contact}
-            width={28}
-            height={28}
-            className="w-7 h-7 rounded-full"
-          />
-          <span className="font-medium">{prospect.contact}</span>
-        </div>
-      </div>
+    const contactedDate = new Date(prospect.since).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    });
 
-      {/* Assigned To */}
-      <div className="flex flex-col items-start gap-2">
-        <div className="text-base text-[#5E6B66]">Assigned To</div>
-        <ul className="flex flex-col gap-1">
-          {prospect.assigned.map(member => (
-             <li key={member.name} className="flex items-center gap-2">
-                <Image
-                    src={member.avatar}
-                    alt={member.name}
-                    width={28}
-                    height={28}
-                    className="w-7 h-7 rounded-full"
-                />
-                <span className="font-medium text-sm">{member.name}</span>
-             </li>
-          ))}
-        </ul>
-      </div>
+    // --- FIX: Updated the color styles for the priority badge ---
+    const priority = prospect.priority.toLowerCase();
+    const priorityStyles = {
+        high: {
+            container: "bg-[#ff6a6a] text-white",
+            bar: "bg-[#c70000]",
+        },
+        medium: {
+            container: "bg-[#fedaa0] text-black",
+            bar: "bg-[#ca820e]",
+        },
+        low: {
+            container: "bg-[#defcbd] text-black",
+            bar: "bg-[#b8df91]",
+        },
+    };
+    const styles = priorityStyles[priority as keyof typeof priorityStyles] || priorityStyles.low;
 
-      {/* Dates */}
-      <div className="flex flex-col ">
-        <div className="text-base text-[#5E6B66]">Created On</div>
-        <div className="flex items-center ">
-          <CustomDatePicker 
-            value={new Date(prospect.since)} 
-            disabled={true} 
-            onChange={() => {}}
-          />
-        </div>
-        <div className="text-base text-[#5E6B66]">Next Follow-up</div>
-        <CustomDatePicker
-            value={prospect.followUps.length > 0 ? new Date(prospect.followUps[0]) : null}
-            disabled={true}
-            onChange={() => {}}
-        />
-      </div>
+    return (
+        <aside className="w-70 min-w-[280px] p-6 border-r border-[#E2E6E4] flex flex-col gap-5 overflow-y-auto">
+            <h1 className="font-medium text-xl text-[#181B1A] pb-2">Overview</h1>
 
-      {/* Industry */}
-      <div className="flex flex-col gap-1 mt-2">
-        <div className="text-base text-[#5E6B66]">Industry</div>
-        <div className="font-medium text-[#181B1A]">{prospect.industry}</div>
-      </div>
+            <Section title="Priority">
+                <div
+                    className={`inline-flex items-center gap-2 px-3 py-1 rounded-md text-sm font-medium ${styles.container}`}
+                >
+                    <span className={`h-4 w-1 rounded-full ${styles.bar}`} />
+                    <span className="capitalize">{priority}</span>
+                </div>
+            </Section>
 
-      {/* Deal Value */}
-      <div className="flex flex-col gap-2 mt-2">
-        <div className="text-base text-[#5E6B66]">Deal Value</div>
-        <span className="font-medium text-[#181B1A]">
-            ${prospect.value.toLocaleString()}
-        </span>
-      </div>
+            <Section title="Prospect Client">
+                <div className="flex items-center gap-3">
+                    <Image
+                        src={prospect.logo}
+                        alt={`${prospect.title} logo`}
+                        width={32}
+                        height={32}
+                        className="w-8 h-8 rounded-full"
+                    />
+                    <span className="font-medium">{prospect.title}</span>
+                </div>
+            </Section>
 
-       {/* Target Plan */}
-      <div className="flex flex-col gap-2 mt-2">
-        <div className="text-base text-[#5E6B66]">Target Plan</div>
-        <span className="font-medium text-[#181B1A]">{prospect.targetPlan}</span>
-      </div>
-    </aside>
-  );
+            <Section title="Client Contact">
+                <div className="flex items-center gap-3">
+                    <Image
+                        src={prospect.contactAvatar}
+                        alt={prospect.contact}
+                        width={32}
+                        height={32}
+                        className="w-8 h-8 rounded-full"
+                    />
+                    <div>
+                        <div className="font-medium">{prospect.contact}</div>
+                        <div className="text-sm text-[#5E6B66]">{prospect.title}</div>
+                    </div>
+                </div>
+            </Section>
+
+            <Section title="Sales Team">
+                <ul className="flex flex-col gap-3">
+                    {prospect.assigned.map(member => (
+                        <li key={member.name} className="flex items-center gap-3">
+                            <Image
+                                src={member.avatar}
+                                alt={member.name}
+                                width={32}
+                                height={32}
+                                className="w-8 h-8 rounded-full"
+                            />
+                            <span className="font-medium text-sm">{member.name}</span>
+                        </li>
+                    ))}
+                </ul>
+            </Section>
+
+            <Section title="Date Contacted">
+                <div className="flex items-center gap-2 font-medium">
+                    <ClipboardCheck size={18} className="text-[#5E6B66]" />
+                    <span>{contactedDate}</span>
+                </div>
+            </Section>
+
+            <Section title="Target Plan">
+                <div className="flex items-center gap-2 font-medium">
+                    <BarChart3 size={18} className="text-[#5E6B66]" />
+                    <span>{prospect.targetPlan}</span>
+                </div>
+            </Section>
+
+            <Section title="Expected Revenue">
+                <div className="flex items-center gap-2 font-medium">
+                    <Wallet size={18} className="text-[#5E6B66]" />
+                    <span>
+                        {`$${expectedRevenue.toLocaleString('en-US')}`}
+                    </span>
+                </div>
+            </Section>
+
+            <Section title="Term">
+                <div className="flex items-center gap-2 font-medium">
+                    <Calendar size={18} className="text-[#5E6B66]" />
+                    <span>{prospect.term} months</span>
+                </div>
+            </Section>
+
+            <Section title="Industry">
+                <span
+                    className="px-3 py-1 rounded-full text-black text-sm font-medium w-fit"
+                    style={{ backgroundColor: prospect.bgColor }}
+                >
+                    {prospect.industry}
+                </span>
+            </Section>
+        </aside>
+    );
 }

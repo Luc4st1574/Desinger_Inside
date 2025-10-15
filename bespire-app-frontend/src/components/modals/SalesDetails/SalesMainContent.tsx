@@ -3,6 +3,8 @@ import SalesMainHeader from "./SalesMainHeader";
 import SalesTabs from "./SalesTabs";
 import SalesTabDetails from "./SalesTabDetails";
 import SalesTabFiles from "./SalesTabFiles";
+import SalesTabFollowUps from "./SalesTabFollowUps"; // Import new component
+import SalesTabInfo from "./SalesTabInfo";         // Import new component
 import { useRef, useState } from "react";
 
 import salesData from "@/data/salesData.json";
@@ -21,32 +23,31 @@ export default function SalesMainContent({
   stage,
   changeStage,
 }: SalesMainContentProps) {
-  const [activeTab, setActiveTab] = useState<"details" | "files">("details");
+  const [activeTab, setActiveTab] = useState<"details" | "files" | "follow-ups" | "info">("details");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="flex-1 flex flex-col bg-white">
       <div className="p-6 flex flex-col">
-        {/* Header */}
         <SalesMainHeader
           stage={stage}
           title={prospect.title}
           prospectId={prospect.id}
           onClose={onClose}
           changeStage={changeStage}
-          loadingStage={false} // Placeholder, as we don't have async status changes
+          loadingStage={false}
         />
-
-        {/* Tabs */}
         <SalesTabs
           activeTab={activeTab}
           onTabChange={setActiveTab}
-          showSubtasks={false} // Subtasks are not in the sales data
+          showSubtasks={false}
         />
       </div>
       <div ref={scrollContainerRef} className="flex-1 overflow-y-auto">
         {activeTab === "details" && <SalesTabDetails prospect={prospect} />}
         {activeTab === "files" && <SalesTabFiles prospect={prospect} />}
+        {activeTab === "follow-ups" && <SalesTabFollowUps prospect={prospect} />}
+        {activeTab === "info" && <SalesTabInfo prospect={prospect} />}
       </div>
     </div>
   );
